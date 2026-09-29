@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MEDCMU Social Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --page:#f3f2ef; --surface:#fcfcfb; --surface-2:#f7f6f3; --border:#dcdbd6; --grid:#e6e5e1;
+  --text-1:#0b0b0b; --text-2:#52514e; --text-3:#6f6e68;
+  --b-MEDCMU:#2a78d6; --b-SI:#eb6834; --b-CU:#1baf7a; --b-SMV:#eda100;
+  --pos:#2a78d6; --neu:#b9b8b2; --neg:#e34948;
+  --side:#ffffff; --accent-2:#6a4ce0; --accent:#2a78d6; --warn-bg:#fdf3dc; --warn-text:#6b4a00;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --page:#0b1017; --side:#0f1520; --surface:#141a24; --surface-2:#1a2230; --border:#243044; --grid:#212b3b;
+    --text-1:#f4f6fa; --text-2:#aab4c5; --text-3:#7d8899;
+    --b-MEDCMU:#3987e5; --b-SI:#d95926; --b-CU:#199e70; --b-SMV:#c98500;
+    --pos:#3987e5; --neu:#6b6a65; --neg:#e66767;
+    --accent:#4f8cff; --accent-2:#7a5cff; --warn-bg:#2b2410; --warn-text:#f1d58a;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --page:#0b1017; --side:#0f1520; --surface:#141a24; --surface-2:#1a2230; --border:#243044; --grid:#212b3b;
+    --text-1:#f4f6fa; --text-2:#aab4c5; --text-3:#7d8899;
+    --b-MEDCMU:#3987e5; --b-SI:#d95926; --b-CU:#199e70; --b-SMV:#c98500;
+    --pos:#3987e5; --neu:#6b6a65; --neg:#e66767;
+    --accent:#4f8cff; --accent-2:#7a5cff; --warn-bg:#2b2410; --warn-text:#f1d58a;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--text-1);
+  font-family:"Noto Sans Thai","Sukhumvit Set","Thonburi",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px;line-height:1.55}
+.sub{color:var(--text-2);font-size:13px;margin:4px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);
+  background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:3px 10px}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.btn{font:inherit;font-size:13px;color:var(--text-2);background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:5px 10px;cursor:pointer}
+.btn:hover{border-color:var(--text-3)}
+section.panel{padding-top:8px}
+.controls{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;margin:0 0 14px}
+.ctl{display:flex;align-items:center;flex-wrap:wrap;max-width:100%;gap:8px;font-size:13px;color:var(--text-2)}
+.seg{max-width:100%;overflow-x:auto;display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{font:inherit;font-size:13px;color:var(--text-2);background:transparent;border:0;padding:5px 11px;cursor:pointer;
+  border-right:1px solid var(--border)}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--accent);color:#fff}
+select{font:inherit;font-size:13px;color:var(--text-1);background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:5px 8px}
+label.tog{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);cursor:pointer;
+  background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:3px 10px}
+label.tog input{accent-color:var(--accent)}
+label.tog i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g1{grid-template-columns:minmax(0,1fr)}
+@media (max-width:980px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.g4{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:0}
+.card h3{margin:0;font-size:15px;font-weight:600}
+.card .sub{margin:2px 0 8px}
+.card figcaption{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.tbtn{font:inherit;font-size:12px;color:var(--text-2);background:transparent;border:1px solid var(--border);
+  border-radius:6px;padding:2px 8px;cursor:pointer;white-space:nowrap}
+.cv{position:relative;height:300px}
+.cv.tall{height:360px}
+.kpi{border-top:4px solid var(--kc);padding-top:12px}
+.kpi .name{font-size:13px;color:var(--text-2);font-weight:600}
+.kpi .big{font-size:26px;font-weight:700;line-height:1.2;margin:4px 0 6px;font-variant-numeric:tabular-nums}
+.kpi dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:12.5px;color:var(--text-2)}
+.kpi dd{margin:0;text-align:right;color:var(--text-1);font-variant-numeric:tabular-nums}
+.note{font-size:13px;color:var(--text-2);background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+  padding:9px 12px;margin:0 0 14px}
+.note.warn{background:var(--warn-bg);color:var(--warn-text);border-color:transparent}
+.note b{color:inherit}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:6px 9px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+td.l,th.l{text-align:left;white-space:normal}
+th{color:var(--text-2);font-weight:600;font-size:12px;background:var(--surface-2);position:sticky;top:0}
+td.na{color:var(--text-3);font-size:12px}
+td.best{font-weight:700}
+.bdot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:baseline;background:var(--kc)}
+.tv{margin-top:8px}
+.tv[hidden]{display:none}
+a{color:var(--accent)}
+.ptxt{max-width:520px;white-space:normal;text-align:left}
+h2{font-size:17px;margin:22px 0 8px}
+ul.clean{margin:6px 0 0;padding-left:18px;color:var(--text-2);font-size:13.5px}
+ul.clean li{margin:3px 0}
+footer{color:var(--text-3);font-size:12px;margin-top:26px}
+
+.app{display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100vh}
+aside.side{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--side);border-right:1px solid var(--border);
+  padding:22px 14px 16px;display:flex;flex-direction:column;gap:6px}
+.logo{padding:0 8px 14px}
+.logo-t{font-size:21px;font-weight:700;letter-spacing:.3px}
+.logo-s{font-size:10.5px;letter-spacing:1.4px;color:var(--text-3);margin-top:3px}
+.nav-h{font-size:11.5px;color:var(--text-3);letter-spacing:.6px;padding:14px 10px 5px}
+.nav-item{display:flex;align-items:center;gap:11px;width:100%;font:inherit;font-size:14px;font-weight:500;color:var(--text-2);
+  background:transparent;border:1px solid transparent;border-radius:11px;padding:9px 10px;cursor:pointer;text-align:left}
+.nav-item:hover{background:var(--surface-2);color:var(--text-1)}
+.nav-item[aria-current="page"]{color:var(--text-1);border-color:color-mix(in srgb,var(--accent) 55%,transparent);
+  background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.nav-item svg{width:19px;height:19px;flex:0 0 19px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .mono{width:19px;height:19px;flex:0 0 19px;border-radius:6px;background:var(--surface-2);border:1px solid var(--border);
+  font-size:9.5px;font-weight:700;display:grid;place-items:center;color:var(--text-2)}
+.nav-item .lbl{flex:1;min-width:0}
+.nav-item .badge{font-size:11px;font-weight:600;color:var(--text-2);background:var(--surface-2);border:1px solid var(--border);
+  border-radius:999px;padding:0 8px;min-width:26px;text-align:center;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-direction:column;gap:6px;padding:0 10px}
+.legend span{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--text-2)}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.side-foot{margin-top:auto;padding:12px;border:1px solid var(--border);border-radius:12px;background:var(--surface);font-size:12px;color:var(--text-2);line-height:1.5}
+.side-foot b{color:var(--text-1);display:block;font-size:12.5px}
+.main{min-width:0;padding:0 30px 48px}
+header.top{padding:26px 0 14px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-start;justify-content:space-between;
+  border-bottom:1px solid var(--border);margin-bottom:18px}
+h1{font-size:24px;margin:0;font-weight:700;letter-spacing:.1px}
+.btn.primary{color:#fff;border:0;background:linear-gradient(135deg,var(--accent),var(--accent-2));padding:9px 16px;border-radius:10px;font-weight:600}
+.btn.primary:hover{filter:brightness(1.1)}
+.kpi2{display:flex;gap:14px;align-items:center;padding:16px}
+.kpi2 .ico{width:48px;height:48px;flex:0 0 48px;border-radius:13px;display:grid;place-items:center;color:var(--kc);
+  background:color-mix(in srgb,var(--kc) 17%,transparent)}
+.kpi2 .ico svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.kpi2 .kl{font-size:12.5px;color:var(--text-2)}
+.kpi2 .kv{font-size:27px;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums}
+.kpi2 .kcap{font-size:12px;color:var(--text-3);margin-top:1px}
+.hnote{font-size:12.5px;color:var(--text-3);margin:8px 2px 16px}
+.card{border-radius:14px}
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  aside.side{position:static;height:auto;flex-direction:column;padding:14px 12px 8px;border-right:0;border-bottom:1px solid var(--border)}
+  #nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}
+  .nav-group{display:contents}.nav-h{display:none}
+  .nav-item{width:auto;flex:0 0 auto;white-space:nowrap}
+  .side-foot{display:none}
+  .main{padding:0 14px 40px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side" id="side">
+    <div class="logo"><div class="logo-t">MedCMU</div><div class="logo-s">SOCIAL ANALYTICS · 4-BRAND BENCHMARK</div></div>
+    <nav id="nav" aria-label="เมนูหลัก"></nav>
+    <div class="side-foot" id="sideFoot"></div>
+  </aside>
+  <main class="main">
+    <header class="top">
+      <div><h1 id="pgTitle"></h1><p class="sub" id="pgSub"></p></div>
+      <div class="chips" id="brandChips" aria-label="สีประจำแบรนด์"></div>
+      <button class="btn primary" id="themeBtn" type="button">สลับโหมดสว่าง/มืด</button>
+    </header>
+    <div id="panels"></div>
+    <footer id="foot"></footer>
+  </main>
+</div>
+
+<script>/*__CHARTJS__*/</script>
+<script>
+const D = /*__DATA__*/null;
+"use strict";
+/* ---------- helpers ---------- */
+const $ = (s, el = document) => el.querySelector(s);
+const PL = {facebook:"Facebook", instagram:"Instagram", tiktok:"TikTok", youtube:"YouTube", twitter:"X / Twitter"};
+const SC = {owned:"Owned (บัญชีทางการ)", earned:"Earned (ถูกกล่าวถึง)"};
+const BR = D.brands, BK = BR.map(b => b.key);
+const bname = k => BR.find(b => b.key === k).short;
+const cell = (b, p, s) => D.cells[`${b}|${p}|${s}`] || null;
+const NA = "ข้อมูลไม่เพียงพอ";
+const nf = new Intl.NumberFormat("th-TH");
+const fmt = v => v == null ? NA : nf.format(Math.round(v));
+const fmt1 = v => v == null ? NA : new Intl.NumberFormat("th-TH", {maximumFractionDigits:1}).format(v);
+const fpct = (v, d = 1) => v == null ? NA : new Intl.NumberFormat("th-TH", {maximumFractionDigits:d, minimumFractionDigits:d}).format(v) + "%";
+const abbr = v => { const a = Math.abs(v); return a >= 1e6 ? (v/1e6).toFixed(a>=1e7?0:1).replace(/\.0$/,"")+"M" : a >= 1e3 ? (v/1e3).toFixed(a>=1e4?0:1).replace(/\.0$/,"")+"k" : String(Math.round(v)); };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const bcol = k => cv("--b-" + k);
+const sum = a => a.reduce((x, y) => x + (y || 0), 0);
+const dlabel = d => new Date(d + "T00:00:00Z").toLocaleDateString("th-TH", {day:"numeric", month:"short", timeZone:"UTC"});
+function safeGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+function safeSet(k, v){ try { localStorage.setItem(k, v); } catch(e){} }
+
+function seg(id, opts, val){
+  return `<div class="seg" id="${id}" role="group">${opts.map(o => `<button type="button" data-v="${esc(o.v)}" class="${o.v === val ? "on" : ""}" aria-pressed="${o.v === val}">${esc(o.t)}</button>`).join("")}</div>`;
+}
+function bindSeg(id, cb){ const h = $("#" + id); h && h.querySelectorAll("button").forEach(b => b.onclick = () => cb(b.dataset.v)); }
+function sel(id, opts, val){
+  return `<select id="${id}">${opts.map(o => `<option value="${esc(o.v)}" ${o.v === val ? "selected" : ""}>${esc(o.t)}</option>`).join("")}</select>`;
+}
+function bindSel(id, cb){ const h = $("#" + id); h && (h.onchange = () => cb(h.value)); }
+const platOpts = (all) => (all ? [{v:"all", t:"ทุกแพลตฟอร์ม"}] : []).concat(D.platforms.map(p => ({v:p, t:PL[p]})));
+
+/* ---------- charts ---------- */
+const charts = {}, tableOpen = new Set();
+function deepMerge(a, b){ for (const k in b){ if (b[k] && typeof b[k] === "object" && !Array.isArray(b[k])) { a[k] = deepMerge(a[k] && typeof a[k] === "object" ? a[k] : {}, b[k]); } else a[k] = b[k]; } return a; }
+
+const valueLabels = {
+  id:"vl",
+  afterDatasetsDraw(chart){
+    const o = chart.options.plugins.vl; if (!o || !o.on) return;
+    const ctx = chart.ctx, horiz = chart.options.indexAxis === "y";
+    ctx.save(); ctx.font = "600 11.5px " + getComputedStyle(document.body).fontFamily; ctx.fillStyle = cv("--text-1");
+    chart.data.datasets.forEach((ds, di) => {
+      const meta = chart.getDatasetMeta(di); if (meta.hidden) return;
+      meta.data.forEach((el, i) => {
+        const v = ds.data[i];
+        if (v == null){
+          ctx.fillStyle = cv("--text-3"); ctx.font = "11px " + getComputedStyle(document.body).fontFamily;
+          ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+          const x = el.x, y = (chart.scales.y ? chart.scales.y.getPixelForValue(0) : el.y) - 4;
+          if (!horiz) ctx.fillText(NA, x, y);
+          ctx.fillStyle = cv("--text-1"); ctx.font = "600 11.5px " + getComputedStyle(document.body).fontFamily;
+          return;
+        }
+        const t = chart.$vlfmt ? chart.$vlfmt(v) : String(v);
+        if (horiz){ ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillText(t, el.x + 6, el.y); }
+        else { ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillText(t, el.x, el.y - 4); }
+      });
+    });
+    ctx.restore();
+  }
+};
+const crosshair = {
+  id:"cross",
+  afterDatasetsDraw(chart){
+    if (chart.config.type !== "line") return;
+    const a = chart.tooltip && chart.tooltip._active; if (!a || !a.length) return;
+    const x = a[0].element.x, ca = chart.chartArea, ctx = chart.ctx;
+    ctx.save(); ctx.strokeStyle = cv("--text-3"); ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(x, ca.top); ctx.lineTo(x, ca.bottom); ctx.stroke(); ctx.restore();
+  }
+};
+const endLabels = {
+  id:"endl",
+  afterDatasetsDraw(chart){
+    if (!chart.options.plugins.endl || !chart.options.plugins.endl.on) return;
+    const ctx = chart.ctx, pts = [];
+    chart.data.datasets.forEach((ds, di) => {
+      const meta = chart.getDatasetMeta(di); if (meta.hidden) return;
+      let li = -1; for (let i = ds.data.length - 1; i >= 0; i--) if (ds.data[i] != null){ li = i; break; }
+      if (li >= 0) pts.push({y:meta.data[li].y, x:meta.data[li].x, t:ds.label});
+    });
+    pts.sort((a, b) => a.y - b.y);
+    for (let i = 1; i < pts.length; i++) if (pts[i].y - pts[i-1].y < 14) pts[i].y = pts[i-1].y + 14;
+    ctx.save(); ctx.font = "600 12px " + getComputedStyle(document.body).fontFamily; ctx.fillStyle = cv("--text-1");
+    ctx.textAlign = "left"; ctx.textBaseline = "middle";
+    pts.forEach(p => ctx.fillText(p.t, p.x + 9, p.y));
+    ctx.restore();
+  }
+};
+
+function baseOpts(type){
+  const grid = cv("--grid"), t2 = cv("--text-2");
+  const o = {
+    responsive:true, maintainAspectRatio:false, animation:false,
+    layout:{padding:{top:18, right:4}},
+    plugins:{
+      legend:{position:"bottom", labels:{color:t2, usePointStyle:true, pointStyle:"rectRounded", boxWidth:9, boxHeight:9, font:{size:12}}},
+      tooltip:{backgroundColor:cv("--surface-2"), titleColor:cv("--text-1"), bodyColor:cv("--text-1"), borderColor:cv("--border"), borderWidth:1,
+               padding:10, boxPadding:4, usePointStyle:true,
+               callbacks:{label: c => ` ${c.dataset.label ? c.dataset.label + ": " : ""}${c.parsed.y == null && c.parsed.x != null ? fmt(c.parsed.x) : (c.parsed.y == null ? NA : fmt1(c.parsed.y))}`}},
+      vl:{on:false}, endl:{on:false}
+    },
+    scales:{
+      x:{grid:{display:false}, border:{color:grid}, ticks:{color:t2, font:{size:12}, maxRotation:0, autoSkip:true}},
+      y:{beginAtZero:true, grid:{color:grid}, border:{display:false}, ticks:{color:t2, font:{size:12}, callback:v => abbr(v)}}
+    },
+    interaction:{mode:"nearest", intersect:true}
+  };
+  if (type === "line") o.interaction = {mode:"index", intersect:false};
+  return o;
+}
+function mk(id, type, data, opts = {}, tfmt){
+  if (charts[id]) charts[id].destroy();
+  const el = document.getElementById(id); if (!el) return;
+  // Chart.js treats any function-valued option as scriptable (calls it with a context object),
+  // so keep the value-label formatter out of the options tree.
+  const vlfmt = opts.plugins && opts.plugins.vl ? opts.plugins.vl.fmt : null;
+  if (vlfmt) delete opts.plugins.vl.fmt;
+  const cfg = {type, data, options:deepMerge(baseOpts(type), opts), plugins:[valueLabels, crosshair, endLabels]};
+  const ch = new Chart(el, cfg); ch.$tfmt = tfmt || fmt1; ch.$vlfmt = vlfmt; charts[id] = ch;
+  fillTable(id);
+  return ch;
+}
+function destroyAll(){ Object.keys(charts).forEach(k => { charts[k].destroy(); delete charts[k]; }); }
+function fillTable(id){
+  const host = document.getElementById(id + "-t"); if (!host) return;
+  const ch = charts[id], labels = ch.data.labels, ds = ch.data.datasets;
+  let h = `<div class="tw"><table><thead><tr><th></th>${ds.map(d => `<th>${esc(d.label || "ค่า")}</th>`).join("")}</tr></thead><tbody>`;
+  labels.forEach((l, i) => { h += `<tr><td>${esc(l)}</td>${ds.map(d => { const v = d.data[i]; return v == null ? `<td class="na">${NA}</td>` : `<td>${ch.$tfmt(v)}</td>`; }).join("")}</tr>`; });
+  host.innerHTML = h + "</tbody></table></div>";
+  host.hidden = !tableOpen.has(id);
+}
+function card(id, title, sub, tall){
+  return `<figure class="card"><figcaption><div><h3>${title}</h3>${sub ? `<p class="sub">${sub}</p>` : ""}</div>
+  <button class="tbtn" type="button" data-t="${id}" aria-expanded="${tableOpen.has(id)}">ตาราง</button></figcaption>
+  <div class="cv ${tall ? "tall" : ""}"><canvas id="${id}" role="img" aria-label="${esc(title)}"></canvas></div><div class="tv" id="${id}-t" hidden></div></figure>`;
+}
+function bindTables(root){
+  root.querySelectorAll(".tbtn").forEach(b => b.onclick = () => {
+    const id = b.dataset.t, h = document.getElementById(id + "-t");
+    if (tableOpen.has(id)) tableOpen.delete(id); else tableOpen.add(id);
+    h.hidden = !tableOpen.has(id); b.setAttribute("aria-expanded", tableOpen.has(id));
+  });
+}
+const barDs = (vals, extra = {}) => Object.assign({data:vals, backgroundColor:BK.map(bcol), borderRadius:4, borderSkipped:false, maxBarThickness:56}, extra);
+const brandLabels = BK.map(bname);
+const bdot = k => `<span class="bdot" style="--kc:${bcol(k)}"></span>`;
+
+/* ---------- tabs ---------- */
+const S = {
+  overview:{scope:"owned", plat:"all"},
+  score:{metric:"Brand Score"},
+  platform:{plat:"facebook"},
+  earned:{plat:"facebook", cb:"MEDCMU", by:"posts"},
+  sentiment:{plat:"all"},
+  trend:{brands:new Set(BK), plat:"facebook", scope:"owned", metric:"eng", gran:"week"},
+  top:{plat:"facebook", scope:"owned", brand:"all"},
+};
+const TABS = [
+  {id:"overview", t:"ภาพรวม (Overview)", d:"สรุปผลของ 4 แบรนด์จากข้อมูลโพสต์ ช่วงที่ Wisesight ส่งออก"},
+  {id:"score", t:"Brand Score", d:"คะแนนรายเดือนจาก Zocial Eye (คนละช่วงเวลากับข้อมูลโพสต์)"},
+  {id:"platform", t:"แพลตฟอร์ม (Owned)", d:"เทียบบัญชีทางการของ 4 แบรนด์ในแต่ละแพลตฟอร์ม"},
+  {id:"earned", t:"Earned / การพูดถึง", d:"โพสต์ของผู้อื่นที่กล่าวถึงแบรนด์ และผู้โพสต์อันดับต้น"},
+  {id:"sentiment", t:"Sentiment", d:"สัดส่วนบวก/กลาง/ลบของโพสต์ที่กล่าวถึงแบรนด์ (Earned)"},
+  {id:"trend", t:"แนวโน้มรายวัน", d:"engagement และจำนวนโพสต์ตามวัน/สัปดาห์"},
+  {id:"top", t:"โพสต์เด่น", d:"โพสต์ที่ engagement สูงสุดและความกระจุกตัวของยอดรวม"},
+  {id:"quality", t:"คุณภาพข้อมูล", d:"ข้อจำกัด นิยาม และการเทียบยอดระหว่างชีต"},
+];
+const ICON = {
+  chart:'<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>',
+  award:'<svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/></svg>',
+  users:'<svg viewBox="0 0 24 24"><path d="M17 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 20v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>',
+  smile:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg>',
+  trend:'<svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
+  star:'<svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>',
+  shield:'<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>',
+  send:'<svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>',
+  heart:'<svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+};
+const MONO = {facebook:"Fb", instagram:"Ig", tiktok:"Tt", youtube:"Yt", twitter:"X"};
+const NAV = [
+  {h:"ภาพรวม", items:[{id:"overview", i:"chart"}, {id:"score", i:"award"}]},
+  {h:"แพลตฟอร์ม (Owned)", items:D.platforms.map(p => ({id:"platform", plat:p, mono:MONO[p], label:PL[p],
+     badge:(cell("MEDCMU", p, "owned") || {}).posts_text, tip:"โพสต์ที่มีข้อความของ MEDCMU (Owned) บน " + PL[p]}))},
+  {h:"ผู้ฟังและการพูดถึง", items:[{id:"earned", i:"users"}, {id:"sentiment", i:"smile"}]},
+  {h:"เจาะลึก", items:[{id:"trend", i:"trend"}, {id:"top", i:"star"}]},
+  {h:"ระบบ", items:[{id:"quality", i:"shield"}]},
+];
+
+
+/* ===== 1 overview ===== */
+function headline(){
+  const own = b => D.platforms.map(p => cell(b, p, "owned")).filter(Boolean);
+  const eng = BK.map(b => sum(own(b).map(c => c.engagement))), rank = 1 + eng.filter(v => v > eng[0]).length;
+  const cs = own("MEDCMU"), pt = sum(cs.map(c => c.posts_text)), pr = sum(cs.map(c => c.posts_raw));
+  const w = cs.filter(c => c.follower_start != null), f0 = sum(w.map(c => c.follower_start)), f1 = sum(w.map(c => c.follower_end));
+  const mo = D.score_months, last = mo.length - 1, bs = BK.map(b => ((D.scores[b] || {})["Brand Score"] || [])[last]), sr = 1 + bs.filter(v => v > bs[0]).length;
+  const k = (ic, lab, val, cap) => `<div class="card kpi2" style="--kc:var(--b-MEDCMU)"><div class="ico">${ICON[ic]}</div><div><div class="kl">${lab}</div><div class="kv">${val}</div><div class="kcap">${cap}</div></div></div>`;
+  return `<div class="grid g4">` +
+    k("send", "โพสต์ที่มีข้อความ", fmt(pt), `แถวดิบ Wisesight ${fmt(pr)}`) +
+    k("heart", "engagement รวม", fmt(eng[0]), `อันดับ #${rank} จาก 4 แบรนด์ · รวมข้ามแพลตฟอร์ม`) +
+    k("award", `Brand Score (${mo[last]})`, fmt(bs[0]), `อันดับ #${sr} จาก 4 · คนละช่วงกับข้อมูลโพสต์`) +
+    k("trend", "ผู้ติดตามที่เพิ่ม", (f1 >= f0 ? "+" : "") + fmt(f1 - f0), f0 ? `${fpct((f1 - f0) / f0 * 100)} จากต้นช่วง · ผลรวมทุกแพลตฟอร์ม` : NA) +
+    `</div><p class="hnote">การ์ดด้านบน: MEDCMU · Owned · ทุกแพลตฟอร์ม</p>`;
+}
+function rOverview(p){
+  const st = S.overview, pls = st.plat === "all" ? D.platforms : [st.plat];
+  const cellsFor = b => pls.map(pl => cell(b, pl, st.scope)).filter(Boolean);
+  let h = headline() + `<h2 style="margin-top:4px">เปรียบเทียบ 4 แบรนด์</h2><div class="controls"><div class="ctl">ประเภทข้อมูล ${seg("oScope", [{v:"owned", t:"Owned"}, {v:"earned", t:"Earned"}], st.scope)}</div>
+   <div class="ctl">แพลตฟอร์ม (การ์ด) ${sel("oPlat", platOpts(true), st.plat)}</div></div>
+   <p class="note"><b>Owned</b> = โพสต์จากบัญชีทางการของแบรนด์ · <b>Earned</b> = โพสต์ของผู้อื่นที่กล่าวถึง/แท็กแบรนด์ (ของ MEDCMU รวมหน่วยงานในคณะบางส่วน) ·
+   นิยาม engagement ต่างกันตามแพลตฟอร์ม การรวมข้ามแพลตฟอร์มในการ์ดจึงใช้ดูภาพรวมเท่านั้น</p><div class="grid g4">`;
+  BK.forEach(b => {
+    const cs = cellsFor(b);
+    if (!cs.length){ h += `<div class="card kpi" style="--kc:${bcol(b)}"><div class="name">${esc(D.brands.find(x => x.key === b).label)}</div><div class="big" style="font-size:16px">${NA}</div></div>`; return; }
+    const eng = sum(cs.map(c => c.engagement)), pt = sum(cs.map(c => c.posts_text)), pr = sum(cs.map(c => c.posts_raw));
+    let extra = "";
+    if (st.scope === "owned"){
+      const w = cs.filter(c => c.follower_start != null);
+      const fe = sum(cs.map(c => c.follower)), f0 = sum(w.map(c => c.follower_start)), f1 = sum(w.map(c => c.follower_end));
+      extra = `<dt>ผลรวมผู้ติดตามทุกแพลตฟอร์ม (สิ้นสุดช่วง)</dt><dd>${fmt(fe)}</dd><dt>เปลี่ยนแปลงในช่วง</dt><dd>${f0 ? (f1 >= f0 ? "+" : "") + fmt(f1 - f0) + " (" + fpct((f1 - f0) / f0 * 100) + ")" : NA}</dd>`;
+    }
+    h += `<div class="card kpi" style="--kc:${bcol(b)}"><div class="name">${esc(D.brands.find(x => x.key === b).label)}</div>
+      <div class="big">${fmt(eng)}</div><dl><dt>engagement รวม</dt><dd>${st.plat === "all" ? "ทุกแพลตฟอร์ม" : PL[st.plat]}</dd>
+      <dt>โพสต์ที่มีข้อความ</dt><dd>${fmt(pt)}</dd><dt>จำนวนแถวดิบ (Wisesight)</dt><dd>${fmt(pr)}</dd>${extra}</dl></div>`;
+  });
+  h += `</div><h2>engagement แยกตามแพลตฟอร์ม · ${SC[st.scope]}</h2><div class="grid g1">${card("cOv", "engagement รวม (ต่อแพลตฟอร์ม)", "เทียบภายในแพลตฟอร์มเดียวกันเท่านั้น", true)}</div>
+  <h2>อันดับต่อแพลตฟอร์ม</h2><div class="card"><div class="tw"><table id="rankT"></table></div></div>
+  <h2>สัดส่วน Earned ต่อ Owned (แพลตฟอร์มที่เลือก)</h2><div class="card"><div class="tw"><table id="ratioT"></table></div></div>`;
+  p.innerHTML = h; bindTables(p);
+  bindSeg("oScope", v => { st.scope = v; render(); }); bindSel("oPlat", v => { st.plat = v; render(); });
+  mk("cOv", "bar", {labels:D.platforms.map(x => PL[x]), datasets:BK.map(b => ({label:bname(b), data:D.platforms.map(pl => (cell(b, pl, st.scope) || {}).engagement ?? null),
+      backgroundColor:bcol(b), borderRadius:4, borderSkipped:false, borderColor:cv("--surface"), borderWidth:2, maxBarThickness:34}))},
+    {scales:{y:{ticks:{callback:v => abbr(v)}}}}, fmt);
+  let t = `<thead><tr><th>แพลตฟอร์ม</th>${BK.map(b => `<th>${bdot(b)}${bname(b)}</th>`).join("")}<th class="l">ผู้นำ</th></tr></thead><tbody>`;
+  D.platforms.forEach(pl => {
+    const vals = BK.map(b => (cell(b, pl, st.scope) || {}).engagement ?? null), mx = Math.max(...vals.filter(v => v != null));
+    const rank = vals.map(v => v == null ? null : 1 + vals.filter(x => x != null && x > v).length);
+    t += `<tr><td>${PL[pl]}</td>${vals.map((v, i) => v == null ? `<td class="na">${NA}</td>` : `<td class="${v === mx ? "best" : ""}">${fmt(v)} <span style="color:var(--text-3)">(#${rank[i]})</span></td>`).join("")}<td class="l">${bname(BK[vals.indexOf(mx)])}</td></tr>`;
+  });
+  $("#rankT").innerHTML = t + "</tbody>";
+  const pls2 = st.plat === "all" ? D.platforms : [st.plat];
+  let r = `<thead><tr><th>แบรนด์</th><th>Owned</th><th>Earned</th><th>Earned ÷ Owned</th></tr></thead><tbody>`;
+  BK.forEach(b => {
+    const o = pls2.map(pl => cell(b, pl, "owned")).filter(Boolean), e = pls2.map(pl => cell(b, pl, "earned")).filter(Boolean);
+    const ov = o.length ? sum(o.map(c => c.engagement)) : null, ev = e.length ? sum(e.map(c => c.engagement)) : null;
+    r += `<tr><td>${bdot(b)}${bname(b)}</td><td>${fmt(ov)}</td><td>${fmt(ev)}</td><td>${ov && ev != null ? fmt1(ev / ov) + " เท่า" : NA}</td></tr>`;
+  });
+  $("#ratioT").innerHTML = r + "</tbody>";
+}
+
+/* ===== 2 brand score ===== */
+function rScore(p){
+  const st = S.score, M = ["Brand Score", "Owned Score", "Earned Score", "Sentiment Score"], mo = D.score_months;
+  let h = `<div class="controls"><div class="ctl">ตัวชี้วัด ${seg("sMet", M.map(m => ({v:m, t:m})), st.metric)}</div></div>
+   <p class="note warn">ช่วงเวลา: <b>${mo[0]} – ${mo[mo.length - 1]}</b> (ข้อมูลรายเดือนจาก Zocial Eye). ${esc(D.meta.score_note.replace(/^Note:\s*/, ""))}
+   ช่วงนี้ <b>ไม่ตรงกับ</b> ข้อมูลโพสต์ (28 มิ.ย. – 27 ก.ย. 2026) จึงไม่นำมารวมกัน</p>
+   <div class="grid g1">${card("cSc", st.metric + " รายเดือน", "คะแนนรายเดือนตามที่ Zocial Eye รายงาน (สเกลของแต่ละตัวชี้วัดต่างกัน)", true)}</div>
+   <h2>ตารางสรุป · ${st.metric}</h2><div class="card"><div class="tw"><table id="scT"></table></div></div>`;
+  p.innerHTML = h; bindTables(p); bindSeg("sMet", v => { st.metric = v; render(); });
+  mk("cSc", "line", {labels:mo, datasets:BK.map(b => ({label:bname(b), data:(D.scores[b] || {})[st.metric] || [], borderColor:bcol(b), backgroundColor:bcol(b),
+      borderWidth:2, pointRadius:4, pointHoverRadius:6, pointBorderColor:cv("--surface"), pointBorderWidth:2, tension:.25}))},
+    {layout:{padding:{right:64}}, plugins:{endl:{on:true}}, scales:{y:{beginAtZero:false, ticks:{callback:v => v}}}}, fmt1);
+  const last = mo.length - 1;
+  let t = `<thead><tr><th>แบรนด์</th><th>${mo[0]}</th><th>${mo[last]}</th><th>เปลี่ยนแปลง</th><th>อันดับ ${mo[last]}</th></tr></thead><tbody>`;
+  const lv = BK.map(b => ((D.scores[b] || {})[st.metric] || [])[last]);
+  BK.forEach((b, i) => { const a = ((D.scores[b] || {})[st.metric] || []); const d = a[last] - a[0];
+    t += `<tr><td>${bdot(b)}${bname(b)}</td><td>${fmt1(a[0])}</td><td>${fmt1(a[last])}</td><td>${d >= 0 ? "+" : ""}${fmt1(d)}</td><td>#${1 + lv.filter(x => x > lv[i]).length}</td></tr>`; });
+  $("#scT").innerHTML = t + "</tbody>";
+}
+
+/* ===== 3 platform (owned) ===== */
+function rPlatform(p){
+  const st = S.platform, pl = st.plat;
+  const cs = BK.map(b => cell(b, pl, "owned")), miss = BK.filter((b, i) => !cs[i]);
+  const g = f => cs.map(c => c ? (c[f] ?? null) : null);
+  let h = `<div class="controls"><div class="ctl">แพลตฟอร์ม ${seg("pPlat", platOpts(false), pl)}</div></div>
+  <p class="note">แสดงเฉพาะบัญชีทางการ (Owned) · โพสต์ที่นับ = แถวที่มีข้อความ (Facebook มีแถวที่ไม่มีข้อความจำนวนมาก (น่าจะเป็นรูปย่อยของโพสต์หลายรูป) จึงไม่นับเป็นโพสต์) ·
+  ค่ากลาง (median) ต้านอิทธิพลของโพสต์ไวรัลไม่กี่โพสต์${miss.length ? ` · <b>${miss.map(bname).join(", ")}</b>: ${NA}บน ${PL[pl]}` : ""}</p>
+  <div class="grid g2">${card("cP1", "engagement รวม", "ตามที่ Wisesight รายงาน (รวมแถวไม่มีข้อความ)")}${card("cP2", "ค่ากลาง engagement ต่อโพสต์", "เฉพาะโพสต์ที่มีข้อความ")}
+  ${card("cP3", "engagement ต่อโพสต์ ÷ ผู้ติดตาม (%)", "ค่าเฉลี่ยต่อโพสต์ที่มีข้อความ ÷ ผู้ติดตามสิ้นสุดช่วง")}${card("cP4", "ผู้ติดตามที่เปลี่ยนแปลงในช่วง (%)", "จากค่าแรกถึงค่าสุดท้ายใน daily_trend")}</div>
+  <h2>ตารางรายละเอียด · ${PL[pl]}</h2><div class="card"><div class="tw"><table id="pT"></table></div></div>`;
+  p.innerHTML = h; bindTables(p); bindSeg("pPlat", v => { st.plat = v; render(); });
+  const o = (fm, x) => ({plugins:{legend:{display:false}, vl:{on:true, fmt:fm}}, scales:{y:{ticks:{callback:x || (v => abbr(v))}}}});
+  const one = (id, f, fm, opt, tk) => mk(id, "bar", {labels:brandLabels, datasets:[barDs(g(f), {label:opt})]}, o(fm, tk), fm);
+  one("cP1", "engagement", abbr, "engagement"); one("cP2", "median_eng_text", v => fmt1(v), "ค่ากลาง");
+  one("cP3", "er_follower_pct", v => fpct(v, 2), "ER ต่อผู้ติดตาม", v => fpct(v, 2));
+  one("cP4", "follower_pct", v => fpct(v, 1), "ผู้ติดตาม %", v => fpct(v, 0));
+  const rows = [
+    ["แถวดิบ (Wisesight)", "posts_raw", fmt], ["โพสต์ที่มีข้อความ", "posts_text", fmt], ["แถวไม่มีข้อความ", "blank_rows", fmt],
+    ["engagement รวม", "engagement", fmt], ["ค่าเฉลี่ยต่อโพสต์ (มีข้อความ)", "mean_eng_text", fmt1], ["ค่ากลางต่อโพสต์", "median_eng_text", fmt1],
+    ["สัดส่วน engagement ของ 1 โพสต์บนสุด", "top1_share", v => fpct(v)], ["สัดส่วน engagement ของ 3 โพสต์บนสุด", "top3_share", v => fpct(v)],
+    ["views", "views", fmt], ["ผู้ติดตาม (สิ้นสุดช่วง)", "follower", fmt], ["ผู้ติดตามที่เปลี่ยน", "follower_delta", fmt], ["ผู้ติดตามที่เปลี่ยน (%)", "follower_pct", v => fpct(v, 2)],
+    ["ER ต่อผู้ติดตาม", "er_follower_pct", v => fpct(v, 2)], ["comment", "comment", fmt], ["share / repost", "share", fmt],
+  ];
+  let t = `<thead><tr><th>ตัวชี้วัด</th>${BK.map(b => `<th>${bdot(b)}${bname(b)}</th>`).join("")}</tr></thead><tbody>`;
+  rows.forEach(([n, f, ff]) => { t += `<tr><td>${n}</td>${g(f).map(v => v == null ? `<td class="na">${NA}</td>` : `<td>${ff(v)}</td>`).join("")}</tr>`; });
+  $("#pT").innerHTML = t + "</tbody>";
+}
+
+/* ===== 4 earned ===== */
+function rEarned(p){
+  const st = S.earned, pl = st.plat;
+  const cs = BK.map(b => cell(b, pl, "earned")), g = f => cs.map(c => c ? (c[f] ?? null) : null);
+  let h = `<div class="controls"><div class="ctl">แพลตฟอร์ม ${seg("ePlat", platOpts(false), pl)}</div></div>
+  <p class="note warn"><b>ข้อควรระวัง:</b> Earned ของ MEDCMU บน Facebook/Instagram ในตารางผู้โพสต์อันดับต้นมีบัญชีของหน่วยงาน/ชมรมในคณะเอง (เช่น Sriphat, ภาควิชาเวชศาสตร์ฉุกเฉิน, CPR CMU)
+  จึงไม่ใช่เสียงจากภายนอกล้วน · ข้อมูลไม่มี reach/impression จึงวัดได้เฉพาะ engagement และจำนวนโพสต์</p>
+  <div class="grid g2">${card("cE1", "engagement จากโพสต์ที่กล่าวถึง", PL[pl])}${card("cE2", "จำนวนโพสต์ที่กล่าวถึง", "ตามที่ Wisesight รายงาน")}</div>
+  <div class="grid g1" style="margin-top:14px">${card("cE3", "โพสต์ที่กล่าวถึง จำแนกตามขนาดผู้โพสต์ (Earned)", "จำนวนโพสต์ในแต่ละระดับ ผลรวมทุกระดับเท่ากับจำนวนโพสต์ Earned ของแบรนด์ (ตรวจตรงทุก 20 ชุดแบรนด์×แพลตฟอร์ม) · เกณฑ์ผู้ติดตามของแต่ละระดับไม่ระบุในไฟล์ ลำดับเรียงตามขนาดที่คาด · คอลัมน์ไม่มีชื่อแสดงเป็น “ไม่ระบุ”", true)}</div>
+  <h2>ผู้สร้างคอนเทนต์อันดับต้น</h2>
+  <div class="controls">${sel("eCb", BK.map(b => ({v:b, t:bname(b)})), st.cb)} ${seg("eBy", [{v:"posts", t:"เรียงตามจำนวนโพสต์"}, {v:"engagement", t:"เรียงตาม engagement"}], st.by)}</div>
+  <div class="card"><div class="tw"><table id="eT"></table></div></div>`;
+  p.innerHTML = h; bindTables(p); bindSeg("ePlat", v => { st.plat = v; render(); }); bindSeg("eBy", v => { st.by = v; render(); }); bindSel("eCb", v => { st.cb = v; render(); });
+  const o = fm => ({plugins:{legend:{display:false}, vl:{on:true, fmt:fm}}});
+  mk("cE1", "bar", {labels:brandLabels, datasets:[barDs(g("engagement"), {label:"engagement"})]}, o(abbr), fmt);
+  mk("cE2", "bar", {labels:brandLabels, datasets:[barDs(g("posts_raw"), {label:"โพสต์"})]}, o(fmt), fmt);
+  const tiers = D.audience_tiers.concat(["unlabeled"]), tl = tiers.map(t => t === "unlabeled" ? "ไม่ระบุ" : t);
+  mk("cE3", "bar", {labels:tl, datasets:BK.map(b => { const r = D.audience.find(a => a.b === b && a.p === pl);
+    return {label:bname(b), data:tiers.map(t => r ? r[t] : null), backgroundColor:bcol(b), borderRadius:4, borderSkipped:false, borderColor:cv("--surface"), borderWidth:2, maxBarThickness:30}; })}, {}, fmt);
+  const rows = D.creators.filter(c => c.b === st.cb && c.p === pl && c.by === st.by).sort((a, b) => a.rank - b.rank);
+  $("#eT").innerHTML = `<thead><tr><th>#</th><th class="l">ชื่อผู้โพสต์</th><th>โพสต์</th><th>engagement</th></tr></thead><tbody>${rows.length ? rows.map(r => `<tr><td>${r.rank}</td><td class="l">${esc(r.n)}</td><td>${fmt(r.posts)}</td><td>${fmt(r.e)}</td></tr>`).join("") : `<tr><td colspan="4" class="na">${NA}</td></tr>`}</tbody>`;
+}
+
+/* ===== 5 sentiment ===== */
+function rSent(p){
+  const st = S.sentiment, pls = st.plat === "all" ? D.platforms : [st.plat];
+  const row = b => { const rs = D.sentiment.filter(s => s.b === b && pls.includes(s.p)); if (!rs.length) return null;
+    const pos = sum(rs.map(r => r.pos)), neg = sum(rs.map(r => r.neg)), neu = sum(rs.map(r => r.neu)); return {pos, neg, neu, n:pos + neg + neu}; };
+  const rs = BK.map(row);
+  let h = `<div class="controls"><div class="ctl">แพลตฟอร์ม ${seg("nPlat", platOpts(true), st.plat)}</div></div>
+  <p class="note">Sentiment ในชีตนี้จำนวนแถวตรงกับโพสต์ <b>Earned</b> (การพูดถึงแบรนด์) ไม่ใช่โพสต์ของบัญชีทางการ · ผลจัดโดยระบบของ Wisesight ·
+  ข้อความบางแบรนด์มีจำนวนน้อยมาก (ดูคอลัมน์ n) ควรอ่านอย่างระมัดระวัง</p>
+  <div class="grid g1">${card("cN", "สัดส่วน Sentiment ของโพสต์ที่กล่าวถึง (Earned)", "แท่งละ 100% · บวก / กลาง / ลบ", true)}</div>
+  <h2>ตัวเลข</h2><div class="card"><div class="tw"><table id="nT"></table></div></div>`;
+  p.innerHTML = h; bindTables(p); bindSeg("nPlat", v => { st.plat = v; render(); });
+  const pct = (r, k) => r && r.n ? r[k] / r.n * 100 : null;
+  const dsx = (label, key, col) => ({label, data:rs.map(r => pct(r, key)), backgroundColor:cv(col), borderColor:cv("--surface"), borderWidth:2, borderSkipped:false, borderRadius:3, maxBarThickness:48});
+  mk("cN", "bar", {labels:BK.map((b, i) => `${bname(b)}${rs[i] ? " (n=" + fmt(rs[i].n) + ")" : ""}`), datasets:[dsx("บวก", "pos", "--pos"), dsx("กลาง", "neu", "--neu"), dsx("ลบ", "neg", "--neg")]},
+    {indexAxis:"y", scales:{x:{stacked:true, max:100, ticks:{callback:v => v + "%"}, grid:{color:cv("--grid")}}, y:{stacked:true, beginAtZero:false, grid:{display:false}, ticks:{callback:function(v){ return this.getLabelForValue(v); }}}},
+     plugins:{tooltip:{callbacks:{label:c => ` ${c.dataset.label}: ${fpct(c.parsed.x)}`}}}}, v => fpct(v));
+  let t = `<thead><tr><th>แบรนด์</th><th>บวก</th><th>กลาง</th><th>ลบ</th><th>n</th><th>บวก %</th><th>ลบ %</th><th>Net (บวก−ลบ) %</th></tr></thead><tbody>`;
+  BK.forEach((b, i) => { const r = rs[i]; t += r ? `<tr><td>${bdot(b)}${bname(b)}</td><td>${fmt(r.pos)}</td><td>${fmt(r.neu)}</td><td>${fmt(r.neg)}</td><td>${fmt(r.n)}</td><td>${fpct(pct(r, "pos"))}</td><td>${fpct(pct(r, "neg"))}</td><td>${fpct(pct(r, "pos") - pct(r, "neg"))}</td></tr>` : `<tr><td>${bname(b)}</td><td colspan="7" class="na">${NA}</td></tr>`; });
+  $("#nT").innerHTML = t + "</tbody>";
+}
+
+/* ===== 6 trend ===== */
+function weekly(dates, arr){
+  const out = {};
+  dates.forEach((d, i) => { const dt = new Date(d + "T00:00:00Z"), dow = (dt.getUTCDay() + 6) % 7; dt.setUTCDate(dt.getUTCDate() - dow); const k = dt.toISOString().slice(0, 10); (out[k] = out[k] || {s:0, n:0}); out[k].s += arr[i] || 0; out[k].n++; });
+  return out;
+}
+function rTrend(p){
+  const st = S.trend;
+  let h = `<div class="controls"><div class="ctl">แพลตฟอร์ม ${sel("tPlat", platOpts(false), st.plat)}</div>
+   <div class="ctl">ประเภท ${seg("tScope", [{v:"owned", t:"Owned"}, {v:"earned", t:"Earned"}], st.scope)}</div>
+   <div class="ctl">ตัวชี้วัด ${seg("tMet", [{v:"eng", t:"engagement"}, {v:"posts", t:"จำนวนโพสต์ (มีข้อความ)"}], st.metric)}</div>
+   <div class="ctl">ช่วง ${seg("tGran", [{v:"day", t:"รายวัน"}, {v:"week", t:"รายสัปดาห์"}], st.gran)}</div></div>
+  <div class="controls">${BK.map(b => `<label class="tog"><input type="checkbox" data-b="${b}" ${st.brands.has(b) ? "checked" : ""}><i style="background:${bcol(b)}"></i>${bname(b)}</label>`).join("")}</div>
+  <p class="note">${st.scope === "owned" ? "จำนวนโพสต์รายวันนับจากแถวที่มีข้อความ (ข้อมูล daily_trend ของ Owned ไม่มีจำนวนโพสต์)" : "Earned: การกล่าวถึงจากผู้อื่น"} ·
+  รายสัปดาห์เริ่มวันจันทร์ สัปดาห์แรกและสัปดาห์สุดท้ายมีไม่ครบ 7 วัน</p>
+  <div class="grid g1">${card("cT", "แนวโน้ม " + PL[st.plat] + " · " + (st.metric === "eng" ? "engagement" : "จำนวนโพสต์"), "", true)}</div>`;
+  p.innerHTML = h; bindTables(p);
+  bindSel("tPlat", v => { st.plat = v; render(); }); bindSeg("tScope", v => { st.scope = v; render(); }); bindSeg("tMet", v => { st.metric = v; render(); }); bindSeg("tGran", v => { st.gran = v; render(); });
+  p.querySelectorAll("input[data-b]").forEach(i => i.onchange = () => { i.checked ? st.brands.add(i.dataset.b) : st.brands.delete(i.dataset.b); render(); });
+  const use = BK.filter(b => st.brands.has(b) && D.daily[`${b}|${st.plat}|${st.scope}`]);
+  let labels, sets;
+  if (st.gran === "day"){ labels = D.dates.map(dlabel); sets = use.map(b => D.daily[`${b}|${st.plat}|${st.scope}`][st.metric]); }
+  else { const ks = Object.keys(weekly(D.dates, D.dates.map(() => 0))).sort(); labels = ks.map(k => dlabel(k));
+    sets = use.map(b => { const w = weekly(D.dates, D.daily[`${b}|${st.plat}|${st.scope}`][st.metric]); return ks.map(k => w[k].s); }); }
+  const missing = BK.filter(b => st.brands.has(b) && !D.daily[`${b}|${st.plat}|${st.scope}`]);
+  mk("cT", "line", {labels, datasets:use.map((b, i) => ({label:bname(b), data:sets[i], borderColor:bcol(b), backgroundColor:bcol(b), borderWidth:2,
+      pointRadius:st.gran === "week" ? 4 : 0, pointHoverRadius:5, pointBorderColor:cv("--surface"), pointBorderWidth:2, tension:.2}))},
+    {plugins:{legend:{display:true}}, scales:{x:{ticks:{maxTicksLimit:st.gran === "day" ? 12 : 14}}}}, fmt);
+  if (missing.length) p.insertAdjacentHTML("beforeend", `<p class="note">${missing.map(bname).join(", ")}: ${NA}สำหรับตัวเลือกนี้</p>`);
+}
+
+/* ===== 7 top posts ===== */
+function rTop(p){
+  const st = S.top;
+  let h = `<div class="controls"><div class="ctl">แพลตฟอร์ม ${seg("xPlat", platOpts(false), st.plat)}</div>
+   <div class="ctl">ประเภท ${seg("xScope", [{v:"owned", t:"Owned"}, {v:"earned", t:"Earned"}], st.scope)}</div>
+   <div class="ctl">แบรนด์ ${sel("xBr", [{v:"all", t:"ทุกแบรนด์"}].concat(BK.map(b => ({v:b, t:bname(b)}))), st.brand)}</div></div>
+   <p class="note">engagement เทียบข้ามแพลตฟอร์มไม่ได้ (นิยามต่างกัน) · โพสต์ที่มี engagement สูงมากเพียงไม่กี่โพสต์อาจครองยอดรวมเกือบทั้งหมด ดูสัดส่วนในตารางแรก ·
+   แสดงข้อความสูงสุด ${240} ตัวอักษรแรกของแต่ละโพสต์ (บันทึกไว้ 25 โพสต์บนสุดต่อแบรนด์/แพลตฟอร์ม/ประเภท)</p>
+  <h2>ความกระจุกตัวของ engagement · ${PL[st.plat]} · ${st.scope === "owned" ? "Owned" : "Earned"}</h2><div class="card"><div class="tw"><table id="xC"></table></div></div>
+  <h2>โพสต์ engagement สูงสุด</h2><div class="card"><div class="tw"><table id="xT"></table></div></div>`;
+  p.innerHTML = h;
+  bindSeg("xPlat", v => { st.plat = v; render(); }); bindSeg("xScope", v => { st.scope = v; render(); }); bindSel("xBr", v => { st.brand = v; render(); });
+  let c = `<thead><tr><th>แบรนด์</th><th>โพสต์ที่มีข้อความ</th><th>ค่ากลาง</th><th>1 โพสต์บนสุด</th><th>3 โพสต์บนสุด</th><th>engagement รวม</th></tr></thead><tbody>`;
+  BK.forEach(b => { const x = cell(b, st.plat, st.scope); c += x ? `<tr><td>${bdot(b)}${bname(b)}</td><td>${fmt(x.posts_text)}</td><td>${fmt1(x.median_eng_text)}</td><td>${fpct(x.top1_share)}</td><td>${fpct(x.top3_share)}</td><td>${fmt(x.engagement)}</td></tr>` : `<tr><td>${bname(b)}</td><td colspan="5" class="na">${NA}</td></tr>`; });
+  $("#xC").innerHTML = c + "</tbody>";
+  const rows = D.top_posts.filter(r => r.p === st.plat && r.s === st.scope && (st.brand === "all" || r.b === st.brand)).sort((a, b) => b.e - a.e).slice(0, st.brand === "all" ? 30 : 25);
+  $("#xT").innerHTML = `<thead><tr><th>#</th><th class="l">แบรนด์</th><th class="l">วันที่</th><th>engagement</th><th>views</th>${st.scope === "earned" ? '<th class="l">ผู้โพสต์</th>' : ""}<th class="l">ข้อความ</th><th class="l">ลิงก์</th></tr></thead><tbody>${rows.length ? rows.map((r, i) =>
+    `<tr><td>${i + 1}</td><td class="l">${bdot(r.b)}${bname(r.b)}</td><td class="l">${r.t}</td><td>${fmt(r.e)}</td><td>${r.v ? fmt(r.v) : "–"}</td>${st.scope === "earned" ? `<td class="l">${esc(r.a || "–")}</td>` : ""}<td class="ptxt">${esc(r.x)}</td><td class="l">${r.u ? `<a href="${esc(r.u)}" target="_blank" rel="noopener noreferrer">เปิด</a>` : "–"}</td></tr>`).join("") : `<tr><td colspan="8" class="na">${NA}</td></tr>`}</tbody>`;
+}
+
+/* ===== 8 data quality ===== */
+function rQuality(p){
+  const M = D.meta;
+  let h = `<div class="note warn"><b>อ่านก่อนใช้ตัวเลข:</b> ข้อมูลนี้ไม่มี reach, impression, click หรือข้อมูล LINE OA จึงไม่มีตัวชี้วัดกลุ่ม Awareness (reach) และ Conversion · X/Twitter ไม่มี views · Chulalongkorn ไม่มี YouTube (Owned)</div>
+  <h2>ช่วงเวลาของข้อมูล</h2><ul class="clean"><li>ไฟล์โพสต์ <b>${esc(M.source_export)}</b>: ${M.export_period[0]} ถึง ${M.export_period[1]}</li>
+  <li>ไฟล์ Brand Score <b>${esc(M.source_score)}</b>: ${M.score_period[0]} ถึง ${M.score_period[1]} (ชื่อไฟล์ระบุ Sep แต่ยังไม่มีคะแนนเดือน ก.ย.)</li><li>สองไฟล์ไม่ตรงช่วงเวลากัน จึงแสดงแยก tab และไม่รวมเป็นตัวเลขเดียว</li></ul>
+  <h2>โพสต์ Owned บน Facebook: จำนวนดิบ เทียบกับที่ปรับแล้ว</h2>
+  <p class="note">แถวที่ไม่มีข้อความน่าจะเป็นรูปย่อยของโพสต์หลายรูป ซึ่ง Wisesight นับแต่ละรูปเป็นหนึ่งแถว (ข้อสันนิษฐาน ไม่ได้ยืนยันจากไฟล์) หลักฐานที่สอดคล้อง: แถวเหล่านี้ไม่มีข้อความและ engagement ต่อแถวต่ำมาก (เทียบคอลัมน์ “engagement ของแถวไม่มีข้อความ” กับ “ไม่มีข้อความ” ในตารางด้านล่าง) ·
+  dashboard ใช้ “โพสต์ที่มีข้อความ” สำหรับค่าเฉลี่ย/ค่ากลางต่อโพสต์ ส่วน engagement รวมใช้ตัวเลขของ Wisesight</p>
+  <div class="card"><div class="tw"><table id="qA"></table></div></div>
+  <h2>เทียบยอดชีต summary กับชีต messages</h2>
+  <p class="note">ใช้ชีต <b>summary</b> เป็นยอดรวมหลัก ค่าที่ต่างกันเล็กน้อยเกิดจากการนับของ Wisesight (แสดงเฉพาะแถวที่ต่าง)</p>
+  <div class="card"><div class="tw"><table id="qB"></table></div></div>
+  <h2>ข้อมูลซ้ำ</h2><ul class="clean"><li>ชีต messages ${fmt(M.messages_rows)} แถว มี ${fmt(M.dup_rows)} แถวที่ message_id ซ้ำ (${fmt(M.dup_ids)} รหัส) ในจำนวนนี้ ${fmt(M.dup_cross_brand_ids)} รหัสปรากฏข้ามหลายแบรนด์ (เช่น โพสต์เดียวกล่าวถึงศิริราชและจุฬาฯ พร้อมกัน) จึงเก็บไว้ต่อแบรนด์</li></ul>
+  <h2>ความครอบคลุมของข้อมูล</h2><div class="card"><div class="tw"><table id="qC"></table></div></div>
+  <h2>นิยาม</h2><ul class="clean"><li><b>Owned/Earned</b> ตามชีต summary ของ Wisesight</li><li><b>engagement</b> เป็นค่ารวมที่ Wisesight คำนวณ (Facebook = reaction+comment+share; X = like+reply+repost+quote; IG = like+comment; TikTok = like+comment+share) ไม่ควรเทียบข้ามแพลตฟอร์ม</li>
+  <li><b>ER ต่อผู้ติดตาม</b> = ค่าเฉลี่ย engagement ต่อโพสต์ที่มีข้อความ ÷ ผู้ติดตามสิ้นสุดช่วง (เฉพาะ Owned) ไม่ใช่ engagement rate ต่อ reach</li>
+  <li><b>ผู้ติดตามที่เปลี่ยน</b> = ค่าสุดท้ายลบค่าแรกของคอลัมน์ follower ใน daily_trend (วันที่แสดงไว้ในไฟล์ ledger) · ผู้ติดตาม YouTube เป็นตัวเลขปัดของแพลตฟอร์ม (เช่น 48.3K, 113K, 191K) การเปลี่ยนแปลง 0% อาจเกิดจากการปัด · ผลรวมผู้ติดตามข้ามแพลตฟอร์มอาจนับผู้ใช้คนเดียวกันซ้ำ</li></ul>`;
+  p.innerHTML = h;
+  let a = `<thead><tr><th>แบรนด์</th><th>แถวดิบ (summary)</th><th>แถวใน messages</th><th>มีข้อความ</th><th>ไม่มีข้อความ</th><th>สัดส่วนไม่มีข้อความ</th><th>engagement ของแถวไม่มีข้อความ</th><th>ค่าเฉลี่ย/แถวดิบ</th><th>ค่าเฉลี่ย/โพสต์มีข้อความ</th></tr></thead><tbody>`;
+  BK.forEach(b => { const c = cell(b, "facebook", "owned"); if (!c) return;
+    a += `<tr><td>${bdot(b)}${bname(b)}</td><td>${fmt(c.posts_raw)}</td><td>${fmt(c.msg_rows)}</td><td>${fmt(c.posts_text)}</td><td>${fmt(c.blank_rows)}</td><td>${fpct(c.blank_rows / c.msg_rows * 100)}</td><td>${fmt(c.blank_eng)}</td><td>${fmt1(c.avg_eng_raw)}</td><td>${fmt1(c.mean_eng_text)}</td></tr>`; });
+  $("#qA").innerHTML = a + "</tbody>";
+  const diffs = D.recon.filter(r => r.eng_summary !== r.eng_msgs || r.posts_summary !== r.rows_msgs);
+  $("#qB").innerHTML = `<thead><tr><th>แบรนด์ | แพลตฟอร์ม | ประเภท</th><th>engagement (summary)</th><th>engagement (messages)</th><th>ต่าง</th><th>โพสต์ (summary)</th><th>แถว (messages)</th><th>ต่าง</th></tr></thead><tbody>${diffs.length ? diffs.map(r => {
+    const [b, pl, s] = r.k.split("|"); return `<tr><td>${bname(b)} | ${PL[pl]} | ${s}</td><td>${fmt(r.eng_summary)}</td><td>${fmt(r.eng_msgs)}</td><td>${fmt(r.eng_msgs - r.eng_summary)}</td><td>${fmt(r.posts_summary)}</td><td>${fmt(r.rows_msgs)}</td><td>${fmt(r.rows_msgs - r.posts_summary)}</td></tr>`; }).join("") : `<tr><td colspan="7" class="na">ตรงกันทุกแถว</td></tr>`}</tbody>`;
+  let c = `<thead><tr><th>แพลตฟอร์ม</th>${BK.map(b => `<th>${bdot(b)}${bname(b)}</th>`).join("")}</tr></thead><tbody>`;
+  D.platforms.forEach(pl => { c += `<tr><td>${PL[pl]}</td>${BK.map(b => { const o = cell(b, pl, "owned"), e = cell(b, pl, "earned");
+    return `<td class="${o && e ? "" : "na"}">${o ? "Owned ✓" : "Owned ✗"} · ${e ? "Earned ✓" : "Earned ✗"}</td>`; }).join("")}</tr>`; });
+  $("#qC").innerHTML = c + "</tbody>";
+}
+
+const RENDER = {overview:rOverview, score:rScore, platform:rPlatform, earned:rEarned, sentiment:rSent, trend:rTrend, top:rTop, quality:rQuality};
+let active = "overview";
+function render(){
+  destroyAll();
+  const p = document.getElementById("panel-" + active);
+  RENDER[active](p);
+}
+function setTab(id, plat){
+  active = id; safeSet("medcmu-tab", id);
+  if (plat) S.platform.plat = plat;
+  TABS.forEach(t => { const pn = document.getElementById("panel-" + t.id), on = t.id === id; pn.hidden = !on; if (!on) pn.innerHTML = ""; });
+  const T = TABS.find(t => t.id === id); $("#pgTitle").textContent = id === "platform" ? "แพลตฟอร์ม (Owned) · " + PL[S.platform.plat] : T.t; $("#pgSub").textContent = T.d;
+  document.querySelectorAll(".nav-item").forEach(b => { const on = b.dataset.id === id && (id !== "platform" || b.dataset.plat === S.platform.plat); on ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"); });
+  history.replaceState(null, "", "#" + id);
+  render();
+}
+function init(){
+  $("#brandChips").innerHTML = BR.map(b => `<span class="chip" title="${esc(b.label)}"><i style="background:var(--b-${b.key})"></i>${esc(b.short)}</span>`).join("");
+  $("#sideFoot").innerHTML = `<b>ฐานข้อมูล Wisesight ZocialEye</b>โพสต์ ${dlabel(D.meta.export_period[0])} – ${dlabel(D.meta.export_period[1])} 2026<br>Brand Score ${D.meta.score_period[0]} – ${D.meta.score_period[1]}`;
+  $("#foot").textContent = `ที่มา: ${D.meta.source_export} · ${D.meta.source_score} · ตัวเลขทุกค่าคำนวณจากสองไฟล์นี้ด้วย build_dashboard.py (ledger: metrics_ledger.csv)`;
+  const nav = $("#nav"), pan = $("#panels");
+  NAV.forEach(g => {
+    const grp = document.createElement("div"); grp.className = "nav-group"; grp.innerHTML = `<div class="nav-h">${esc(g.h)}</div>`;
+    g.items.forEach(it => {
+      const T = TABS.find(t => t.id === it.id), b = document.createElement("button"); b.type = "button"; b.className = "nav-item"; b.dataset.id = it.id; if (it.plat) b.dataset.plat = it.plat;
+      b.innerHTML = (it.mono ? `<span class="mono">${it.mono}</span>` : ICON[it.i]) + `<span class="lbl">${esc(it.label || T.t)}</span>` + (it.badge != null ? `<span class="badge" title="${esc(it.tip)}">${fmt(it.badge)}</span>` : "");
+      b.onclick = () => setTab(it.id, it.plat); grp.appendChild(b);
+    });
+    nav.appendChild(grp);
+  });
+  TABS.forEach(t => { const s = document.createElement("section"); s.className = "panel"; s.id = "panel-" + t.id; s.hidden = true; pan.appendChild(s); });
+  const th = safeGet("medcmu-theme"); document.documentElement.dataset.theme = th === "light" ? "light" : "dark";
+  $("#themeBtn").onclick = () => { const nx = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; document.documentElement.dataset.theme = nx; safeSet("medcmu-theme", nx); render(); };
+  const h = location.hash.replace("#", ""), st = safeGet("medcmu-tab");
+  setTab(TABS.some(t => t.id === h) ? h : TABS.some(t => t.id === st) ? st : "overview");
+}
+init();
+</script>
+</body>
+</html>

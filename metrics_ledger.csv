@@ -1,0 +1,805 @@
+﻿brand,platform,scope,metric,value,source
+MEDCMU,facebook,earned,engagement,60588.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,posts_raw,501.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,views,28391.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,comment,2593.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,share,4702.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,avg_eng_raw,120.93,summary+messages+daily_trend
+MEDCMU,facebook,earned,msg_rows,501.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,msg_eng_sum,60588.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,posts_text,501.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,blank_rows,0.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,blank_eng,0.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,mean_eng_text,120.93,summary+messages+daily_trend
+MEDCMU,facebook,earned,median_eng_text,17.0,summary+messages+daily_trend
+MEDCMU,facebook,earned,top1_share,7.9,summary+messages+daily_trend
+MEDCMU,facebook,earned,top3_share,21.0,summary+messages+daily_trend
+SI,facebook,earned,engagement,2006491.0,summary+messages+daily_trend
+SI,facebook,earned,posts_raw,4845.0,summary+messages+daily_trend
+SI,facebook,earned,views,20920401.0,summary+messages+daily_trend
+SI,facebook,earned,comment,65598.0,summary+messages+daily_trend
+SI,facebook,earned,share,161166.0,summary+messages+daily_trend
+SI,facebook,earned,avg_eng_raw,414.74,summary+messages+daily_trend
+SI,facebook,earned,msg_rows,4838.0,summary+messages+daily_trend
+SI,facebook,earned,msg_eng_sum,2006491.0,summary+messages+daily_trend
+SI,facebook,earned,posts_text,4838.0,summary+messages+daily_trend
+SI,facebook,earned,blank_rows,0.0,summary+messages+daily_trend
+SI,facebook,earned,blank_eng,0.0,summary+messages+daily_trend
+SI,facebook,earned,mean_eng_text,414.74,summary+messages+daily_trend
+SI,facebook,earned,median_eng_text,9.0,summary+messages+daily_trend
+SI,facebook,earned,top1_share,4.5,summary+messages+daily_trend
+SI,facebook,earned,top3_share,11.5,summary+messages+daily_trend
+CU,facebook,earned,engagement,680563.0,summary+messages+daily_trend
+CU,facebook,earned,posts_raw,456.0,summary+messages+daily_trend
+CU,facebook,earned,views,2113018.0,summary+messages+daily_trend
+CU,facebook,earned,comment,17621.0,summary+messages+daily_trend
+CU,facebook,earned,share,27110.0,summary+messages+daily_trend
+CU,facebook,earned,avg_eng_raw,1492.46,summary+messages+daily_trend
+CU,facebook,earned,msg_rows,456.0,summary+messages+daily_trend
+CU,facebook,earned,msg_eng_sum,680563.0,summary+messages+daily_trend
+CU,facebook,earned,posts_text,446.0,summary+messages+daily_trend
+CU,facebook,earned,blank_rows,10.0,summary+messages+daily_trend
+CU,facebook,earned,blank_eng,162.0,summary+messages+daily_trend
+CU,facebook,earned,mean_eng_text,1525.56,summary+messages+daily_trend
+CU,facebook,earned,median_eng_text,24.0,summary+messages+daily_trend
+CU,facebook,earned,top1_share,41.9,summary+messages+daily_trend
+CU,facebook,earned,top3_share,63.4,summary+messages+daily_trend
+SMV,facebook,earned,engagement,204942.0,summary+messages+daily_trend
+SMV,facebook,earned,posts_raw,1726.0,summary+messages+daily_trend
+SMV,facebook,earned,views,3384999.0,summary+messages+daily_trend
+SMV,facebook,earned,comment,5087.0,summary+messages+daily_trend
+SMV,facebook,earned,share,33214.0,summary+messages+daily_trend
+SMV,facebook,earned,avg_eng_raw,118.67,summary+messages+daily_trend
+SMV,facebook,earned,msg_rows,1727.0,summary+messages+daily_trend
+SMV,facebook,earned,msg_eng_sum,204942.0,summary+messages+daily_trend
+SMV,facebook,earned,posts_text,1727.0,summary+messages+daily_trend
+SMV,facebook,earned,blank_rows,0.0,summary+messages+daily_trend
+SMV,facebook,earned,blank_eng,0.0,summary+messages+daily_trend
+SMV,facebook,earned,mean_eng_text,118.67,summary+messages+daily_trend
+SMV,facebook,earned,median_eng_text,0.0,summary+messages+daily_trend
+SMV,facebook,earned,top1_share,19.2,summary+messages+daily_trend
+SMV,facebook,earned,top3_share,28.9,summary+messages+daily_trend
+SMV,facebook,owned,engagement,102615.0,summary+messages+daily_trend
+SMV,facebook,owned,posts_raw,477.0,summary+messages+daily_trend
+SMV,facebook,owned,views,3809864.0,summary+messages+daily_trend
+SMV,facebook,owned,follower,303483.0,summary+messages+daily_trend
+SMV,facebook,owned,comment,1260.0,summary+messages+daily_trend
+SMV,facebook,owned,share,9143.0,summary+messages+daily_trend
+SMV,facebook,owned,avg_eng_raw,215.13,summary+messages+daily_trend
+SMV,facebook,owned,msg_rows,477.0,summary+messages+daily_trend
+SMV,facebook,owned,msg_eng_sum,102615.0,summary+messages+daily_trend
+SMV,facebook,owned,posts_text,128.0,summary+messages+daily_trend
+SMV,facebook,owned,blank_rows,349.0,summary+messages+daily_trend
+SMV,facebook,owned,blank_eng,1097.0,summary+messages+daily_trend
+SMV,facebook,owned,mean_eng_text,793.11,summary+messages+daily_trend
+SMV,facebook,owned,median_eng_text,381.0,summary+messages+daily_trend
+SMV,facebook,owned,top1_share,10.0,summary+messages+daily_trend
+SMV,facebook,owned,top3_share,23.0,summary+messages+daily_trend
+SMV,facebook,owned,er_follower_pct,0.261,summary+messages+daily_trend
+SMV,facebook,owned,follower_start,298207.0,summary+messages+daily_trend
+SMV,facebook,owned,follower_end,303473.0,summary+messages+daily_trend
+SMV,facebook,owned,follower_delta,5266.0,summary+messages+daily_trend
+SMV,facebook,owned,follower_pct,1.77,summary+messages+daily_trend
+MEDCMU,facebook,owned,engagement,330238.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,posts_raw,4185.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,views,5867457.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,follower,225631.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,comment,12851.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,share,23267.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,avg_eng_raw,78.76,summary+messages+daily_trend
+MEDCMU,facebook,owned,msg_rows,4193.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,msg_eng_sum,330238.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,posts_text,536.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,blank_rows,3657.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,blank_eng,10695.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,mean_eng_text,596.16,summary+messages+daily_trend
+MEDCMU,facebook,owned,median_eng_text,141.5,summary+messages+daily_trend
+MEDCMU,facebook,owned,top1_share,19.7,summary+messages+daily_trend
+MEDCMU,facebook,owned,top3_share,28.9,summary+messages+daily_trend
+MEDCMU,facebook,owned,er_follower_pct,0.264,summary+messages+daily_trend
+MEDCMU,facebook,owned,follower_start,200212.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,follower_end,225631.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,follower_delta,25419.0,summary+messages+daily_trend
+MEDCMU,facebook,owned,follower_pct,12.7,summary+messages+daily_trend
+SI,facebook,owned,engagement,66736.0,summary+messages+daily_trend
+SI,facebook,owned,posts_raw,807.0,summary+messages+daily_trend
+SI,facebook,owned,views,2125609.0,summary+messages+daily_trend
+SI,facebook,owned,follower,270158.0,summary+messages+daily_trend
+SI,facebook,owned,comment,1906.0,summary+messages+daily_trend
+SI,facebook,owned,share,6204.0,summary+messages+daily_trend
+SI,facebook,owned,avg_eng_raw,82.7,summary+messages+daily_trend
+SI,facebook,owned,msg_rows,807.0,summary+messages+daily_trend
+SI,facebook,owned,msg_eng_sum,66736.0,summary+messages+daily_trend
+SI,facebook,owned,posts_text,306.0,summary+messages+daily_trend
+SI,facebook,owned,blank_rows,501.0,summary+messages+daily_trend
+SI,facebook,owned,blank_eng,3300.0,summary+messages+daily_trend
+SI,facebook,owned,mean_eng_text,207.31,summary+messages+daily_trend
+SI,facebook,owned,median_eng_text,36.0,summary+messages+daily_trend
+SI,facebook,owned,top1_share,12.3,summary+messages+daily_trend
+SI,facebook,owned,top3_share,33.3,summary+messages+daily_trend
+SI,facebook,owned,er_follower_pct,0.077,summary+messages+daily_trend
+SI,facebook,owned,follower_start,267781.0,summary+messages+daily_trend
+SI,facebook,owned,follower_end,270158.0,summary+messages+daily_trend
+SI,facebook,owned,follower_delta,2377.0,summary+messages+daily_trend
+SI,facebook,owned,follower_pct,0.89,summary+messages+daily_trend
+CU,facebook,owned,engagement,66767.0,summary+messages+daily_trend
+CU,facebook,owned,posts_raw,611.0,summary+messages+daily_trend
+CU,facebook,owned,views,852459.0,summary+messages+daily_trend
+CU,facebook,owned,follower,232036.0,summary+messages+daily_trend
+CU,facebook,owned,comment,3503.0,summary+messages+daily_trend
+CU,facebook,owned,share,6667.0,summary+messages+daily_trend
+CU,facebook,owned,avg_eng_raw,109.27,summary+messages+daily_trend
+CU,facebook,owned,msg_rows,611.0,summary+messages+daily_trend
+CU,facebook,owned,msg_eng_sum,66767.0,summary+messages+daily_trend
+CU,facebook,owned,posts_text,180.0,summary+messages+daily_trend
+CU,facebook,owned,blank_rows,431.0,summary+messages+daily_trend
+CU,facebook,owned,blank_eng,7890.0,summary+messages+daily_trend
+CU,facebook,owned,mean_eng_text,327.09,summary+messages+daily_trend
+CU,facebook,owned,median_eng_text,195.0,summary+messages+daily_trend
+CU,facebook,owned,top1_share,6.4,summary+messages+daily_trend
+CU,facebook,owned,top3_share,14.0,summary+messages+daily_trend
+CU,facebook,owned,er_follower_pct,0.141,summary+messages+daily_trend
+CU,facebook,owned,follower_start,226738.0,summary+messages+daily_trend
+CU,facebook,owned,follower_end,232036.0,summary+messages+daily_trend
+CU,facebook,owned,follower_delta,5298.0,summary+messages+daily_trend
+CU,facebook,owned,follower_pct,2.34,summary+messages+daily_trend
+MEDCMU,instagram,earned,engagement,18135.0,summary+messages+daily_trend
+MEDCMU,instagram,earned,posts_raw,85.0,summary+messages+daily_trend
+MEDCMU,instagram,earned,views,0.0,summary+messages+daily_trend
+MEDCMU,instagram,earned,comment,62.0,summary+messages+daily_trend
+MEDCMU,instagram,earned,avg_eng_raw,213.35,summary+messages+daily_trend
+MEDCMU,instagram,earned,msg_rows,85.0,summary+messages+daily_trend
+MEDCMU,instagram,earned,msg_eng_sum,18135.0,summary+messages+daily_trend
+MEDCMU,instagram,earned,posts_text,85.0,summary+messages+daily_trend
+MEDCMU,instagram,earned,blank_rows,0.0,summary+messages+daily_trend
+MEDCMU,instagram,earned,blank_eng,0.0,summary+messages+daily_trend
+MEDCMU,instagram,earned,mean_eng_text,213.35,summary+messages+daily_trend
+MEDCMU,instagram,earned,median_eng_text,10.0,summary+messages+daily_trend
+MEDCMU,instagram,earned,top1_share,48.3,summary+messages+daily_trend
+MEDCMU,instagram,earned,top3_share,71.5,summary+messages+daily_trend
+SI,instagram,earned,engagement,351858.0,summary+messages+daily_trend
+SI,instagram,earned,posts_raw,997.0,summary+messages+daily_trend
+SI,instagram,earned,views,1623017.0,summary+messages+daily_trend
+SI,instagram,earned,comment,2537.0,summary+messages+daily_trend
+SI,instagram,earned,avg_eng_raw,352.92,summary+messages+daily_trend
+SI,instagram,earned,msg_rows,997.0,summary+messages+daily_trend
+SI,instagram,earned,msg_eng_sum,351858.0,summary+messages+daily_trend
+SI,instagram,earned,posts_text,997.0,summary+messages+daily_trend
+SI,instagram,earned,blank_rows,0.0,summary+messages+daily_trend
+SI,instagram,earned,blank_eng,0.0,summary+messages+daily_trend
+SI,instagram,earned,mean_eng_text,352.92,summary+messages+daily_trend
+SI,instagram,earned,median_eng_text,16.0,summary+messages+daily_trend
+SI,instagram,earned,top1_share,18.0,summary+messages+daily_trend
+SI,instagram,earned,top3_share,27.9,summary+messages+daily_trend
+CU,instagram,earned,engagement,38086.0,summary+messages+daily_trend
+CU,instagram,earned,posts_raw,102.0,summary+messages+daily_trend
+CU,instagram,earned,views,126038.0,summary+messages+daily_trend
+CU,instagram,earned,comment,330.0,summary+messages+daily_trend
+CU,instagram,earned,avg_eng_raw,373.39,summary+messages+daily_trend
+CU,instagram,earned,msg_rows,102.0,summary+messages+daily_trend
+CU,instagram,earned,msg_eng_sum,38086.0,summary+messages+daily_trend
+CU,instagram,earned,posts_text,102.0,summary+messages+daily_trend
+CU,instagram,earned,blank_rows,0.0,summary+messages+daily_trend
+CU,instagram,earned,blank_eng,0.0,summary+messages+daily_trend
+CU,instagram,earned,mean_eng_text,373.39,summary+messages+daily_trend
+CU,instagram,earned,median_eng_text,4.0,summary+messages+daily_trend
+CU,instagram,earned,top1_share,38.0,summary+messages+daily_trend
+CU,instagram,earned,top3_share,66.3,summary+messages+daily_trend
+SMV,instagram,earned,engagement,47038.0,summary+messages+daily_trend
+SMV,instagram,earned,posts_raw,327.0,summary+messages+daily_trend
+SMV,instagram,earned,views,353755.0,summary+messages+daily_trend
+SMV,instagram,earned,comment,522.0,summary+messages+daily_trend
+SMV,instagram,earned,avg_eng_raw,143.85,summary+messages+daily_trend
+SMV,instagram,earned,msg_rows,327.0,summary+messages+daily_trend
+SMV,instagram,earned,msg_eng_sum,47038.0,summary+messages+daily_trend
+SMV,instagram,earned,posts_text,327.0,summary+messages+daily_trend
+SMV,instagram,earned,blank_rows,0.0,summary+messages+daily_trend
+SMV,instagram,earned,blank_eng,0.0,summary+messages+daily_trend
+SMV,instagram,earned,mean_eng_text,143.85,summary+messages+daily_trend
+SMV,instagram,earned,median_eng_text,1.0,summary+messages+daily_trend
+SMV,instagram,earned,top1_share,31.4,summary+messages+daily_trend
+SMV,instagram,earned,top3_share,50.4,summary+messages+daily_trend
+MEDCMU,instagram,owned,engagement,55762.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,posts_raw,105.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,views,889813.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,follower,21543.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,comment,248.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,avg_eng_raw,531.07,summary+messages+daily_trend
+MEDCMU,instagram,owned,msg_rows,105.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,msg_eng_sum,55762.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,posts_text,105.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,blank_rows,0.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,blank_eng,0.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,mean_eng_text,531.07,summary+messages+daily_trend
+MEDCMU,instagram,owned,median_eng_text,282.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,top1_share,9.3,summary+messages+daily_trend
+MEDCMU,instagram,owned,top3_share,20.9,summary+messages+daily_trend
+MEDCMU,instagram,owned,er_follower_pct,2.465,summary+messages+daily_trend
+MEDCMU,instagram,owned,follower_start,18793.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,follower_end,21543.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,follower_delta,2750.0,summary+messages+daily_trend
+MEDCMU,instagram,owned,follower_pct,14.63,summary+messages+daily_trend
+CU,instagram,owned,engagement,10113.0,summary+messages+daily_trend
+CU,instagram,owned,posts_raw,95.0,summary+messages+daily_trend
+CU,instagram,owned,views,132949.0,summary+messages+daily_trend
+CU,instagram,owned,follower,13216.0,summary+messages+daily_trend
+CU,instagram,owned,comment,21.0,summary+messages+daily_trend
+CU,instagram,owned,avg_eng_raw,106.45,summary+messages+daily_trend
+CU,instagram,owned,msg_rows,95.0,summary+messages+daily_trend
+CU,instagram,owned,msg_eng_sum,10113.0,summary+messages+daily_trend
+CU,instagram,owned,posts_text,88.0,summary+messages+daily_trend
+CU,instagram,owned,blank_rows,7.0,summary+messages+daily_trend
+CU,instagram,owned,blank_eng,430.0,summary+messages+daily_trend
+CU,instagram,owned,mean_eng_text,110.03,summary+messages+daily_trend
+CU,instagram,owned,median_eng_text,36.0,summary+messages+daily_trend
+CU,instagram,owned,top1_share,22.0,summary+messages+daily_trend
+CU,instagram,owned,top3_share,39.6,summary+messages+daily_trend
+CU,instagram,owned,er_follower_pct,0.833,summary+messages+daily_trend
+CU,instagram,owned,follower_start,11237.0,summary+messages+daily_trend
+CU,instagram,owned,follower_end,13216.0,summary+messages+daily_trend
+CU,instagram,owned,follower_delta,1979.0,summary+messages+daily_trend
+CU,instagram,owned,follower_pct,17.61,summary+messages+daily_trend
+SMV,instagram,owned,engagement,1716.0,summary+messages+daily_trend
+SMV,instagram,owned,posts_raw,28.0,summary+messages+daily_trend
+SMV,instagram,owned,views,8308.0,summary+messages+daily_trend
+SMV,instagram,owned,follower,25645.0,summary+messages+daily_trend
+SMV,instagram,owned,comment,9.0,summary+messages+daily_trend
+SMV,instagram,owned,avg_eng_raw,61.29,summary+messages+daily_trend
+SMV,instagram,owned,msg_rows,28.0,summary+messages+daily_trend
+SMV,instagram,owned,msg_eng_sum,1716.0,summary+messages+daily_trend
+SMV,instagram,owned,posts_text,28.0,summary+messages+daily_trend
+SMV,instagram,owned,blank_rows,0.0,summary+messages+daily_trend
+SMV,instagram,owned,blank_eng,0.0,summary+messages+daily_trend
+SMV,instagram,owned,mean_eng_text,61.29,summary+messages+daily_trend
+SMV,instagram,owned,median_eng_text,54.0,summary+messages+daily_trend
+SMV,instagram,owned,top1_share,15.4,summary+messages+daily_trend
+SMV,instagram,owned,top3_share,29.6,summary+messages+daily_trend
+SMV,instagram,owned,er_follower_pct,0.239,summary+messages+daily_trend
+SMV,instagram,owned,follower_start,25466.0,summary+messages+daily_trend
+SMV,instagram,owned,follower_end,25645.0,summary+messages+daily_trend
+SMV,instagram,owned,follower_delta,179.0,summary+messages+daily_trend
+SMV,instagram,owned,follower_pct,0.7,summary+messages+daily_trend
+SI,instagram,owned,engagement,13750.0,summary+messages+daily_trend
+SI,instagram,owned,posts_raw,101.0,summary+messages+daily_trend
+SI,instagram,owned,views,234660.0,summary+messages+daily_trend
+SI,instagram,owned,follower,14123.0,summary+messages+daily_trend
+SI,instagram,owned,comment,23.0,summary+messages+daily_trend
+SI,instagram,owned,avg_eng_raw,136.14,summary+messages+daily_trend
+SI,instagram,owned,msg_rows,101.0,summary+messages+daily_trend
+SI,instagram,owned,msg_eng_sum,13750.0,summary+messages+daily_trend
+SI,instagram,owned,posts_text,101.0,summary+messages+daily_trend
+SI,instagram,owned,blank_rows,0.0,summary+messages+daily_trend
+SI,instagram,owned,blank_eng,0.0,summary+messages+daily_trend
+SI,instagram,owned,mean_eng_text,136.14,summary+messages+daily_trend
+SI,instagram,owned,median_eng_text,44.0,summary+messages+daily_trend
+SI,instagram,owned,top1_share,13.5,summary+messages+daily_trend
+SI,instagram,owned,top3_share,32.5,summary+messages+daily_trend
+SI,instagram,owned,er_follower_pct,0.964,summary+messages+daily_trend
+SI,instagram,owned,follower_start,12922.0,summary+messages+daily_trend
+SI,instagram,owned,follower_end,14123.0,summary+messages+daily_trend
+SI,instagram,owned,follower_delta,1201.0,summary+messages+daily_trend
+SI,instagram,owned,follower_pct,9.29,summary+messages+daily_trend
+MEDCMU,twitter,earned,engagement,609.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,posts_raw,21.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,comment,1.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,share,232.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,avg_eng_raw,29.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,msg_rows,21.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,msg_eng_sum,609.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,posts_text,21.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,blank_rows,0.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,blank_eng,0.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,mean_eng_text,29.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,median_eng_text,13.0,summary+messages+daily_trend
+MEDCMU,twitter,earned,top1_share,38.3,summary+messages+daily_trend
+MEDCMU,twitter,earned,top3_share,60.3,summary+messages+daily_trend
+SI,twitter,earned,engagement,102732.0,summary+messages+daily_trend
+SI,twitter,earned,posts_raw,393.0,summary+messages+daily_trend
+SI,twitter,earned,comment,406.0,summary+messages+daily_trend
+SI,twitter,earned,share,60776.0,summary+messages+daily_trend
+SI,twitter,earned,avg_eng_raw,261.4,summary+messages+daily_trend
+SI,twitter,earned,msg_rows,393.0,summary+messages+daily_trend
+SI,twitter,earned,msg_eng_sum,102732.0,summary+messages+daily_trend
+SI,twitter,earned,posts_text,393.0,summary+messages+daily_trend
+SI,twitter,earned,blank_rows,0.0,summary+messages+daily_trend
+SI,twitter,earned,blank_eng,0.0,summary+messages+daily_trend
+SI,twitter,earned,mean_eng_text,261.4,summary+messages+daily_trend
+SI,twitter,earned,median_eng_text,5.0,summary+messages+daily_trend
+SI,twitter,earned,top1_share,21.9,summary+messages+daily_trend
+SI,twitter,earned,top3_share,41.7,summary+messages+daily_trend
+CU,twitter,earned,engagement,12119.0,summary+messages+daily_trend
+CU,twitter,earned,posts_raw,86.0,summary+messages+daily_trend
+CU,twitter,earned,comment,108.0,summary+messages+daily_trend
+CU,twitter,earned,share,5567.0,summary+messages+daily_trend
+CU,twitter,earned,avg_eng_raw,140.92,summary+messages+daily_trend
+CU,twitter,earned,msg_rows,86.0,summary+messages+daily_trend
+CU,twitter,earned,msg_eng_sum,12119.0,summary+messages+daily_trend
+CU,twitter,earned,posts_text,86.0,summary+messages+daily_trend
+CU,twitter,earned,blank_rows,0.0,summary+messages+daily_trend
+CU,twitter,earned,blank_eng,0.0,summary+messages+daily_trend
+CU,twitter,earned,mean_eng_text,140.92,summary+messages+daily_trend
+CU,twitter,earned,median_eng_text,7.0,summary+messages+daily_trend
+CU,twitter,earned,top1_share,28.4,summary+messages+daily_trend
+CU,twitter,earned,top3_share,60.1,summary+messages+daily_trend
+SMV,twitter,earned,engagement,4202.0,summary+messages+daily_trend
+SMV,twitter,earned,posts_raw,85.0,summary+messages+daily_trend
+SMV,twitter,earned,comment,182.0,summary+messages+daily_trend
+SMV,twitter,earned,share,1757.0,summary+messages+daily_trend
+SMV,twitter,earned,avg_eng_raw,49.44,summary+messages+daily_trend
+SMV,twitter,earned,msg_rows,85.0,summary+messages+daily_trend
+SMV,twitter,earned,msg_eng_sum,4202.0,summary+messages+daily_trend
+SMV,twitter,earned,posts_text,85.0,summary+messages+daily_trend
+SMV,twitter,earned,blank_rows,0.0,summary+messages+daily_trend
+SMV,twitter,earned,blank_eng,0.0,summary+messages+daily_trend
+SMV,twitter,earned,mean_eng_text,49.44,summary+messages+daily_trend
+SMV,twitter,earned,median_eng_text,6.0,summary+messages+daily_trend
+SMV,twitter,earned,top1_share,24.8,summary+messages+daily_trend
+SMV,twitter,earned,top3_share,66.7,summary+messages+daily_trend
+MEDCMU,twitter,owned,engagement,91847.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,posts_raw,111.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,follower,2757.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,comment,216.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,share,42428.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,avg_eng_raw,827.45,summary+messages+daily_trend
+MEDCMU,twitter,owned,msg_rows,111.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,msg_eng_sum,91847.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,posts_text,111.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,blank_rows,0.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,blank_eng,0.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,mean_eng_text,827.45,summary+messages+daily_trend
+MEDCMU,twitter,owned,median_eng_text,7.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,top1_share,16.3,summary+messages+daily_trend
+MEDCMU,twitter,owned,top3_share,43.8,summary+messages+daily_trend
+MEDCMU,twitter,owned,er_follower_pct,30.013,summary+messages+daily_trend
+MEDCMU,twitter,owned,follower_start,2485.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,follower_end,2756.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,follower_delta,271.0,summary+messages+daily_trend
+MEDCMU,twitter,owned,follower_pct,10.91,summary+messages+daily_trend
+CU,twitter,owned,engagement,424.0,summary+messages+daily_trend
+CU,twitter,owned,posts_raw,60.0,summary+messages+daily_trend
+CU,twitter,owned,follower,27674.0,summary+messages+daily_trend
+CU,twitter,owned,comment,6.0,summary+messages+daily_trend
+CU,twitter,owned,share,120.0,summary+messages+daily_trend
+CU,twitter,owned,avg_eng_raw,7.07,summary+messages+daily_trend
+CU,twitter,owned,msg_rows,60.0,summary+messages+daily_trend
+CU,twitter,owned,msg_eng_sum,424.0,summary+messages+daily_trend
+CU,twitter,owned,posts_text,60.0,summary+messages+daily_trend
+CU,twitter,owned,blank_rows,0.0,summary+messages+daily_trend
+CU,twitter,owned,blank_eng,0.0,summary+messages+daily_trend
+CU,twitter,owned,mean_eng_text,7.07,summary+messages+daily_trend
+CU,twitter,owned,median_eng_text,5.0,summary+messages+daily_trend
+CU,twitter,owned,top1_share,13.4,summary+messages+daily_trend
+CU,twitter,owned,top3_share,26.9,summary+messages+daily_trend
+CU,twitter,owned,er_follower_pct,0.026,summary+messages+daily_trend
+CU,twitter,owned,follower_start,27635.0,summary+messages+daily_trend
+CU,twitter,owned,follower_end,27674.0,summary+messages+daily_trend
+CU,twitter,owned,follower_delta,39.0,summary+messages+daily_trend
+CU,twitter,owned,follower_pct,0.14,summary+messages+daily_trend
+SMV,twitter,owned,engagement,102792.0,summary+messages+daily_trend
+SMV,twitter,owned,posts_raw,63.0,summary+messages+daily_trend
+SMV,twitter,owned,follower,57345.0,summary+messages+daily_trend
+SMV,twitter,owned,comment,40.0,summary+messages+daily_trend
+SMV,twitter,owned,share,54533.0,summary+messages+daily_trend
+SMV,twitter,owned,avg_eng_raw,1631.62,summary+messages+daily_trend
+SMV,twitter,owned,msg_rows,63.0,summary+messages+daily_trend
+SMV,twitter,owned,msg_eng_sum,102792.0,summary+messages+daily_trend
+SMV,twitter,owned,posts_text,63.0,summary+messages+daily_trend
+SMV,twitter,owned,blank_rows,0.0,summary+messages+daily_trend
+SMV,twitter,owned,blank_eng,0.0,summary+messages+daily_trend
+SMV,twitter,owned,mean_eng_text,1631.62,summary+messages+daily_trend
+SMV,twitter,owned,median_eng_text,424.0,summary+messages+daily_trend
+SMV,twitter,owned,top1_share,36.9,summary+messages+daily_trend
+SMV,twitter,owned,top3_share,50.9,summary+messages+daily_trend
+SMV,twitter,owned,er_follower_pct,2.845,summary+messages+daily_trend
+SMV,twitter,owned,follower_start,57345.0,summary+messages+daily_trend
+SMV,twitter,owned,follower_end,57166.0,summary+messages+daily_trend
+SMV,twitter,owned,follower_delta,-179.0,summary+messages+daily_trend
+SMV,twitter,owned,follower_pct,-0.31,summary+messages+daily_trend
+SI,twitter,owned,engagement,121.0,summary+messages+daily_trend
+SI,twitter,owned,posts_raw,23.0,summary+messages+daily_trend
+SI,twitter,owned,follower,17041.0,summary+messages+daily_trend
+SI,twitter,owned,comment,0.0,summary+messages+daily_trend
+SI,twitter,owned,share,41.0,summary+messages+daily_trend
+SI,twitter,owned,avg_eng_raw,5.26,summary+messages+daily_trend
+SI,twitter,owned,msg_rows,23.0,summary+messages+daily_trend
+SI,twitter,owned,msg_eng_sum,121.0,summary+messages+daily_trend
+SI,twitter,owned,posts_text,23.0,summary+messages+daily_trend
+SI,twitter,owned,blank_rows,0.0,summary+messages+daily_trend
+SI,twitter,owned,blank_eng,0.0,summary+messages+daily_trend
+SI,twitter,owned,mean_eng_text,5.26,summary+messages+daily_trend
+SI,twitter,owned,median_eng_text,2.0,summary+messages+daily_trend
+SI,twitter,owned,top1_share,18.2,summary+messages+daily_trend
+SI,twitter,owned,top3_share,43.0,summary+messages+daily_trend
+SI,twitter,owned,er_follower_pct,0.031,summary+messages+daily_trend
+SI,twitter,owned,follower_start,17041.0,summary+messages+daily_trend
+SI,twitter,owned,follower_end,16984.0,summary+messages+daily_trend
+SI,twitter,owned,follower_delta,-57.0,summary+messages+daily_trend
+SI,twitter,owned,follower_pct,-0.33,summary+messages+daily_trend
+MEDCMU,youtube,earned,engagement,365.0,summary+messages+daily_trend
+MEDCMU,youtube,earned,posts_raw,2.0,summary+messages+daily_trend
+MEDCMU,youtube,earned,views,26639.0,summary+messages+daily_trend
+MEDCMU,youtube,earned,comment,32.0,summary+messages+daily_trend
+MEDCMU,youtube,earned,avg_eng_raw,182.5,summary+messages+daily_trend
+MEDCMU,youtube,earned,msg_rows,2.0,summary+messages+daily_trend
+MEDCMU,youtube,earned,msg_eng_sum,365.0,summary+messages+daily_trend
+MEDCMU,youtube,earned,posts_text,2.0,summary+messages+daily_trend
+MEDCMU,youtube,earned,blank_rows,0.0,summary+messages+daily_trend
+MEDCMU,youtube,earned,blank_eng,0.0,summary+messages+daily_trend
+MEDCMU,youtube,earned,mean_eng_text,182.5,summary+messages+daily_trend
+MEDCMU,youtube,earned,median_eng_text,182.5,summary+messages+daily_trend
+MEDCMU,youtube,earned,top1_share,100.0,summary+messages+daily_trend
+MEDCMU,youtube,earned,top3_share,100.0,summary+messages+daily_trend
+SI,youtube,earned,engagement,35726.0,summary+messages+daily_trend
+SI,youtube,earned,posts_raw,163.0,summary+messages+daily_trend
+SI,youtube,earned,views,2429874.0,summary+messages+daily_trend
+SI,youtube,earned,comment,2938.0,summary+messages+daily_trend
+SI,youtube,earned,avg_eng_raw,219.18,summary+messages+daily_trend
+SI,youtube,earned,msg_rows,163.0,summary+messages+daily_trend
+SI,youtube,earned,msg_eng_sum,35726.0,summary+messages+daily_trend
+SI,youtube,earned,posts_text,163.0,summary+messages+daily_trend
+SI,youtube,earned,blank_rows,0.0,summary+messages+daily_trend
+SI,youtube,earned,blank_eng,0.0,summary+messages+daily_trend
+SI,youtube,earned,mean_eng_text,219.18,summary+messages+daily_trend
+SI,youtube,earned,median_eng_text,18.0,summary+messages+daily_trend
+SI,youtube,earned,top1_share,14.1,summary+messages+daily_trend
+SI,youtube,earned,top3_share,40.7,summary+messages+daily_trend
+CU,youtube,earned,engagement,577.0,summary+messages+daily_trend
+CU,youtube,earned,posts_raw,6.0,summary+messages+daily_trend
+CU,youtube,earned,views,21667.0,summary+messages+daily_trend
+CU,youtube,earned,comment,40.0,summary+messages+daily_trend
+CU,youtube,earned,avg_eng_raw,96.17,summary+messages+daily_trend
+CU,youtube,earned,msg_rows,6.0,summary+messages+daily_trend
+CU,youtube,earned,msg_eng_sum,577.0,summary+messages+daily_trend
+CU,youtube,earned,posts_text,6.0,summary+messages+daily_trend
+CU,youtube,earned,blank_rows,0.0,summary+messages+daily_trend
+CU,youtube,earned,blank_eng,0.0,summary+messages+daily_trend
+CU,youtube,earned,mean_eng_text,96.17,summary+messages+daily_trend
+CU,youtube,earned,median_eng_text,95.0,summary+messages+daily_trend
+CU,youtube,earned,top1_share,32.2,summary+messages+daily_trend
+CU,youtube,earned,top3_share,81.6,summary+messages+daily_trend
+SMV,youtube,earned,engagement,5099.0,summary+messages+daily_trend
+SMV,youtube,earned,posts_raw,18.0,summary+messages+daily_trend
+SMV,youtube,earned,views,3106737.0,summary+messages+daily_trend
+SMV,youtube,earned,comment,381.0,summary+messages+daily_trend
+SMV,youtube,earned,avg_eng_raw,283.28,summary+messages+daily_trend
+SMV,youtube,earned,msg_rows,18.0,summary+messages+daily_trend
+SMV,youtube,earned,msg_eng_sum,5099.0,summary+messages+daily_trend
+SMV,youtube,earned,posts_text,18.0,summary+messages+daily_trend
+SMV,youtube,earned,blank_rows,0.0,summary+messages+daily_trend
+SMV,youtube,earned,blank_eng,0.0,summary+messages+daily_trend
+SMV,youtube,earned,mean_eng_text,283.28,summary+messages+daily_trend
+SMV,youtube,earned,median_eng_text,11.5,summary+messages+daily_trend
+SMV,youtube,earned,top1_share,72.5,summary+messages+daily_trend
+SMV,youtube,earned,top3_share,93.6,summary+messages+daily_trend
+SI,youtube,owned,engagement,394.0,summary+messages+daily_trend
+SI,youtube,owned,posts_raw,46.0,summary+messages+daily_trend
+SI,youtube,owned,views,12082.0,summary+messages+daily_trend
+SI,youtube,owned,follower,113000.0,summary+messages+daily_trend
+SI,youtube,owned,comment,22.0,summary+messages+daily_trend
+SI,youtube,owned,avg_eng_raw,8.57,summary+messages+daily_trend
+SI,youtube,owned,msg_rows,46.0,summary+messages+daily_trend
+SI,youtube,owned,msg_eng_sum,394.0,summary+messages+daily_trend
+SI,youtube,owned,posts_text,46.0,summary+messages+daily_trend
+SI,youtube,owned,blank_rows,0.0,summary+messages+daily_trend
+SI,youtube,owned,blank_eng,0.0,summary+messages+daily_trend
+SI,youtube,owned,mean_eng_text,8.57,summary+messages+daily_trend
+SI,youtube,owned,median_eng_text,6.0,summary+messages+daily_trend
+SI,youtube,owned,top1_share,16.5,summary+messages+daily_trend
+SI,youtube,owned,top3_share,32.0,summary+messages+daily_trend
+SI,youtube,owned,er_follower_pct,0.008,summary+messages+daily_trend
+SI,youtube,owned,follower_start,113000.0,summary+messages+daily_trend
+SI,youtube,owned,follower_end,113000.0,summary+messages+daily_trend
+SI,youtube,owned,follower_delta,0.0,summary+messages+daily_trend
+SI,youtube,owned,follower_pct,0.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,engagement,26465.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,posts_raw,81.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,views,1253662.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,follower,48300.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,comment,644.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,avg_eng_raw,326.73,summary+messages+daily_trend
+MEDCMU,youtube,owned,msg_rows,81.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,msg_eng_sum,26465.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,posts_text,81.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,blank_rows,0.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,blank_eng,0.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,mean_eng_text,326.73,summary+messages+daily_trend
+MEDCMU,youtube,owned,median_eng_text,17.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,top1_share,55.1,summary+messages+daily_trend
+MEDCMU,youtube,owned,top3_share,79.7,summary+messages+daily_trend
+MEDCMU,youtube,owned,er_follower_pct,0.676,summary+messages+daily_trend
+MEDCMU,youtube,owned,follower_start,40800.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,follower_end,48300.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,follower_delta,7500.0,summary+messages+daily_trend
+MEDCMU,youtube,owned,follower_pct,18.38,summary+messages+daily_trend
+SMV,youtube,owned,engagement,2156.0,summary+messages+daily_trend
+SMV,youtube,owned,posts_raw,42.0,summary+messages+daily_trend
+SMV,youtube,owned,views,394081.0,summary+messages+daily_trend
+SMV,youtube,owned,follower,191000.0,summary+messages+daily_trend
+SMV,youtube,owned,comment,41.0,summary+messages+daily_trend
+SMV,youtube,owned,avg_eng_raw,51.33,summary+messages+daily_trend
+SMV,youtube,owned,msg_rows,42.0,summary+messages+daily_trend
+SMV,youtube,owned,msg_eng_sum,2156.0,summary+messages+daily_trend
+SMV,youtube,owned,posts_text,37.0,summary+messages+daily_trend
+SMV,youtube,owned,blank_rows,5.0,summary+messages+daily_trend
+SMV,youtube,owned,blank_eng,85.0,summary+messages+daily_trend
+SMV,youtube,owned,mean_eng_text,55.97,summary+messages+daily_trend
+SMV,youtube,owned,median_eng_text,16.0,summary+messages+daily_trend
+SMV,youtube,owned,top1_share,28.3,summary+messages+daily_trend
+SMV,youtube,owned,top3_share,61.9,summary+messages+daily_trend
+SMV,youtube,owned,er_follower_pct,0.029,summary+messages+daily_trend
+SMV,youtube,owned,follower_start,189000.0,summary+messages+daily_trend
+SMV,youtube,owned,follower_end,191000.0,summary+messages+daily_trend
+SMV,youtube,owned,follower_delta,2000.0,summary+messages+daily_trend
+SMV,youtube,owned,follower_pct,1.06,summary+messages+daily_trend
+MEDCMU,tiktok,earned,engagement,19104.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,posts_raw,7.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,views,261526.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,comment,208.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,share,3920.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,avg_eng_raw,2729.14,summary+messages+daily_trend
+MEDCMU,tiktok,earned,msg_rows,7.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,msg_eng_sum,19104.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,posts_text,7.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,blank_rows,0.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,blank_eng,0.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,mean_eng_text,2729.14,summary+messages+daily_trend
+MEDCMU,tiktok,earned,median_eng_text,36.0,summary+messages+daily_trend
+MEDCMU,tiktok,earned,top1_share,78.7,summary+messages+daily_trend
+MEDCMU,tiktok,earned,top3_share,99.6,summary+messages+daily_trend
+SI,tiktok,earned,engagement,191789.0,summary+messages+daily_trend
+SI,tiktok,earned,posts_raw,192.0,summary+messages+daily_trend
+SI,tiktok,earned,views,3735224.0,summary+messages+daily_trend
+SI,tiktok,earned,comment,1645.0,summary+messages+daily_trend
+SI,tiktok,earned,share,30264.0,summary+messages+daily_trend
+SI,tiktok,earned,avg_eng_raw,998.9,summary+messages+daily_trend
+SI,tiktok,earned,msg_rows,192.0,summary+messages+daily_trend
+SI,tiktok,earned,msg_eng_sum,191789.0,summary+messages+daily_trend
+SI,tiktok,earned,posts_text,192.0,summary+messages+daily_trend
+SI,tiktok,earned,blank_rows,0.0,summary+messages+daily_trend
+SI,tiktok,earned,blank_eng,0.0,summary+messages+daily_trend
+SI,tiktok,earned,mean_eng_text,998.9,summary+messages+daily_trend
+SI,tiktok,earned,median_eng_text,67.5,summary+messages+daily_trend
+SI,tiktok,earned,top1_share,18.1,summary+messages+daily_trend
+SI,tiktok,earned,top3_share,36.8,summary+messages+daily_trend
+CU,tiktok,earned,engagement,26266.0,summary+messages+daily_trend
+CU,tiktok,earned,posts_raw,27.0,summary+messages+daily_trend
+CU,tiktok,earned,views,442731.0,summary+messages+daily_trend
+CU,tiktok,earned,comment,413.0,summary+messages+daily_trend
+CU,tiktok,earned,share,1604.0,summary+messages+daily_trend
+CU,tiktok,earned,avg_eng_raw,972.81,summary+messages+daily_trend
+CU,tiktok,earned,msg_rows,27.0,summary+messages+daily_trend
+CU,tiktok,earned,msg_eng_sum,26266.0,summary+messages+daily_trend
+CU,tiktok,earned,posts_text,27.0,summary+messages+daily_trend
+CU,tiktok,earned,blank_rows,0.0,summary+messages+daily_trend
+CU,tiktok,earned,blank_eng,0.0,summary+messages+daily_trend
+CU,tiktok,earned,mean_eng_text,972.81,summary+messages+daily_trend
+CU,tiktok,earned,median_eng_text,46.0,summary+messages+daily_trend
+CU,tiktok,earned,top1_share,78.9,summary+messages+daily_trend
+CU,tiktok,earned,top3_share,90.9,summary+messages+daily_trend
+SMV,tiktok,earned,engagement,8347.0,summary+messages+daily_trend
+SMV,tiktok,earned,posts_raw,34.0,summary+messages+daily_trend
+SMV,tiktok,earned,views,165223.0,summary+messages+daily_trend
+SMV,tiktok,earned,comment,86.0,summary+messages+daily_trend
+SMV,tiktok,earned,share,836.0,summary+messages+daily_trend
+SMV,tiktok,earned,avg_eng_raw,245.5,summary+messages+daily_trend
+SMV,tiktok,earned,msg_rows,34.0,summary+messages+daily_trend
+SMV,tiktok,earned,msg_eng_sum,8347.0,summary+messages+daily_trend
+SMV,tiktok,earned,posts_text,34.0,summary+messages+daily_trend
+SMV,tiktok,earned,blank_rows,0.0,summary+messages+daily_trend
+SMV,tiktok,earned,blank_eng,0.0,summary+messages+daily_trend
+SMV,tiktok,earned,mean_eng_text,245.5,summary+messages+daily_trend
+SMV,tiktok,earned,median_eng_text,17.0,summary+messages+daily_trend
+SMV,tiktok,earned,top1_share,75.0,summary+messages+daily_trend
+SMV,tiktok,earned,top3_share,89.1,summary+messages+daily_trend
+SI,tiktok,owned,engagement,3662.0,summary+messages+daily_trend
+SI,tiktok,owned,posts_raw,26.0,summary+messages+daily_trend
+SI,tiktok,owned,views,365877.0,summary+messages+daily_trend
+SI,tiktok,owned,follower,30979.0,summary+messages+daily_trend
+SI,tiktok,owned,comment,28.0,summary+messages+daily_trend
+SI,tiktok,owned,share,319.0,summary+messages+daily_trend
+SI,tiktok,owned,avg_eng_raw,140.85,summary+messages+daily_trend
+SI,tiktok,owned,msg_rows,26.0,summary+messages+daily_trend
+SI,tiktok,owned,msg_eng_sum,3662.0,summary+messages+daily_trend
+SI,tiktok,owned,posts_text,26.0,summary+messages+daily_trend
+SI,tiktok,owned,blank_rows,0.0,summary+messages+daily_trend
+SI,tiktok,owned,blank_eng,0.0,summary+messages+daily_trend
+SI,tiktok,owned,mean_eng_text,140.85,summary+messages+daily_trend
+SI,tiktok,owned,median_eng_text,67.5,summary+messages+daily_trend
+SI,tiktok,owned,top1_share,28.5,summary+messages+daily_trend
+SI,tiktok,owned,top3_share,53.7,summary+messages+daily_trend
+SI,tiktok,owned,er_follower_pct,0.455,summary+messages+daily_trend
+SI,tiktok,owned,follower_start,30526.0,summary+messages+daily_trend
+SI,tiktok,owned,follower_end,30979.0,summary+messages+daily_trend
+SI,tiktok,owned,follower_delta,453.0,summary+messages+daily_trend
+SI,tiktok,owned,follower_pct,1.48,summary+messages+daily_trend
+MEDCMU,tiktok,owned,engagement,197515.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,posts_raw,67.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,views,3386617.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,follower,93904.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,comment,2800.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,share,22416.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,avg_eng_raw,2947.99,summary+messages+daily_trend
+MEDCMU,tiktok,owned,msg_rows,67.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,msg_eng_sum,197515.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,posts_text,67.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,blank_rows,0.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,blank_eng,0.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,mean_eng_text,2947.99,summary+messages+daily_trend
+MEDCMU,tiktok,owned,median_eng_text,398.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,top1_share,28.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,top3_share,57.3,summary+messages+daily_trend
+MEDCMU,tiktok,owned,er_follower_pct,3.139,summary+messages+daily_trend
+MEDCMU,tiktok,owned,follower_start,82398.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,follower_end,93904.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,follower_delta,11506.0,summary+messages+daily_trend
+MEDCMU,tiktok,owned,follower_pct,13.96,summary+messages+daily_trend
+SMV,tiktok,owned,engagement,147909.0,summary+messages+daily_trend
+SMV,tiktok,owned,posts_raw,37.0,summary+messages+daily_trend
+SMV,tiktok,owned,views,4661488.0,summary+messages+daily_trend
+SMV,tiktok,owned,follower,66651.0,summary+messages+daily_trend
+SMV,tiktok,owned,comment,1949.0,summary+messages+daily_trend
+SMV,tiktok,owned,share,12565.0,summary+messages+daily_trend
+SMV,tiktok,owned,avg_eng_raw,3997.54,summary+messages+daily_trend
+SMV,tiktok,owned,msg_rows,37.0,summary+messages+daily_trend
+SMV,tiktok,owned,msg_eng_sum,147909.0,summary+messages+daily_trend
+SMV,tiktok,owned,posts_text,36.0,summary+messages+daily_trend
+SMV,tiktok,owned,blank_rows,1.0,summary+messages+daily_trend
+SMV,tiktok,owned,blank_eng,75.0,summary+messages+daily_trend
+SMV,tiktok,owned,mean_eng_text,4106.5,summary+messages+daily_trend
+SMV,tiktok,owned,median_eng_text,115.5,summary+messages+daily_trend
+SMV,tiktok,owned,top1_share,66.2,summary+messages+daily_trend
+SMV,tiktok,owned,top3_share,80.4,summary+messages+daily_trend
+SMV,tiktok,owned,er_follower_pct,6.161,summary+messages+daily_trend
+SMV,tiktok,owned,follower_start,52103.0,summary+messages+daily_trend
+SMV,tiktok,owned,follower_end,66651.0,summary+messages+daily_trend
+SMV,tiktok,owned,follower_delta,14548.0,summary+messages+daily_trend
+SMV,tiktok,owned,follower_pct,27.92,summary+messages+daily_trend
+CU,tiktok,owned,engagement,25562.0,summary+messages+daily_trend
+CU,tiktok,owned,posts_raw,24.0,summary+messages+daily_trend
+CU,tiktok,owned,views,268607.0,summary+messages+daily_trend
+CU,tiktok,owned,follower,16949.0,summary+messages+daily_trend
+CU,tiktok,owned,comment,188.0,summary+messages+daily_trend
+CU,tiktok,owned,share,4346.0,summary+messages+daily_trend
+CU,tiktok,owned,avg_eng_raw,1065.08,summary+messages+daily_trend
+CU,tiktok,owned,msg_rows,24.0,summary+messages+daily_trend
+CU,tiktok,owned,msg_eng_sum,25562.0,summary+messages+daily_trend
+CU,tiktok,owned,posts_text,24.0,summary+messages+daily_trend
+CU,tiktok,owned,blank_rows,0.0,summary+messages+daily_trend
+CU,tiktok,owned,blank_eng,0.0,summary+messages+daily_trend
+CU,tiktok,owned,mean_eng_text,1065.08,summary+messages+daily_trend
+CU,tiktok,owned,median_eng_text,204.0,summary+messages+daily_trend
+CU,tiktok,owned,top1_share,37.0,summary+messages+daily_trend
+CU,tiktok,owned,top3_share,76.2,summary+messages+daily_trend
+CU,tiktok,owned,er_follower_pct,6.284,summary+messages+daily_trend
+CU,tiktok,owned,follower_start,13125.0,summary+messages+daily_trend
+CU,tiktok,owned,follower_end,16949.0,summary+messages+daily_trend
+CU,tiktok,owned,follower_delta,3824.0,summary+messages+daily_trend
+CU,tiktok,owned,follower_pct,29.14,summary+messages+daily_trend
+MEDCMU,all,score,Brand Score@Jan-26,99.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Brand Score@Feb-26,122.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Brand Score@Mar-26,150.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Brand Score@Apr-26,182.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Brand Score@May-26,196.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Brand Score@Jun-26,206.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Brand Score@Jul-26,211.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Brand Score@Aug-26,219.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Owned Score@Jan-26,111.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Owned Score@Feb-26,139.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Owned Score@Mar-26,174.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Owned Score@Apr-26,219.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Owned Score@May-26,229.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Owned Score@Jun-26,241.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Owned Score@Jul-26,247.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Owned Score@Aug-26,256.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Earned Score@Jan-26,76.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Earned Score@Feb-26,90.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Earned Score@Mar-26,106.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Earned Score@Apr-26,114.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Earned Score@May-26,135.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Earned Score@Jun-26,140.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Earned Score@Jul-26,145.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Earned Score@Aug-26,151.0,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Sentiment Score@Jan-26,44.8,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Sentiment Score@Feb-26,45.5,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Sentiment Score@Mar-26,45.2,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Sentiment Score@Apr-26,43.1,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Sentiment Score@May-26,43.4,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Sentiment Score@Jun-26,43.2,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Sentiment Score@Jul-26,43.5,Brand_Score_Jan-Sep2026.xlsx
+MEDCMU,all,score,Sentiment Score@Aug-26,43.7,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Brand Score@Jan-26,79.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Brand Score@Feb-26,107.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Brand Score@Mar-26,124.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Brand Score@Apr-26,141.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Brand Score@May-26,149.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Brand Score@Jun-26,157.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Brand Score@Jul-26,167.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Brand Score@Aug-26,172.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Owned Score@Jan-26,48.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Owned Score@Feb-26,75.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Owned Score@Mar-26,87.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Owned Score@Apr-26,104.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Owned Score@May-26,108.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Owned Score@Jun-26,113.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Owned Score@Jul-26,116.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Owned Score@Aug-26,116.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Earned Score@Jan-26,137.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Earned Score@Feb-26,167.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Earned Score@Mar-26,191.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Earned Score@Apr-26,211.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Earned Score@May-26,226.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Earned Score@Jun-26,239.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Earned Score@Jul-26,261.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Earned Score@Aug-26,276.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Sentiment Score@Jan-26,38.6,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Sentiment Score@Feb-26,41.4,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Sentiment Score@Mar-26,43.7,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Sentiment Score@Apr-26,47.1,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Sentiment Score@May-26,46.2,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Sentiment Score@Jun-26,46.0,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Sentiment Score@Jul-26,46.2,Brand_Score_Jan-Sep2026.xlsx
+SI,all,score,Sentiment Score@Aug-26,45.8,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Brand Score@Jan-26,100.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Brand Score@Feb-26,118.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Brand Score@Mar-26,135.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Brand Score@Apr-26,147.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Brand Score@May-26,160.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Brand Score@Jun-26,177.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Brand Score@Jul-26,187.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Brand Score@Aug-26,192.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Owned Score@Jan-26,73.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Owned Score@Feb-26,87.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Owned Score@Mar-26,103.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Owned Score@Apr-26,112.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Owned Score@May-26,124.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Owned Score@Jun-26,141.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Owned Score@Jul-26,151.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Owned Score@Aug-26,154.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Earned Score@Jan-26,151.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Earned Score@Feb-26,175.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Earned Score@Mar-26,195.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Earned Score@Apr-26,212.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Earned Score@May-26,227.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Earned Score@Jun-26,244.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Earned Score@Jul-26,255.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Earned Score@Aug-26,264.0,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Sentiment Score@Jan-26,45.8,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Sentiment Score@Feb-26,45.6,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Sentiment Score@Mar-26,44.6,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Sentiment Score@Apr-26,44.3,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Sentiment Score@May-26,47.9,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Sentiment Score@Jun-26,44.2,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Sentiment Score@Jul-26,43.4,Brand_Score_Jan-Sep2026.xlsx
+CU,all,score,Sentiment Score@Aug-26,43.4,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Brand Score@Jan-26,105.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Brand Score@Feb-26,129.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Brand Score@Mar-26,140.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Brand Score@Apr-26,154.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Brand Score@May-26,161.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Brand Score@Jun-26,160.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Brand Score@Jul-26,174.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Brand Score@Aug-26,182.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Owned Score@Jan-26,100.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Owned Score@Feb-26,126.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Owned Score@Mar-26,135.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Owned Score@Apr-26,145.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Owned Score@May-26,153.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Owned Score@Jun-26,151.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Owned Score@Jul-26,168.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Owned Score@Aug-26,177.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Earned Score@Jan-26,116.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Earned Score@Feb-26,134.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Earned Score@Mar-26,149.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Earned Score@Apr-26,171.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Earned Score@May-26,174.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Earned Score@Jun-26,179.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Earned Score@Jul-26,186.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Earned Score@Aug-26,190.0,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Sentiment Score@Jan-26,52.5,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Sentiment Score@Feb-26,48.5,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Sentiment Score@Mar-26,51.7,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Sentiment Score@Apr-26,55.1,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Sentiment Score@May-26,54.8,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Sentiment Score@Jun-26,53.4,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Sentiment Score@Jul-26,53.6,Brand_Score_Jan-Sep2026.xlsx
+SMV,all,score,Sentiment Score@Aug-26,52.4,Brand_Score_Jan-Sep2026.xlsx
