@@ -2,3 +2,5 @@
 *.xlsx
 node_modules/
 .vercel/
+.vercel
+.env*
