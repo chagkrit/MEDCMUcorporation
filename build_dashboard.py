@@ -145,6 +145,20 @@ def build_daily(x):
     return dates, out
 
 
+def build_monthly(x, dates):
+    """Monthly engagement per (brand, platform, scope), summed from daily_trend (same basis as the
+    summary sheet). `days` = number of days of the export window that fall in each month, so the UI
+    can flag partial months and offer a per-day view."""
+    dt = x["daily_trend"].copy()
+    dt["mo"] = pd.to_datetime(dt.date).dt.strftime("%Y-%m")
+    months = sorted({d[:7] for d in dates})
+    days = [sum(1 for d in dates if d[:7] == mo) for mo in months]
+    eng = {}
+    for (bk, pf, sc), g in dt.groupby(["bk", "platform", "scope"]):
+        eng[f"{bk}|{pf}|{sc}"] = [float(g[g.mo == mo].total_engagement.fillna(0).sum()) for mo in months]
+    return dict(months=months, days=days, eng=eng)
+
+
 def build_top_posts(x):
     m = x["messages"]
     rows = []
@@ -215,6 +229,7 @@ def main():
     cells = build_cells(x)
     dates, daily = build_daily(x)
     tops = build_top_posts(x)
+    monthly = build_monthly(x, dates)
     months, scores, score_note = build_scores()
     sent, aud, cr, tiers = build_misc(x)
     recon = build_reconciliation(x, cells)
@@ -234,7 +249,7 @@ def main():
         brands=[dict(key=b[0], short=b[1], label=b[2]) for b in BRANDS],
         platforms=PLATFORMS,
         cells=cells,
-        dates=dates, daily=daily,
+        dates=dates, daily=daily, monthly=monthly,
         top_posts=tops,
         score_months=months, scores=scores,
         sentiment=sent, audience=aud, audience_tiers=tiers, creators=cr,
@@ -250,6 +265,10 @@ def main():
                 continue
             led.append(dict(brand=c["brand"], platform=c["platform"], scope=c["scope"], metric=mname,
                             value=v, source="summary+messages+daily_trend"))
+    for k, vals in monthly["eng"].items():
+        bk, pf, sc = k.split("|")
+        for mo, v in zip(monthly["months"], vals):
+            led.append(dict(brand=bk, platform=pf, scope=sc, metric=f"month_engagement@{mo}", value=v, source="daily_trend"))
     for b, mets in scores.items():
         for mname, vals in mets.items():
             for mo, v in zip(months, vals):

@@ -129,6 +129,7 @@ aside.side{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--s
 header.top{padding:26px 0 14px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-start;justify-content:space-between;
   border-bottom:1px solid var(--border);margin-bottom:18px}
 h1{font-size:24px;margin:0;font-weight:700;letter-spacing:.1px}
+.hright{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
 .btn.primary{color:#fff;border:0;background:linear-gradient(135deg,var(--accent),var(--accent-2));padding:9px 16px;border-radius:10px;font-weight:600}
 .btn.primary:hover{filter:brightness(1.1)}
 .kpi2{display:flex;gap:14px;align-items:center;padding:16px}
@@ -161,8 +162,8 @@ h1{font-size:24px;margin:0;font-weight:700;letter-spacing:.1px}
   <main class="main">
     <header class="top">
       <div><h1 id="pgTitle"></h1><p class="sub" id="pgSub"></p></div>
-      <div class="chips" id="brandChips" aria-label="สีประจำแบรนด์"></div>
-      <button class="btn primary" id="themeBtn" type="button">สลับโหมดสว่าง/มืด</button>
+      <div class="hright"><div class="chips" id="brandChips" aria-label="สีประจำแบรนด์"></div>
+      <button class="btn primary" id="themeBtn" type="button">สลับโหมดสว่าง/มืด</button></div>
     </header>
     <div id="panels"></div>
     <footer id="foot"></footer>
@@ -328,6 +329,7 @@ const S = {
   platform:{plat:"facebook"},
   earned:{plat:"facebook", cb:"MEDCMU", by:"posts"},
   sentiment:{plat:"all"},
+  monthly:{plat:"facebook", scope:"owned", mode:"total", metric:"Brand Score"},
   trend:{brands:new Set(BK), plat:"facebook", scope:"owned", metric:"eng", gran:"week"},
   top:{plat:"facebook", scope:"owned", brand:"all"},
 };
@@ -337,6 +339,7 @@ const TABS = [
   {id:"platform", t:"แพลตฟอร์ม (Owned)", d:"เทียบบัญชีทางการของ 4 แบรนด์ในแต่ละแพลตฟอร์ม"},
   {id:"earned", t:"Earned / การพูดถึง", d:"โพสต์ของผู้อื่นที่กล่าวถึงแบรนด์ และผู้โพสต์อันดับต้น"},
   {id:"sentiment", t:"Sentiment", d:"สัดส่วนบวก/กลาง/ลบของโพสต์ที่กล่าวถึงแบรนด์ (Earned)"},
+  {id:"monthly", t:"รายเดือน", d:"engagement รายเดือนจากข้อมูลโพสต์ และ Brand Score รายเดือนจาก Zocial Eye"},
   {id:"trend", t:"แนวโน้มรายวัน", d:"engagement และจำนวนโพสต์ตามวัน/สัปดาห์"},
   {id:"top", t:"โพสต์เด่น", d:"โพสต์ที่ engagement สูงสุดและความกระจุกตัวของยอดรวม"},
   {id:"quality", t:"คุณภาพข้อมูล", d:"ข้อจำกัด นิยาม และการเทียบยอดระหว่างชีต"},
@@ -349,6 +352,7 @@ const ICON = {
   trend:'<svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
   star:'<svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>',
   shield:'<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>',
+  calendar:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>',
   send:'<svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>',
   heart:'<svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
 };
@@ -358,7 +362,7 @@ const NAV = [
   {h:"แพลตฟอร์ม (Owned)", items:D.platforms.map(p => ({id:"platform", plat:p, mono:MONO[p], label:PL[p],
      badge:(cell("MEDCMU", p, "owned") || {}).posts_text, tip:"โพสต์ที่มีข้อความของ MEDCMU (Owned) บน " + PL[p]}))},
   {h:"ผู้ฟังและการพูดถึง", items:[{id:"earned", i:"users"}, {id:"sentiment", i:"smile"}]},
-  {h:"เจาะลึก", items:[{id:"trend", i:"trend"}, {id:"top", i:"star"}]},
+  {h:"เจาะลึก", items:[{id:"monthly", i:"calendar"}, {id:"trend", i:"trend"}, {id:"top", i:"star"}]},
   {h:"ระบบ", items:[{id:"quality", i:"shield"}]},
 ];
 
@@ -574,7 +578,7 @@ function rQuality(p){
   const M = D.meta;
   let h = `<div class="note warn"><b>อ่านก่อนใช้ตัวเลข:</b> ข้อมูลนี้ไม่มี reach, impression, click หรือข้อมูล LINE OA จึงไม่มีตัวชี้วัดกลุ่ม Awareness (reach) และ Conversion · X/Twitter ไม่มี views · Chulalongkorn ไม่มี YouTube (Owned)</div>
   <h2>ช่วงเวลาของข้อมูล</h2><ul class="clean"><li>ไฟล์โพสต์ <b>${esc(M.source_export)}</b>: ${M.export_period[0]} ถึง ${M.export_period[1]}</li>
-  <li>ไฟล์ Brand Score <b>${esc(M.source_score)}</b>: ${M.score_period[0]} ถึง ${M.score_period[1]} (ชื่อไฟล์ระบุ Sep แต่ยังไม่มีคะแนนเดือน ก.ย.)</li><li>สองไฟล์ไม่ตรงช่วงเวลากัน จึงแสดงแยก tab และไม่รวมเป็นตัวเลขเดียว</li></ul>
+  <li>ไฟล์ Brand Score <b>${esc(M.source_score)}</b>: ${M.score_period[0]} ถึง ${M.score_period[1]} (ชื่อไฟล์ระบุ Sep แต่ยังไม่มีคะแนนเดือน ก.ย.)</li><li>สองไฟล์ไม่ตรงช่วงเวลากัน จึงแสดงแยก tab และไม่รวมเป็นตัวเลขเดียว</li><li>การแบ่งวันใช้ฟิลด์วันที่ในไฟล์ (posted_time เป็น UTC ส่วน daily_trend ไม่ระบุเขตเวลา) ค่ารายวัน/รายสัปดาห์อาจคลาดเคลื่อนได้ไม่เกินหนึ่งวัน</li></ul>
   <h2>โพสต์ Owned บน Facebook: จำนวนดิบ เทียบกับที่ปรับแล้ว</h2>
   <p class="note">แถวที่ไม่มีข้อความน่าจะเป็นรูปย่อยของโพสต์หลายรูป ซึ่ง Wisesight นับแต่ละรูปเป็นหนึ่งแถว (ข้อสันนิษฐาน ไม่ได้ยืนยันจากไฟล์) หลักฐานที่สอดคล้อง: แถวเหล่านี้ไม่มีข้อความและ engagement ต่อแถวต่ำมาก (เทียบคอลัมน์ “engagement ของแถวไม่มีข้อความ” กับ “ไม่มีข้อความ” ในตารางด้านล่าง) ·
   dashboard ใช้ “โพสต์ที่มีข้อความ” สำหรับค่าเฉลี่ย/ค่ากลางต่อโพสต์ ส่วน engagement รวมใช้ตัวเลขของ Wisesight</p>
@@ -601,7 +605,65 @@ function rQuality(p){
   $("#qC").innerHTML = c + "</tbody>";
 }
 
-const RENDER = {overview:rOverview, score:rScore, platform:rPlatform, earned:rEarned, sentiment:rSent, trend:rTrend, top:rTop, quality:rQuality};
+/* ===== monthly: engagement (post export) + Brand Score (Zocial Eye) ===== */
+const THM = ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+function moInfo(mo, days){ const [y, m] = mo.split("-").map(Number), dim = new Date(Date.UTC(y, m, 0)).getUTCDate();
+  return {y, m, dim, full:days === dim, label:`${THM[m - 1]} ${y}` + (days < dim ? ` (${days} วัน)*` : "")}; }
+function rMonthly(p){
+  const st = S.monthly, M = D.monthly, pl = st.plat, sc = st.scope, perday = st.mode === "perday";
+  const info = M.months.map((mo, i) => moInfo(mo, M.days[i]));
+  const so = D.score_months, last = so.length - 1, MET = ["Brand Score", "Owned Score", "Earned Score", "Sentiment Score"];
+  const arr = (b, m) => (D.scores[b] || {})[m] || [];
+  const ev = (b, i) => { const s = M.eng[`${b}|${pl}|${sc}`]; return s ? (perday ? s[i] / M.days[i] : s[i]) : null; };
+  const efmt = v => perday ? fmt1(v) : fmt(v);
+  let h = `<h2 style="margin-top:0">engagement รายเดือน · ข้อมูลโพสต์ ${dlabel(D.meta.export_period[0])} – ${dlabel(D.meta.export_period[1])}</h2>
+  <div class="controls"><div class="ctl">แพลตฟอร์ม ${seg("mPlat", platOpts(false), pl)}</div>
+   <div class="ctl">ประเภท ${seg("mScope", [{v:"owned", t:"Owned"}, {v:"earned", t:"Earned"}], sc)}</div>
+   <div class="ctl">รูปแบบ ${seg("mMode", [{v:"total", t:"รวมทั้งเดือน"}, {v:"perday", t:"เฉลี่ยต่อวัน"}], st.mode)}</div></div>
+  <p class="note warn">เดือนที่มี <b>*</b> ไม่ครบเดือน (ข้อมูลเริ่มและสิ้นสุดกลางเดือน) เทียบกับเดือนเต็มโดยตรงไม่ได้ ให้ใช้ “เฉลี่ยต่อวัน” · engagement เทียบข้ามแพลตฟอร์มไม่ได้</p>
+  <div class="grid g1">${card("cMo", "engagement" + (perday ? " (เฉลี่ยต่อวัน)" : "") + " · " + PL[pl] + " · " + (sc === "owned" ? "Owned" : "Earned"), "แยกตามเดือน 4 แบรนด์", true)}</div>
+  <div class="card" style="margin-top:14px"><div class="tw"><table id="mT"></table></div></div>
+  <h2>Brand Score รายเดือน · Zocial Eye</h2>
+  <div class="controls"><div class="ctl">ตัวชี้วัด ${seg("mMet", MET.map(m => ({v:m, t:m})), st.metric)}</div></div>
+  <p class="note warn">ช่วง <b>${so[0]} – ${so[last]}</b> <b>คนละช่วงกับข้อมูลโพสต์ด้านบน</b> จึงแสดงแยกกัน · ${esc(D.meta.score_note.replace(/^Note:\s*/, ""))} · คะแนนแต่ละตัวชี้วัดมีสเกลต่างกัน เทียบข้ามตัวชี้วัดไม่ได้</p>
+  <div class="grid g1">${card("cMs", st.metric + " รายเดือน", "แยกตามเดือน 4 แบรนด์", true)}</div>
+  <h2>${st.metric} รายเดือน</h2><div class="card"><div class="tw"><table id="mB"></table></div></div>
+  <h2>เปลี่ยนแปลงจากเดือนก่อน · ${st.metric}</h2><div class="card"><div class="tw"><table id="mD"></table></div></div>
+  <h2>ทุกตัวชี้วัด</h2><div class="card"><div class="tw"><table id="mS"></table></div></div>`;
+  p.innerHTML = h; bindTables(p);
+  bindSeg("mPlat", v => { st.plat = v; render(); }); bindSeg("mScope", v => { st.scope = v; render(); }); bindSeg("mMode", v => { st.mode = v; render(); }); bindSeg("mMet", v => { st.metric = v; render(); });
+  // --- engagement by month
+  mk("cMo", "bar", {labels:info.map(i => i.label), datasets:BK.map(b => ({label:bname(b), data:M.months.map((_, i) => ev(b, i)), backgroundColor:bcol(b),
+      borderRadius:4, borderSkipped:false, borderColor:cv("--surface"), borderWidth:2, maxBarThickness:38}))},
+    {plugins:{vl:{on:true, fmt:v => perday ? fmt1(v) : abbr(v)}}, scales:{y:{ticks:{callback:v => abbr(v)}}}}, efmt);
+  const full = info.map((x, i) => x.full ? i : -1).filter(i => i >= 0), i0 = full[full.length - 2], i1 = full[full.length - 1], canDelta = full.length >= 2;
+  let t = `<thead><tr><th>แบรนด์</th>${info.map(x => `<th>${x.label}</th>`).join("")}<th>${perday ? "เฉลี่ยต่อวันทั้งช่วง" : "รวมทั้งช่วง"}</th>${canDelta ? `<th>เปลี่ยนแปลง ${THM[info[i0].m - 1]}→${THM[info[i1].m - 1]} (เดือนเต็ม)</th>` : ""}</tr></thead><tbody>`;
+  BK.forEach(b => { const s = M.eng[`${b}|${pl}|${sc}`];
+    if (!s){ t += `<tr><td>${bdot(b)}${bname(b)}</td><td colspan="${info.length + 1 + (canDelta ? 1 : 0)}" class="na">${NA}</td></tr>`; return; }
+    const vals = M.months.map((_, i) => ev(b, i)), tot = perday ? sum(s) / sum(M.days) : sum(s);
+    const dcell = canDelta ? `<td>${vals[i0] > 0 ? (vals[i1] >= vals[i0] ? "+" : "") + fpct((vals[i1] - vals[i0]) / vals[i0] * 100) : NA}</td>` : "";
+    t += `<tr><td>${bdot(b)}${bname(b)}</td>${vals.map(v => `<td>${efmt(v)}</td>`).join("")}<td>${efmt(tot)}</td>${dcell}</tr>`; });
+  $("#mT").innerHTML = t + "</tbody>";
+  // --- Brand Score by month
+  mk("cMs", "bar", {labels:so, datasets:BK.map(b => ({label:bname(b), data:arr(b, st.metric), backgroundColor:bcol(b), borderRadius:4, borderSkipped:false,
+      borderColor:cv("--surface"), borderWidth:2, maxBarThickness:26}))},
+    {plugins:{vl:{on:true, fmt:v => fmt1(v)}}, scales:{y:{beginAtZero:st.metric !== "Sentiment Score", ticks:{callback:v => v}}}}, fmt1);
+  const lv = BK.map(b => arr(b, st.metric)[last]);
+  let u = `<thead><tr><th>แบรนด์</th>${so.map(m => `<th>${m}</th>`).join("")}<th>${so[0]}→${so[last]}</th><th>อันดับ ${so[last]}</th></tr></thead><tbody>`;
+  BK.forEach((b, i) => { const a = arr(b, st.metric), d = a[last] - a[0];
+    u += `<tr><td>${bdot(b)}${bname(b)}</td>${so.map((_, k) => a[k] == null ? `<td class="na">${NA}</td>` : `<td>${fmt1(a[k])}</td>`).join("")}<td>${d >= 0 ? "+" : ""}${fmt1(d)}</td><td>#${1 + lv.filter(x => x > lv[i]).length}</td></tr>`; });
+  $("#mB").innerHTML = u + "</tbody>";
+  let d = `<thead><tr><th>แบรนด์</th>${so.slice(1).map((m, k) => `<th>${so[k]}→${m}</th>`).join("")}</tr></thead><tbody>`;
+  BK.forEach(b => { const a = arr(b, st.metric);
+    d += `<tr><td>${bdot(b)}${bname(b)}</td>${so.slice(1).map((_, k) => { const x = a[k + 1] - a[k]; return isNaN(x) ? `<td class="na">${NA}</td>` : `<td>${x >= 0 ? "+" : ""}${fmt1(x)}</td>`; }).join("")}</tr>`; });
+  $("#mD").innerHTML = d + "</tbody>";
+  let q = `<thead><tr><th>ตัวชี้วัด</th><th>แบรนด์</th>${so.map(m => `<th>${m}</th>`).join("")}</tr></thead><tbody>`;
+  MET.forEach(met => BK.forEach((b, bi) => { const a = arr(b, met);
+    q += `<tr><td>${bi === 0 ? met : ""}</td><td>${bdot(b)}${bname(b)}</td>${so.map((_, i) => a[i] == null ? `<td class="na">${NA}</td>` : `<td>${fmt1(a[i])}</td>`).join("")}</tr>`; }));
+  $("#mS").innerHTML = q + "</tbody>";
+}
+
+const RENDER = {overview:rOverview, score:rScore, platform:rPlatform, earned:rEarned, sentiment:rSent, monthly:rMonthly, trend:rTrend, top:rTop, quality:rQuality};
 let active = "overview";
 function render(){
   destroyAll();
