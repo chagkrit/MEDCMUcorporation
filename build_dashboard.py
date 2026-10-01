@@ -17,7 +17,7 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 DATA_DIR = Path(os.environ.get("MEDCMU_DATA_DIR", HERE.parent / "MEDCMU DATA 2026"))  # folder holding the two .xlsx files
-EXPORT = DATA_DIR / "MEDCMU_4Brands_Export_28Jun-27Sep2026.xlsx"
+EXPORT = DATA_DIR / "MEDCMU_4Brands_Export_28Jun-27Sep2026_v2_corrected.xlsx"  # v2 = completeness-checked 2026-09-30 (see change_log sheet)
 SCORE = DATA_DIR / "Brand_Score_Jan-Sep2026.xlsx"
 
 BRANDS = [  # display order == categorical slot order (blue, orange, aqua, yellow)
@@ -206,7 +206,7 @@ def build_misc(x):
         d = dict(b=r.bk, p=r.platform)
         for t in tiers:
             d[t] = num(r.get(t)) or 0
-        d["unlabeled"] = num(r.get("Unnamed: 9")) or 0
+        d["unlabeled"] = num(r.get("unlabeled_tier", r.get("Unnamed: 9"))) or 0
         aud.append(d)
     cr = []
     for _, r in x["top_creators"].iterrows():
