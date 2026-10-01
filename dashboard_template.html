@@ -329,7 +329,7 @@ const S = {
   platform:{plat:"facebook"},
   earned:{plat:"facebook", cb:"MEDCMU", by:"posts"},
   sentiment:{plat:"all"},
-  monthly:{plat:"facebook", scope:"owned", mode:"total", metric:"Brand Score", ce:"bar", cs:"line", vB:"line", vD:"line", vS:"line"},
+  monthly:{plat:"facebook", scope:"owned", mode:"total", metric:"Brand Score", ce:"bar", cs:"line", vD:"line", vS:"line"},
   trend:{brands:new Set(BK), plat:"facebook", scope:"owned", metric:"eng", gran:"week"},
   top:{plat:"facebook", scope:"owned", brand:"all"},
 };
@@ -630,15 +630,14 @@ function rMonthly(p){
   <p class="note warn">ช่วง <b>${so[0]} – ${so[last]}</b> <b>คนละช่วงกับข้อมูลโพสต์ด้านบน</b> จึงแสดงแยกกัน · ${esc(D.meta.score_note.replace(/^Note:\s*/, ""))} · คะแนนแต่ละตัวชี้วัดมีสเกลต่างกัน เทียบข้ามตัวชี้วัดไม่ได้</p>
   <div class="controls"><div class="ctl">รูปแบบกราฟ ${seg("mCs", [{v:"line", t:"กราฟเส้น"}, {v:"bar", t:"กราฟแท่ง"}], st.cs)}</div></div>
   <div class="grid g1">${card("cMs", st.metric + " รายเดือน", st.cs === "line" ? "แนวโน้มรายเดือน 4 แบรนด์" : "แยกตามเดือน 4 แบรนด์", true)}</div>
-  <h2>${st.metric} รายเดือน</h2>${vw("B")}
-  ${st.vB === "line" ? `<div class="grid g1">${card("cMB", st.metric + " รายเดือน · แนวโน้ม", "กราฟเส้นแยกตามแบรนด์ (กดปุ่ม “ตาราง” ที่มุมการ์ดเพื่อดูตัวเลข)", true)}</div>` : `<div class="card"><div class="tw"><table id="mB"></table></div></div>`}
+  <h2>${st.metric} รายเดือน · ตาราง</h2><div class="card"><div class="tw"><table id="mB"></table></div></div>
   <h2>เปลี่ยนแปลงจากเดือนก่อน · ${st.metric}</h2>${vw("D")}
   ${st.vD === "line" ? `<div class="grid g1">${card("cMD", "เปลี่ยนแปลงจากเดือนก่อน · " + st.metric, "ผลต่างคะแนนเทียบเดือนก่อนหน้า (เส้นเหนือ 0 = เพิ่มขึ้น)", true)}</div>` : `<div class="card"><div class="tw"><table id="mD"></table></div></div>`}
   <h2>ทุกตัวชี้วัด</h2>${vw("S")}
   ${st.vS === "line" ? `<p class="note">แยกกราฟตามตัวชี้วัด เพราะสเกลคะแนนแต่ละตัวต่างกัน เทียบข้ามกราฟไม่ได้</p><div class="grid g2">${MET.map((m, i) => card("cMS" + i, m, "คะแนนรายเดือน 4 แบรนด์", true)).join("")}</div>` : `<div class="card"><div class="tw"><table id="mS"></table></div></div>`}`;
   p.innerHTML = h; bindTables(p);
   bindSeg("mPlat", v => { st.plat = v; render(); }); bindSeg("mScope", v => { st.scope = v; render(); }); bindSeg("mMode", v => { st.mode = v; render(); }); bindSeg("mMet", v => { st.metric = v; render(); });
-  ["B", "D", "S"].forEach(k => bindSeg("mV" + k, v => { st["v" + k] = v; render(); })); bindSeg("mCs", v => { st.cs = v; render(); }); bindSeg("mCe", v => { st.ce = v; render(); });
+  ["D", "S"].forEach(k => bindSeg("mV" + k, v => { st["v" + k] = v; render(); })); bindSeg("mCs", v => { st.cs = v; render(); }); bindSeg("mCe", v => { st.ce = v; render(); });
   // --- engagement by month
   if (st.ce === "line") mk("cMo", "line", {labels:info.map(i => i.label), datasets:BK.map(b => ({label:bname(b), data:M.months.map((_, i) => ev(b, i)), borderColor:bcol(b), backgroundColor:bcol(b),
       borderWidth:2, pointRadius:4, pointHoverRadius:6, pointBorderColor:cv("--surface"), pointBorderWidth:2, tension:.25}))},
@@ -666,7 +665,7 @@ function rMonthly(p){
   let u = `<thead><tr><th>แบรนด์</th>${so.map(m => `<th>${m}</th>`).join("")}<th>${so[0]}→${so[last]}</th><th>อันดับ ${so[last]}</th></tr></thead><tbody>`;
   BK.forEach((b, i) => { const a = arr(b, st.metric), d = a[last] - a[0];
     u += `<tr><td>${bdot(b)}${bname(b)}</td>${so.map((_, k) => a[k] == null ? `<td class="na">${NA}</td>` : `<td>${fmt1(a[k])}</td>`).join("")}<td>${d >= 0 ? "+" : ""}${fmt1(d)}</td><td>#${1 + lv.filter(x => x > lv[i]).length}</td></tr>`; });
-  if ($("#mB")) $("#mB").innerHTML = u + "</tbody>";
+  $("#mB").innerHTML = u + "</tbody>";
   let d = `<thead><tr><th>แบรนด์</th>${so.slice(1).map((m, k) => `<th>${so[k]}→${m}</th>`).join("")}</tr></thead><tbody>`;
   BK.forEach(b => { const a = arr(b, st.metric);
     d += `<tr><td>${bdot(b)}${bname(b)}</td>${so.slice(1).map((_, k) => { const x = a[k + 1] - a[k]; return isNaN(x) ? `<td class="na">${NA}</td>` : `<td>${x >= 0 ? "+" : ""}${fmt1(x)}</td>`; }).join("")}</tr>`; });
@@ -677,7 +676,6 @@ function rMonthly(p){
   if ($("#mS")) $("#mS").innerHTML = q + "</tbody>";
   // --- line-chart views (trend) for the three score sections
   const sgn = v => v == null || isNaN(v) ? null : v;
-  if (st.vB === "line") mk("cMB", "line", {labels:so, datasets:lineDs(b => arr(b, st.metric))}, lineOpt(), fmt1);
   if (st.vD === "line") mk("cMD", "line", {labels:so.slice(1).map((m, k) => so[k] + "→" + m),
       datasets:lineDs(b => { const a = arr(b, st.metric); return so.slice(1).map((_, k) => sgn(a[k + 1] - a[k])); })}, lineOpt(), v => (v >= 0 ? "+" : "") + fmt1(v));
   if (st.vS === "line") MET.forEach((m, i) => mk("cMS" + i, "line", {labels:so, datasets:lineDs(b => arr(b, m))},
