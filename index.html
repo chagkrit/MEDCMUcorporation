@@ -329,7 +329,7 @@ const S = {
   platform:{plat:"facebook"},
   earned:{plat:"facebook", cb:"MEDCMU", by:"posts"},
   sentiment:{plat:"all"},
-  monthly:{plat:"facebook", scope:"owned", mode:"total", metric:"Brand Score", vB:"table", vD:"table", vS:"table"},
+  monthly:{plat:"facebook", scope:"owned", mode:"total", metric:"Brand Score", ce:"bar", cs:"line", vB:"line", vD:"line", vS:"line"},
   trend:{brands:new Set(BK), plat:"facebook", scope:"owned", metric:"eng", gran:"week"},
   top:{plat:"facebook", scope:"owned", brand:"all"},
 };
@@ -620,14 +620,16 @@ function rMonthly(p){
   let h = `<h2 style="margin-top:0">engagement รายเดือน · ข้อมูลโพสต์ ${dlabel(D.meta.export_period[0])} – ${dlabel(D.meta.export_period[1])}</h2>
   <div class="controls"><div class="ctl">แพลตฟอร์ม ${seg("mPlat", platOpts(false), pl)}</div>
    <div class="ctl">ประเภท ${seg("mScope", [{v:"owned", t:"Owned"}, {v:"earned", t:"Earned"}], sc)}</div>
-   <div class="ctl">รูปแบบ ${seg("mMode", [{v:"total", t:"รวมทั้งเดือน"}, {v:"perday", t:"เฉลี่ยต่อวัน"}], st.mode)}</div></div>
+   <div class="ctl">รูปแบบ ${seg("mMode", [{v:"total", t:"รวมทั้งเดือน"}, {v:"perday", t:"เฉลี่ยต่อวัน"}], st.mode)}</div>
+   <div class="ctl">กราฟ ${seg("mCe", [{v:"bar", t:"กราฟแท่ง"}, {v:"line", t:"กราฟเส้น"}], st.ce)}</div></div>
   <p class="note warn">เดือนที่มี <b>*</b> ไม่ครบเดือน (ข้อมูลเริ่มและสิ้นสุดกลางเดือน) เทียบกับเดือนเต็มโดยตรงไม่ได้ ให้ใช้ “เฉลี่ยต่อวัน” · engagement เทียบข้ามแพลตฟอร์มไม่ได้</p>
   <div class="grid g1">${card("cMo", "engagement" + (perday ? " (เฉลี่ยต่อวัน)" : "") + " · " + PL[pl] + " · " + (sc === "owned" ? "Owned" : "Earned"), "แยกตามเดือน 4 แบรนด์", true)}</div>
   <div class="card" style="margin-top:14px"><div class="tw"><table id="mT"></table></div></div>
   <h2>Brand Score รายเดือน · Zocial Eye</h2>
   <div class="controls"><div class="ctl">ตัวชี้วัด ${seg("mMet", MET.map(m => ({v:m, t:m})), st.metric)}</div></div>
   <p class="note warn">ช่วง <b>${so[0]} – ${so[last]}</b> <b>คนละช่วงกับข้อมูลโพสต์ด้านบน</b> จึงแสดงแยกกัน · ${esc(D.meta.score_note.replace(/^Note:\s*/, ""))} · คะแนนแต่ละตัวชี้วัดมีสเกลต่างกัน เทียบข้ามตัวชี้วัดไม่ได้</p>
-  <div class="grid g1">${card("cMs", st.metric + " รายเดือน", "แยกตามเดือน 4 แบรนด์", true)}</div>
+  <div class="controls"><div class="ctl">รูปแบบกราฟ ${seg("mCs", [{v:"line", t:"กราฟเส้น"}, {v:"bar", t:"กราฟแท่ง"}], st.cs)}</div></div>
+  <div class="grid g1">${card("cMs", st.metric + " รายเดือน", st.cs === "line" ? "แนวโน้มรายเดือน 4 แบรนด์" : "แยกตามเดือน 4 แบรนด์", true)}</div>
   <h2>${st.metric} รายเดือน</h2>${vw("B")}
   ${st.vB === "line" ? `<div class="grid g1">${card("cMB", st.metric + " รายเดือน · แนวโน้ม", "กราฟเส้นแยกตามแบรนด์ (กดปุ่ม “ตาราง” ที่มุมการ์ดเพื่อดูตัวเลข)", true)}</div>` : `<div class="card"><div class="tw"><table id="mB"></table></div></div>`}
   <h2>เปลี่ยนแปลงจากเดือนก่อน · ${st.metric}</h2>${vw("D")}
@@ -636,9 +638,12 @@ function rMonthly(p){
   ${st.vS === "line" ? `<p class="note">แยกกราฟตามตัวชี้วัด เพราะสเกลคะแนนแต่ละตัวต่างกัน เทียบข้ามกราฟไม่ได้</p><div class="grid g2">${MET.map((m, i) => card("cMS" + i, m, "คะแนนรายเดือน 4 แบรนด์", true)).join("")}</div>` : `<div class="card"><div class="tw"><table id="mS"></table></div></div>`}`;
   p.innerHTML = h; bindTables(p);
   bindSeg("mPlat", v => { st.plat = v; render(); }); bindSeg("mScope", v => { st.scope = v; render(); }); bindSeg("mMode", v => { st.mode = v; render(); }); bindSeg("mMet", v => { st.metric = v; render(); });
-  ["B", "D", "S"].forEach(k => bindSeg("mV" + k, v => { st["v" + k] = v; render(); }));
+  ["B", "D", "S"].forEach(k => bindSeg("mV" + k, v => { st["v" + k] = v; render(); })); bindSeg("mCs", v => { st.cs = v; render(); }); bindSeg("mCe", v => { st.ce = v; render(); });
   // --- engagement by month
-  mk("cMo", "bar", {labels:info.map(i => i.label), datasets:BK.map(b => ({label:bname(b), data:M.months.map((_, i) => ev(b, i)), backgroundColor:bcol(b),
+  if (st.ce === "line") mk("cMo", "line", {labels:info.map(i => i.label), datasets:BK.map(b => ({label:bname(b), data:M.months.map((_, i) => ev(b, i)), borderColor:bcol(b), backgroundColor:bcol(b),
+      borderWidth:2, pointRadius:4, pointHoverRadius:6, pointBorderColor:cv("--surface"), pointBorderWidth:2, tension:.25}))},
+    {layout:{padding:{right:64}}, plugins:{endl:{on:true}}, scales:{y:{beginAtZero:true, ticks:{callback:v => abbr(v)}}}}, efmt);
+  else mk("cMo", "bar", {labels:info.map(i => i.label), datasets:BK.map(b => ({label:bname(b), data:M.months.map((_, i) => ev(b, i)), backgroundColor:bcol(b),
       borderRadius:4, borderSkipped:false, borderColor:cv("--surface"), borderWidth:2, maxBarThickness:38}))},
     {plugins:{vl:{on:true, fmt:v => perday ? fmt1(v) : abbr(v)}}, scales:{y:{ticks:{callback:v => abbr(v)}}}}, efmt);
   const full = info.map((x, i) => x.full ? i : -1).filter(i => i >= 0), i0 = full[full.length - 2], i1 = full[full.length - 1], canDelta = full.length >= 2;
@@ -650,7 +655,11 @@ function rMonthly(p){
     t += `<tr><td>${bdot(b)}${bname(b)}</td>${vals.map(v => `<td>${efmt(v)}</td>`).join("")}<td>${efmt(tot)}</td>${dcell}</tr>`; });
   $("#mT").innerHTML = t + "</tbody>";
   // --- Brand Score by month
-  mk("cMs", "bar", {labels:so, datasets:BK.map(b => ({label:bname(b), data:arr(b, st.metric), backgroundColor:bcol(b), borderRadius:4, borderSkipped:false,
+  const lineDs = vals => BK.map(b => ({label:bname(b), data:vals(b), borderColor:bcol(b), backgroundColor:bcol(b), borderWidth:2, pointRadius:4, pointHoverRadius:6,
+      pointBorderColor:cv("--surface"), pointBorderWidth:2, tension:.25, spanGaps:false}));
+  const lineOpt = (extra = {}) => deepMerge({layout:{padding:{right:64}}, plugins:{endl:{on:true}}, scales:{y:{beginAtZero:false, ticks:{callback:v => v}}}}, extra);
+  if (st.cs === "line") mk("cMs", "line", {labels:so, datasets:lineDs(b => arr(b, st.metric))}, lineOpt(), fmt1);
+  else mk("cMs", "bar", {labels:so, datasets:BK.map(b => ({label:bname(b), data:arr(b, st.metric), backgroundColor:bcol(b), borderRadius:4, borderSkipped:false,
       borderColor:cv("--surface"), borderWidth:2, maxBarThickness:26}))},
     {plugins:{vl:{on:true, fmt:v => fmt1(v)}}, scales:{y:{beginAtZero:st.metric !== "Sentiment Score", ticks:{callback:v => v}}}}, fmt1);
   const lv = BK.map(b => arr(b, st.metric)[last]);
@@ -667,9 +676,6 @@ function rMonthly(p){
     q += `<tr><td>${bi === 0 ? met : ""}</td><td>${bdot(b)}${bname(b)}</td>${so.map((_, i) => a[i] == null ? `<td class="na">${NA}</td>` : `<td>${fmt1(a[i])}</td>`).join("")}</tr>`; }));
   if ($("#mS")) $("#mS").innerHTML = q + "</tbody>";
   // --- line-chart views (trend) for the three score sections
-  const lineDs = vals => BK.map(b => ({label:bname(b), data:vals(b), borderColor:bcol(b), backgroundColor:bcol(b), borderWidth:2, pointRadius:4, pointHoverRadius:6,
-      pointBorderColor:cv("--surface"), pointBorderWidth:2, tension:.25, spanGaps:false}));
-  const lineOpt = (extra = {}) => deepMerge({layout:{padding:{right:64}}, plugins:{endl:{on:true}}, scales:{y:{beginAtZero:false, ticks:{callback:v => v}}}}, extra);
   const sgn = v => v == null || isNaN(v) ? null : v;
   if (st.vB === "line") mk("cMB", "line", {labels:so, datasets:lineDs(b => arr(b, st.metric))}, lineOpt(), fmt1);
   if (st.vD === "line") mk("cMD", "line", {labels:so.slice(1).map((m, k) => so[k] + "→" + m),
