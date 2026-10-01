@@ -44,6 +44,11 @@ body{margin:0;background:var(--page);color:var(--text-1);
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);
   background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:3px 10px}
 .chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chipl{font-size:12px;color:var(--text-3)}
+button.chip{font:inherit;font-size:13px;cursor:pointer}
+button.chip.pick{opacity:.55}button.chip.pick.on{opacity:1;color:var(--text-1);border-color:var(--accent)}
+button.chip.pick:hover{opacity:1}
+.chip.fixed{color:var(--text-1);border-color:var(--accent)}
 .btn{font:inherit;font-size:13px;color:var(--text-2);background:var(--surface);border:1px solid var(--border);
   border-radius:8px;padding:5px 10px;cursor:pointer}
 .btn:hover{border-color:var(--text-3)}
@@ -178,7 +183,12 @@ const D = /*__DATA__*/null;
 const $ = (s, el = document) => el.querySelector(s);
 const PL = {facebook:"Facebook", instagram:"Instagram", tiktok:"TikTok", youtube:"YouTube", twitter:"X / Twitter"};
 const SC = {owned:"Owned (บัญชีทางการ)", earned:"Earned (ถูกกล่าวถึง)"};
-const BR = D.brands, BK = BR.map(b => b.key);
+const BR = D.brands, ALL = BR.map(b => b.key);
+/* brand filter: MEDCMU is always shown; other brands are opt-in (default = MEDCMU only), remembered in localStorage */
+let EXTRA = new Set();
+try { (JSON.parse(safeGet("medcmu-brands") || "[]") || []).forEach(k => { if (ALL.includes(k) && k !== "MEDCMU") EXTRA.add(k); }); } catch(e){}
+let BK = ALL.filter(k => k === "MEDCMU" || EXTRA.has(k));
+function setExtra(set){ EXTRA = set; BK = ALL.filter(k => k === "MEDCMU" || EXTRA.has(k)); safeSet("medcmu-brands", JSON.stringify([...EXTRA])); }
 const bname = k => BR.find(b => b.key === k).short;
 const cell = (b, p, s) => D.cells[`${b}|${p}|${s}`] || null;
 const NA = "ข้อมูลไม่เพียงพอ";
@@ -319,7 +329,6 @@ function bindTables(root){
   });
 }
 const barDs = (vals, extra = {}) => Object.assign({data:vals, backgroundColor:BK.map(bcol), borderRadius:4, borderSkipped:false, maxBarThickness:56}, extra);
-const brandLabels = BK.map(bname);
 const bdot = k => `<span class="bdot" style="--kc:${bcol(k)}"></span>`;
 
 /* ---------- tabs ---------- */
@@ -330,13 +339,13 @@ const S = {
   earned:{plat:"facebook", cb:"MEDCMU", by:"posts"},
   sentiment:{plat:"all"},
   monthly:{plat:"facebook", scope:"owned", mode:"total", metric:"Brand Score", ce:"bar", cs:"line", vD:"line", vS:"line"},
-  trend:{brands:new Set(BK), plat:"facebook", scope:"owned", metric:"eng", gran:"week"},
+  trend:{brands:new Set(ALL), plat:"facebook", scope:"owned", metric:"eng", gran:"week"},
   top:{plat:"facebook", scope:"owned", brand:"all"},
 };
 const TABS = [
-  {id:"overview", t:"ภาพรวม (Overview)", d:"สรุปผลของ 4 แบรนด์จากข้อมูลโพสต์ ช่วงที่ Wisesight ส่งออก"},
+  {id:"overview", t:"ภาพรวม (Overview)", d:"สรุปผลจากข้อมูลโพสต์ ช่วงที่ Wisesight ส่งออก (เลือกแบรนด์เปรียบเทียบได้ที่มุมขวาบน)"},
   {id:"score", t:"Brand Score", d:"คะแนนรายเดือนจาก Zocial Eye (คนละช่วงเวลากับข้อมูลโพสต์)"},
-  {id:"platform", t:"แพลตฟอร์ม (Owned)", d:"เทียบบัญชีทางการของ 4 แบรนด์ในแต่ละแพลตฟอร์ม"},
+  {id:"platform", t:"แพลตฟอร์ม (Owned)", d:"เทียบบัญชีทางการของแบรนด์ที่เลือกในแต่ละแพลตฟอร์ม"},
   {id:"earned", t:"Earned / การพูดถึง", d:"โพสต์ของผู้อื่นที่กล่าวถึงแบรนด์ และผู้โพสต์อันดับต้น"},
   {id:"sentiment", t:"Sentiment", d:"สัดส่วนบวก/กลาง/ลบของโพสต์ที่กล่าวถึงแบรนด์ (Earned)"},
   {id:"monthly", t:"รายเดือน", d:"engagement รายเดือนจากข้อมูลโพสต์ และ Brand Score รายเดือนจาก Zocial Eye"},
@@ -370,10 +379,10 @@ const NAV = [
 /* ===== 1 overview ===== */
 function headline(){
   const own = b => D.platforms.map(p => cell(b, p, "owned")).filter(Boolean);
-  const eng = BK.map(b => sum(own(b).map(c => c.engagement))), rank = 1 + eng.filter(v => v > eng[0]).length;
+  const eng = ALL.map(b => sum(own(b).map(c => c.engagement))), rank = 1 + eng.filter(v => v > eng[0]).length;
   const cs = own("MEDCMU"), pt = sum(cs.map(c => c.posts_text)), pr = sum(cs.map(c => c.posts_raw));
   const w = cs.filter(c => c.follower_start != null), f0 = sum(w.map(c => c.follower_start)), f1 = sum(w.map(c => c.follower_end));
-  const mo = D.score_months, last = mo.length - 1, bs = BK.map(b => ((D.scores[b] || {})["Brand Score"] || [])[last]), sr = 1 + bs.filter(v => v > bs[0]).length;
+  const mo = D.score_months, last = mo.length - 1, bs = ALL.map(b => ((D.scores[b] || {})["Brand Score"] || [])[last]), sr = 1 + bs.filter(v => v > bs[0]).length;
   const k = (ic, lab, val, cap) => `<div class="card kpi2" style="--kc:var(--b-MEDCMU)"><div class="ico">${ICON[ic]}</div><div><div class="kl">${lab}</div><div class="kv">${val}</div><div class="kcap">${cap}</div></div></div>`;
   return `<div class="grid g4">` +
     k("send", "โพสต์ที่มีข้อความ", fmt(pt), `แถวดิบ Wisesight ${fmt(pr)}`) +
@@ -385,7 +394,7 @@ function headline(){
 function rOverview(p){
   const st = S.overview, pls = st.plat === "all" ? D.platforms : [st.plat];
   const cellsFor = b => pls.map(pl => cell(b, pl, st.scope)).filter(Boolean);
-  let h = headline() + `<h2 style="margin-top:4px">เปรียบเทียบ 4 แบรนด์</h2><div class="controls"><div class="ctl">ประเภทข้อมูล ${seg("oScope", [{v:"owned", t:"Owned"}, {v:"earned", t:"Earned"}], st.scope)}</div>
+  let h = headline() + `<h2 style="margin-top:4px">${BK.length === 1 ? "MEDCMU" : "เปรียบเทียบ " + BK.length + " แบรนด์"}</h2><div class="controls"><div class="ctl">ประเภทข้อมูล ${seg("oScope", [{v:"owned", t:"Owned"}, {v:"earned", t:"Earned"}], st.scope)}</div>
    <div class="ctl">แพลตฟอร์ม (การ์ด) ${sel("oPlat", platOpts(true), st.plat)}</div></div>
    <p class="note"><b>Owned</b> = โพสต์จากบัญชีทางการของแบรนด์ · <b>Earned</b> = โพสต์ของผู้อื่นที่กล่าวถึง/แท็กแบรนด์ (ของ MEDCMU รวมหน่วยงานในคณะบางส่วน) ·
    นิยาม engagement ต่างกันตามแพลตฟอร์ม การรวมข้ามแพลตฟอร์มในการ์ดจึงใช้ดูภาพรวมเท่านั้น</p><div class="grid g4">`;
@@ -404,18 +413,19 @@ function rOverview(p){
       <dt>โพสต์ที่มีข้อความ</dt><dd>${fmt(pt)}</dd><dt>จำนวนแถวดิบ (Wisesight)</dt><dd>${fmt(pr)}</dd>${extra}</dl></div>`;
   });
   h += `</div><h2>engagement แยกตามแพลตฟอร์ม · ${SC[st.scope]}</h2><div class="grid g1">${card("cOv", "engagement รวม (ต่อแพลตฟอร์ม)", "เทียบภายในแพลตฟอร์มเดียวกันเท่านั้น", true)}</div>
-  <h2>อันดับต่อแพลตฟอร์ม</h2><div class="card"><div class="tw"><table id="rankT"></table></div></div>
+  <h2>อันดับต่อแพลตฟอร์ม <span style="font-weight:400;color:var(--text-3);font-size:13px">(อันดับเทียบทั้ง 4 แบรนด์ แม้แสดงเฉพาะบางแบรนด์)</span></h2><div class="card"><div class="tw"><table id="rankT"></table></div></div>
   <h2>สัดส่วน Earned ต่อ Owned (แพลตฟอร์มที่เลือก)</h2><div class="card"><div class="tw"><table id="ratioT"></table></div></div>`;
   p.innerHTML = h; bindTables(p);
   bindSeg("oScope", v => { st.scope = v; render(); }); bindSel("oPlat", v => { st.plat = v; render(); });
   mk("cOv", "bar", {labels:D.platforms.map(x => PL[x]), datasets:BK.map(b => ({label:bname(b), data:D.platforms.map(pl => (cell(b, pl, st.scope) || {}).engagement ?? null),
       backgroundColor:bcol(b), borderRadius:4, borderSkipped:false, borderColor:cv("--surface"), borderWidth:2, maxBarThickness:34}))},
     {scales:{y:{ticks:{callback:v => abbr(v)}}}}, fmt);
-  let t = `<thead><tr><th>แพลตฟอร์ม</th>${BK.map(b => `<th>${bdot(b)}${bname(b)}</th>`).join("")}<th class="l">ผู้นำ</th></tr></thead><tbody>`;
+  let t = `<thead><tr><th>แพลตฟอร์ม</th>${BK.map(b => `<th>${bdot(b)}${bname(b)}</th>`).join("")}<th class="l">ผู้นำ (จาก 4 แบรนด์)</th></tr></thead><tbody>`;
   D.platforms.forEach(pl => {
-    const vals = BK.map(b => (cell(b, pl, st.scope) || {}).engagement ?? null), mx = Math.max(...vals.filter(v => v != null));
-    const rank = vals.map(v => v == null ? null : 1 + vals.filter(x => x != null && x > v).length);
-    t += `<tr><td>${PL[pl]}</td>${vals.map((v, i) => v == null ? `<td class="na">${NA}</td>` : `<td class="${v === mx ? "best" : ""}">${fmt(v)} <span style="color:var(--text-3)">(#${rank[i]})</span></td>`).join("")}<td class="l">${bname(BK[vals.indexOf(mx)])}</td></tr>`;
+    const all = ALL.map(b => (cell(b, pl, st.scope) || {}).engagement ?? null), mx = Math.max(...all.filter(v => v != null));
+    const vals = BK.map(b => all[ALL.indexOf(b)]);
+    const rank = vals.map(v => v == null ? null : 1 + all.filter(x => x != null && x > v).length);
+    t += `<tr><td>${PL[pl]}</td>${vals.map((v, i) => v == null ? `<td class="na">${NA}</td>` : `<td class="${v === mx ? "best" : ""}">${fmt(v)} <span style="color:var(--text-3)">(#${rank[i]})</span></td>`).join("")}<td class="l">${bname(ALL[all.indexOf(mx)])}</td></tr>`;
   });
   $("#rankT").innerHTML = t + "</tbody>";
   const pls2 = st.plat === "all" ? D.platforms : [st.plat];
@@ -441,9 +451,9 @@ function rScore(p){
       borderWidth:2, pointRadius:4, pointHoverRadius:6, pointBorderColor:cv("--surface"), pointBorderWidth:2, tension:.25}))},
     {layout:{padding:{right:64}}, plugins:{endl:{on:true}}, scales:{y:{beginAtZero:false, ticks:{callback:v => v}}}}, fmt1);
   const last = mo.length - 1;
-  let t = `<thead><tr><th>แบรนด์</th><th>${mo[0]}</th><th>${mo[last]}</th><th>เปลี่ยนแปลง</th><th>อันดับ ${mo[last]}</th></tr></thead><tbody>`;
-  const lv = BK.map(b => ((D.scores[b] || {})[st.metric] || [])[last]);
-  BK.forEach((b, i) => { const a = ((D.scores[b] || {})[st.metric] || []); const d = a[last] - a[0];
+  let t = `<thead><tr><th>แบรนด์</th><th>${mo[0]}</th><th>${mo[last]}</th><th>เปลี่ยนแปลง</th><th>อันดับ ${mo[last]} (จาก 4)</th></tr></thead><tbody>`;
+  const lv = ALL.map(b => ((D.scores[b] || {})[st.metric] || [])[last]);
+  BK.forEach(b => { const i = ALL.indexOf(b), a = ((D.scores[b] || {})[st.metric] || []); const d = a[last] - a[0];
     t += `<tr><td>${bdot(b)}${bname(b)}</td><td>${fmt1(a[0])}</td><td>${fmt1(a[last])}</td><td>${d >= 0 ? "+" : ""}${fmt1(d)}</td><td>#${1 + lv.filter(x => x > lv[i]).length}</td></tr>`; });
   $("#scT").innerHTML = t + "</tbody>";
 }
@@ -461,7 +471,7 @@ function rPlatform(p){
   <h2>ตารางรายละเอียด · ${PL[pl]}</h2><div class="card"><div class="tw"><table id="pT"></table></div></div>`;
   p.innerHTML = h; bindTables(p); bindSeg("pPlat", v => { st.plat = v; render(); });
   const o = (fm, x) => ({plugins:{legend:{display:false}, vl:{on:true, fmt:fm}}, scales:{y:{ticks:{callback:x || (v => abbr(v))}}}});
-  const one = (id, f, fm, opt, tk) => mk(id, "bar", {labels:brandLabels, datasets:[barDs(g(f), {label:opt})]}, o(fm, tk), fm);
+  const one = (id, f, fm, opt, tk) => mk(id, "bar", {labels:BK.map(bname), datasets:[barDs(g(f), {label:opt})]}, o(fm, tk), fm);
   one("cP1", "engagement", abbr, "engagement"); one("cP2", "median_eng_text", v => fmt1(v), "ค่ากลาง");
   one("cP3", "er_follower_pct", v => fpct(v, 2), "ER ต่อผู้ติดตาม", v => fpct(v, 2));
   one("cP4", "follower_pct", v => fpct(v, 1), "ผู้ติดตาม %", v => fpct(v, 0));
@@ -479,7 +489,7 @@ function rPlatform(p){
 
 /* ===== 4 earned ===== */
 function rEarned(p){
-  const st = S.earned, pl = st.plat;
+  const st = S.earned, pl = st.plat; if (!BK.includes(st.cb)) st.cb = BK[0];
   const cs = BK.map(b => cell(b, pl, "earned")), g = f => cs.map(c => c ? (c[f] ?? null) : null);
   let h = `<div class="controls"><div class="ctl">แพลตฟอร์ม ${seg("ePlat", platOpts(false), pl)}</div></div>
   <p class="note warn"><b>ข้อควรระวัง:</b> Earned ของ MEDCMU บน Facebook/Instagram ในตารางผู้โพสต์อันดับต้นมีบัญชีของหน่วยงาน/ชมรมในคณะเอง (เช่น Sriphat, ภาควิชาเวชศาสตร์ฉุกเฉิน, CPR CMU)
@@ -491,8 +501,8 @@ function rEarned(p){
   <div class="card"><div class="tw"><table id="eT"></table></div></div>`;
   p.innerHTML = h; bindTables(p); bindSeg("ePlat", v => { st.plat = v; render(); }); bindSeg("eBy", v => { st.by = v; render(); }); bindSel("eCb", v => { st.cb = v; render(); });
   const o = fm => ({plugins:{legend:{display:false}, vl:{on:true, fmt:fm}}});
-  mk("cE1", "bar", {labels:brandLabels, datasets:[barDs(g("engagement"), {label:"engagement"})]}, o(abbr), fmt);
-  mk("cE2", "bar", {labels:brandLabels, datasets:[barDs(g("posts_raw"), {label:"โพสต์"})]}, o(fmt), fmt);
+  mk("cE1", "bar", {labels:BK.map(bname), datasets:[barDs(g("engagement"), {label:"engagement"})]}, o(abbr), fmt);
+  mk("cE2", "bar", {labels:BK.map(bname), datasets:[barDs(g("posts_raw"), {label:"โพสต์"})]}, o(fmt), fmt);
   const tiers = D.audience_tiers.concat(["unlabeled"]), tl = tiers.map(t => t === "unlabeled" ? "ไม่ระบุ" : t);
   mk("cE3", "bar", {labels:tl, datasets:BK.map(b => { const r = D.audience.find(a => a.b === b && a.p === pl);
     return {label:bname(b), data:tiers.map(t => r ? r[t] : null), backgroundColor:bcol(b), borderRadius:4, borderSkipped:false, borderColor:cv("--surface"), borderWidth:2, maxBarThickness:30}; })}, {}, fmt);
@@ -555,10 +565,10 @@ function rTrend(p){
 
 /* ===== 7 top posts ===== */
 function rTop(p){
-  const st = S.top;
+  const st = S.top; if (st.brand !== "all" && !BK.includes(st.brand)) st.brand = "all";
   let h = `<div class="controls"><div class="ctl">แพลตฟอร์ม ${seg("xPlat", platOpts(false), st.plat)}</div>
    <div class="ctl">ประเภท ${seg("xScope", [{v:"owned", t:"Owned"}, {v:"earned", t:"Earned"}], st.scope)}</div>
-   <div class="ctl">แบรนด์ ${sel("xBr", [{v:"all", t:"ทุกแบรนด์"}].concat(BK.map(b => ({v:b, t:bname(b)}))), st.brand)}</div></div>
+   <div class="ctl">แบรนด์ ${sel("xBr", [{v:"all", t:"ทุกแบรนด์ที่เลือก"}].concat(BK.map(b => ({v:b, t:bname(b)}))), st.brand)}</div></div>
    <p class="note">engagement เทียบข้ามแพลตฟอร์มไม่ได้ (นิยามต่างกัน) · โพสต์ที่มี engagement สูงมากเพียงไม่กี่โพสต์อาจครองยอดรวมเกือบทั้งหมด ดูสัดส่วนในตารางแรก ·
    แสดงข้อความสูงสุด ${240} ตัวอักษรแรกของแต่ละโพสต์ (บันทึกไว้ 25 โพสต์บนสุดต่อแบรนด์/แพลตฟอร์ม/ประเภท)</p>
   <h2>ความกระจุกตัวของ engagement · ${PL[st.plat]} · ${st.scope === "owned" ? "Owned" : "Earned"}</h2><div class="card"><div class="tw"><table id="xC"></table></div></div>
@@ -568,7 +578,7 @@ function rTop(p){
   let c = `<thead><tr><th>แบรนด์</th><th>โพสต์ที่มีข้อความ</th><th>ค่ากลาง</th><th>1 โพสต์บนสุด</th><th>3 โพสต์บนสุด</th><th>engagement รวม</th></tr></thead><tbody>`;
   BK.forEach(b => { const x = cell(b, st.plat, st.scope); c += x ? `<tr><td>${bdot(b)}${bname(b)}</td><td>${fmt(x.posts_text)}</td><td>${fmt1(x.median_eng_text)}</td><td>${fpct(x.top1_share)}</td><td>${fpct(x.top3_share)}</td><td>${fmt(x.engagement)}</td></tr>` : `<tr><td>${bname(b)}</td><td colspan="5" class="na">${NA}</td></tr>`; });
   $("#xC").innerHTML = c + "</tbody>";
-  const rows = D.top_posts.filter(r => r.p === st.plat && r.s === st.scope && (st.brand === "all" || r.b === st.brand)).sort((a, b) => b.e - a.e).slice(0, st.brand === "all" ? 30 : 25);
+  const rows = D.top_posts.filter(r => r.p === st.plat && r.s === st.scope && (st.brand === "all" ? BK.includes(r.b) : r.b === st.brand)).sort((a, b) => b.e - a.e).slice(0, st.brand === "all" ? 30 : 25);
   $("#xT").innerHTML = `<thead><tr><th>#</th><th class="l">แบรนด์</th><th class="l">วันที่</th><th>engagement</th><th>views</th>${st.scope === "earned" ? '<th class="l">ผู้โพสต์</th>' : ""}<th class="l">ข้อความ</th><th class="l">ลิงก์</th></tr></thead><tbody>${rows.length ? rows.map((r, i) =>
     `<tr><td>${i + 1}</td><td class="l">${bdot(r.b)}${bname(r.b)}</td><td class="l">${r.t}</td><td>${fmt(r.e)}</td><td>${r.v ? fmt(r.v) : "–"}</td>${st.scope === "earned" ? `<td class="l">${esc(r.a || "–")}</td>` : ""}<td class="ptxt">${esc(r.x)}</td><td class="l">${r.u ? `<a href="${esc(r.u)}" target="_blank" rel="noopener noreferrer">เปิด</a>` : "–"}</td></tr>`).join("") : `<tr><td colspan="8" class="na">${NA}</td></tr>`}</tbody>`;
 }
@@ -623,18 +633,18 @@ function rMonthly(p){
    <div class="ctl">รูปแบบ ${seg("mMode", [{v:"total", t:"รวมทั้งเดือน"}, {v:"perday", t:"เฉลี่ยต่อวัน"}], st.mode)}</div>
    <div class="ctl">กราฟ ${seg("mCe", [{v:"bar", t:"กราฟแท่ง"}, {v:"line", t:"กราฟเส้น"}], st.ce)}</div></div>
   <p class="note warn">เดือนที่มี <b>*</b> ไม่ครบเดือน (ข้อมูลเริ่มและสิ้นสุดกลางเดือน) เทียบกับเดือนเต็มโดยตรงไม่ได้ ให้ใช้ “เฉลี่ยต่อวัน” · engagement เทียบข้ามแพลตฟอร์มไม่ได้</p>
-  <div class="grid g1">${card("cMo", "engagement" + (perday ? " (เฉลี่ยต่อวัน)" : "") + " · " + PL[pl] + " · " + (sc === "owned" ? "Owned" : "Earned"), "แยกตามเดือน 4 แบรนด์", true)}</div>
+  <div class="grid g1">${card("cMo", "engagement" + (perday ? " (เฉลี่ยต่อวัน)" : "") + " · " + PL[pl] + " · " + (sc === "owned" ? "Owned" : "Earned"), "แยกตามเดือนตามแบรนด์ที่เลือก", true)}</div>
   <div class="card" style="margin-top:14px"><div class="tw"><table id="mT"></table></div></div>
   <h2>Brand Score รายเดือน · Zocial Eye</h2>
   <div class="controls"><div class="ctl">ตัวชี้วัด ${seg("mMet", MET.map(m => ({v:m, t:m})), st.metric)}</div></div>
   <p class="note warn">ช่วง <b>${so[0]} – ${so[last]}</b> <b>คนละช่วงกับข้อมูลโพสต์ด้านบน</b> จึงแสดงแยกกัน · ${esc(D.meta.score_note.replace(/^Note:\s*/, ""))} · คะแนนแต่ละตัวชี้วัดมีสเกลต่างกัน เทียบข้ามตัวชี้วัดไม่ได้</p>
   <div class="controls"><div class="ctl">รูปแบบกราฟ ${seg("mCs", [{v:"line", t:"กราฟเส้น"}, {v:"bar", t:"กราฟแท่ง"}], st.cs)}</div></div>
-  <div class="grid g1">${card("cMs", st.metric + " รายเดือน", st.cs === "line" ? "แนวโน้มรายเดือน 4 แบรนด์" : "แยกตามเดือน 4 แบรนด์", true)}</div>
+  <div class="grid g1">${card("cMs", st.metric + " รายเดือน", st.cs === "line" ? "แนวโน้มรายเดือนตามแบรนด์ที่เลือก" : "แยกตามเดือนตามแบรนด์ที่เลือก", true)}</div>
   <h2>${st.metric} รายเดือน · ตาราง</h2><div class="card"><div class="tw"><table id="mB"></table></div></div>
   <h2>เปลี่ยนแปลงจากเดือนก่อน · ${st.metric}</h2>${vw("D")}
   ${st.vD === "line" ? `<div class="grid g1">${card("cMD", "เปลี่ยนแปลงจากเดือนก่อน · " + st.metric, "ผลต่างคะแนนเทียบเดือนก่อนหน้า (เส้นเหนือ 0 = เพิ่มขึ้น)", true)}</div>` : `<div class="card"><div class="tw"><table id="mD"></table></div></div>`}
   <h2>ทุกตัวชี้วัด</h2>${vw("S")}
-  ${st.vS === "line" ? `<p class="note">แยกกราฟตามตัวชี้วัด เพราะสเกลคะแนนแต่ละตัวต่างกัน เทียบข้ามกราฟไม่ได้</p><div class="grid g2">${MET.map((m, i) => card("cMS" + i, m, "คะแนนรายเดือน 4 แบรนด์", true)).join("")}</div>` : `<div class="card"><div class="tw"><table id="mS"></table></div></div>`}`;
+  ${st.vS === "line" ? `<p class="note">แยกกราฟตามตัวชี้วัด เพราะสเกลคะแนนแต่ละตัวต่างกัน เทียบข้ามกราฟไม่ได้</p><div class="grid g2">${MET.map((m, i) => card("cMS" + i, m, "คะแนนรายเดือนตามแบรนด์ที่เลือก", true)).join("")}</div>` : `<div class="card"><div class="tw"><table id="mS"></table></div></div>`}`;
   p.innerHTML = h; bindTables(p);
   bindSeg("mPlat", v => { st.plat = v; render(); }); bindSeg("mScope", v => { st.scope = v; render(); }); bindSeg("mMode", v => { st.mode = v; render(); }); bindSeg("mMet", v => { st.metric = v; render(); });
   ["D", "S"].forEach(k => bindSeg("mV" + k, v => { st["v" + k] = v; render(); })); bindSeg("mCs", v => { st.cs = v; render(); }); bindSeg("mCe", v => { st.ce = v; render(); });
@@ -661,9 +671,9 @@ function rMonthly(p){
   else mk("cMs", "bar", {labels:so, datasets:BK.map(b => ({label:bname(b), data:arr(b, st.metric), backgroundColor:bcol(b), borderRadius:4, borderSkipped:false,
       borderColor:cv("--surface"), borderWidth:2, maxBarThickness:26}))},
     {plugins:{vl:{on:true, fmt:v => fmt1(v)}}, scales:{y:{beginAtZero:st.metric !== "Sentiment Score", ticks:{callback:v => v}}}}, fmt1);
-  const lv = BK.map(b => arr(b, st.metric)[last]);
-  let u = `<thead><tr><th>แบรนด์</th>${so.map(m => `<th>${m}</th>`).join("")}<th>${so[0]}→${so[last]}</th><th>อันดับ ${so[last]}</th></tr></thead><tbody>`;
-  BK.forEach((b, i) => { const a = arr(b, st.metric), d = a[last] - a[0];
+  const lv = ALL.map(b => arr(b, st.metric)[last]);
+  let u = `<thead><tr><th>แบรนด์</th>${so.map(m => `<th>${m}</th>`).join("")}<th>${so[0]}→${so[last]}</th><th>อันดับ ${so[last]} (จาก 4)</th></tr></thead><tbody>`;
+  BK.forEach(b => { const i = ALL.indexOf(b), a = arr(b, st.metric), d = a[last] - a[0];
     u += `<tr><td>${bdot(b)}${bname(b)}</td>${so.map((_, k) => a[k] == null ? `<td class="na">${NA}</td>` : `<td>${fmt1(a[k])}</td>`).join("")}<td>${d >= 0 ? "+" : ""}${fmt1(d)}</td><td>#${1 + lv.filter(x => x > lv[i]).length}</td></tr>`; });
   $("#mB").innerHTML = u + "</tbody>";
   let d = `<thead><tr><th>แบรนด์</th>${so.slice(1).map((m, k) => `<th>${so[k]}→${m}</th>`).join("")}</tr></thead><tbody>`;
@@ -689,6 +699,18 @@ function render(){
   const p = document.getElementById("panel-" + active);
   RENDER[active](p);
 }
+function renderChips(){
+  const h = $("#brandChips");
+  h.innerHTML = `<span class="chipl">แบรนด์ที่แสดง</span>` + BR.map(b => b.key === "MEDCMU"
+    ? `<span class="chip on fixed" title="${esc(b.label)} · แสดงเสมอ"><i style="background:var(--b-${b.key})"></i>${esc(b.short)}</span>`
+    : `<button type="button" class="chip pick ${EXTRA.has(b.key) ? "on" : ""}" data-k="${b.key}" aria-pressed="${EXTRA.has(b.key)}" title="${esc(b.label)}"><i style="background:var(--b-${b.key})"></i>${esc(b.short)}</button>`).join("")
+    + `<button type="button" class="chip pick" data-k="__only">เฉพาะ MEDCMU</button><button type="button" class="chip pick" data-k="__all">ทุกแบรนด์</button>`;
+  h.querySelectorAll("button[data-k]").forEach(btn => btn.onclick = () => {
+    const k = btn.dataset.k, n = new Set(EXTRA);
+    if (k === "__only") n.clear(); else if (k === "__all") ALL.forEach(x => x !== "MEDCMU" && n.add(x)); else if (n.has(k)) n.delete(k); else n.add(k);
+    setExtra(n); renderChips(); render();
+  });
+}
 function setTab(id, plat){
   active = id; safeSet("medcmu-tab", id);
   if (plat) S.platform.plat = plat;
@@ -699,7 +721,7 @@ function setTab(id, plat){
   render();
 }
 function init(){
-  $("#brandChips").innerHTML = BR.map(b => `<span class="chip" title="${esc(b.label)}"><i style="background:var(--b-${b.key})"></i>${esc(b.short)}</span>`).join("");
+  renderChips();
   $("#sideFoot").innerHTML = `<b>ฐานข้อมูล Wisesight ZocialEye</b>โพสต์ ${dlabel(D.meta.export_period[0])} – ${dlabel(D.meta.export_period[1])} 2026<br>Brand Score ${D.meta.score_period[0]} – ${D.meta.score_period[1]}`;
   $("#foot").textContent = `ที่มา: ${D.meta.source_export} · ${D.meta.source_score} · ตัวเลขทุกค่าคำนวณจากสองไฟล์นี้ด้วย build_dashboard.py (ledger: metrics_ledger.csv)`;
   const nav = $("#nav"), pan = $("#panels");
