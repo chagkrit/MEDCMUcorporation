@@ -192,6 +192,36 @@ def main(data_dir, ledger_path, data_path):
     der_got = {d["file"]: d["rows"] for d in data["meta"]["derived"]}
     if der_exp != der_got:
         bad.append(("derived-engagement files differ", der_exp, der_got, None))
+    def norm(msg):
+        return re.sub(r"\s+", "", str(msg).strip().lower())[:80]
+    ov_exp, cand = defaultdict(lambda: [0, 0, 0, 0.0, 0.0]), defaultdict(list)
+    for f in files:
+        for mo in {r[0] for r in f["rows"]}:
+            cand[(mo, f["scope"])].append(f)
+    for (mo, sc), fl in cand.items():
+        if len(fl) < 2:
+            continue
+        fl = sorted(fl, key=lambda f: (f["gen"], f["name"]), reverse=True)
+        wrows = [r for r in fl[0]["rows"] if r[0] == mo]
+        for other in fl[1:]:
+            orows = [r for r in other["rows"] if r[0] == mo]
+            d0, d1 = min(r[3] for r in orows), max(r[3] for r in orows)
+            wwin = [r for r in wrows if d0 <= r[3] <= d1]
+            for br in {r[1] for r in wwin + orows}:
+                for pf in {r[2] for r in wwin + orows if r[1] == br}:
+                    ga = [r for r in wwin if r[1] == br and r[2] == pf]
+                    gb = [r for r in orows if r[1] == br and r[2] == pf]
+                    ka = {r[3] + "|" + norm(r[4]) for r in ga if has_text(r[4])}
+                    kb = {r[3] + "|" + norm(r[4]) for r in gb if has_text(r[4])}
+                    e = ov_exp[(mo, sc, br)]
+                    e[0] += sum(1 for r in ga if has_text(r[4])); e[1] += sum(1 for r in gb if has_text(r[4])); e[2] += len(ka & kb)
+                    e[3] += sum(r[6] for r in ga); e[4] += sum(r[6] for r in gb)
+    ov_got = defaultdict(lambda: [0, 0, 0, 0.0, 0.0])
+    for r in data["quality"]["overlap"]:
+        g = ov_got[(r["month"], r["scope"], r["brand"])]
+        g[0] += r["win_text"]; g[1] += r["other_text"]; g[2] += r["matched"]; g[3] += r["win_eng"]; g[4] += r["other_eng"]
+    if set(ov_exp) != set(ov_got) or any(any(abs(x - y) > TOL for x, y in zip(ov_exp[k], ov_got[k])) for k in ov_exp if k in ov_got):
+        bad.append(("overlap table differs", len(ov_exp), len(ov_got), None))
     series = defaultdict(lambda: [0.0, 0])               # (brand, platform, scope) -> engagement, text posts over all months
     for (mo, b, p, s), a in agg.items():
         series[(b, p, s)][0] += a["eng"]
@@ -218,7 +248,7 @@ def main(data_dir, ledger_path, data_path):
         bad.append(("author lists differ", len(au_got), len(au_exp), None))
 
     print(f"recounted cells: {len(agg)}; ledger cells: {len(cells)}; ledger values compared: {len(agg) * len(METRICS)} (+ every ledger row's source label); "
-          f"months: {len(data['months'])}; daily series: {len(data['daily'])}; top-post groups: {len(top_exp)}; author groups: {len(au_exp)}; mismatches: {len(bad)}")
+          f"months: {len(data['months'])}; daily series: {len(data['daily'])}; top-post groups: {len(top_exp)}; author groups: {len(au_exp)}; overlap groups: {len(ov_exp)}; mismatches: {len(bad)}")
     for b in bad[:20]:
         print("  MISMATCH", b)
     return 1 if bad else 0

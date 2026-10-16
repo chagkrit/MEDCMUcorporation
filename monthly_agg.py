@@ -146,9 +146,12 @@ def overlap_report(posts, chosen, cands):
         if len(files) < 2:
             continue
         win = files[0]
-        a_all = posts[(posts.month == mo) & (posts.scope == sc) & (posts.src_file == win)]
+        win_all = posts[(posts.month == mo) & (posts.scope == sc) & (posts.src_file == win)]
         for other in files[1:]:
             b_all = posts[(posts.month == mo) & (posts.scope == sc) & (posts.src_file == other)]
+            # compare only the days both files cover (the older export may start mid-month); otherwise the % is a coverage artefact
+            d0, d1 = b_all.date.min(), b_all.date.max()
+            a_all = win_all[(win_all.date >= d0) & (win_all.date <= d1)]
             combos = set(zip(a_all.brand, a_all.platform)) | set(zip(b_all.brand, b_all.platform))
             for br, pf in sorted(combos):
                 ga = a_all[(a_all.brand == br) & (a_all.platform == pf)]
@@ -157,10 +160,10 @@ def overlap_report(posts, chosen, cands):
                 ka = {_key(d, t) for d, t in zip(ta.date, ta.text)}
                 kb = {_key(d, t) for d, t in zip(tb.date, tb.text)}
                 rows.append(dict(
-                    month=mo, scope=sc, brand=br, platform=pf, winner=win, winner_family=fam[win], other=other,
+                    month=mo, scope=sc, brand=br, platform=pf, window=f"{d0}→{d1}", winner=win, winner_family=fam[win], other=other,
                     other_family=fam[other], win_rows=int(len(ga)), win_text=int(len(ta)), other_rows=int(len(gb)),
                     other_text=int(len(tb)), matched=int(len(ka & kb)),
                     win_eng=float(ga.engagement.fillna(0).sum()), other_eng=float(gb.engagement.fillna(0).sum())))
-    cols = ["month", "scope", "brand", "platform", "winner", "winner_family", "other", "other_family", "win_rows",
+    cols = ["month", "scope", "brand", "platform", "window", "winner", "winner_family", "other", "other_family", "win_rows",
             "win_text", "other_rows", "other_text", "matched", "win_eng", "other_eng"]
     return pd.DataFrame(rows, columns=cols)

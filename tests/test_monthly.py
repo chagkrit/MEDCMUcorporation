@@ -246,6 +246,18 @@ class SourceTests(unittest.TestCase):
         self.assertEqual((r.win_text, r.other_text, r.matched), (1, 1, 1))     # urls differ between files: match on date+text
         self.assertEqual((r.win_eng, r.other_eng), (90.0, 100.0))
 
+    def test_overlap_compares_only_the_common_date_window(self):
+        # the newer file covers the whole month, the older one only 20-25 Jul: compare just those days, otherwise the % is a coverage artefact
+        rows = [P("2026-07-02", text="a", src="sm.xlsx", family="social_metric", eng=50, gen=GEN_NEW, tf=("2026-07-01", "2026-07-31")),
+                P("2026-07-20", text="b", src="sm.xlsx", family="social_metric", eng=7, gen=GEN_NEW, tf=("2026-07-01", "2026-07-31")),
+                P("2026-07-20", text="b", src="ow.xlsx", eng=5, gen=GEN_OLD),
+                P("2026-07-25", text="c", src="ow.xlsx", eng=3, gen=GEN_OLD)]
+        df = table(rows)
+        chosen, cands = A.choose_sources(df)
+        r = A.overlap_report(df, chosen, cands).iloc[0]
+        self.assertEqual(r.window, "2026-07-20→2026-07-25")
+        self.assertEqual((r.win_text, r.other_text, r.matched, r.win_eng, r.other_eng), (1, 2, 1, 7.0, 8.0))
+
     def test_top_and_authors(self):
         rows = [P("2026-08-01", text="x" * 300, eng=50, url="u1"), P("2026-08-02", text="y", eng=70, url="u2"),
                 P("2026-08-02", scope="earned", family="earned", src="e.xlsx", text="z", eng=8, author="Bob"),
