@@ -23,7 +23,7 @@ SHEET_PLATFORM = {"Facebook": "facebook", "Instagram": "instagram", "TikTok": "t
 FAMILY_SCOPE = {"social_metric": "owned", "owned": "owned", "earned": "earned"}
 REQUIRED_COLS = ("Date", "Brand Name", "Author", "Message", "Post URL", "Engagement")   # a rename in a new export must stop the build
 COLS = ["date", "month", "brand", "platform", "scope", "author", "text", "url", "engagement", "views",
-        "comment", "share", "family", "src_file", "generated_at", "tf_start", "tf_end"]
+        "comment", "share", "family", "src_file", "generated_at", "tf_start", "tf_end", "eng_derived"]
 
 
 def family_of(path):
@@ -89,6 +89,7 @@ def read_file(path):
         it = ws.iter_rows(values_only=True)
         hdr = [str(h) for h in next(it)]
         ix = {h: i for i, h in enumerate(hdr)}
+        start, yt_lc = len(out), []
         missing = [c for c in REQUIRED_COLS if c not in ix]
         if missing:
             raise ValueError(f"missing required column(s) {missing} in {name}/{ws.title}")
@@ -112,7 +113,17 @@ def read_file(path):
                 comment, share = num(g(row, "Comment")), num(g(row, "Share"))
             out.append((date, date[:7], brand, pf, scope, clean_text(g(row, "Author")), clean_text(g(row, "Message")),
                         clean_text(g(row, "Post URL")), num(g(row, "Engagement")), num(g(row, "View")),
-                        comment, share, fam, name, gen, tf0, tf1))
+                        comment, share, fam, name, gen, tf0, tf1, False))
+            if pf == "youtube":
+                like = num(g(row, "Like"))
+                yt_lc.append(0.0 if (np.isnan(like) and np.isnan(comment)) else float(np.nansum([like, comment])))
+        # Social Metric exports carry an Engagement column that is 0 on every YouTube row although Like/Comment are filled.
+        # In the Owned export Engagement == Like + Comment on every YouTube row (verified 173/173), so when the whole
+        # sheet is 0/missing but Like/Comment are not, derive it and flag the rows. A sheet with any filled value is untouched.
+        if pf == "youtube" and out[start:] and all(np.isnan(r[8]) or r[8] == 0 for r in out[start:]) and any(v > 0 for v in yt_lc):
+            for i, v in enumerate(yt_lc):
+                r = out[start + i]
+                out[start + i] = r[:8] + (v,) + r[9:17] + (True,)
     wb.close()
     return pd.DataFrame(out, columns=COLS)
 

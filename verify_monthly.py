@@ -65,10 +65,11 @@ def read_files(data_dir):
             if len(c) >= 2 and c[0] == "Timeframe":
                 tf = str(c[1])
         tf0, tf1 = re.findall(r"\d{4}-\d{2}-\d{2}", tf)[:2]
-        rows = []
+        rows, derived = [], 0
         for ws in wb.worksheets:
             if ws.title == "Overview":
                 continue
+            start, yt_lc = len(rows), []
             it = ws.iter_rows(values_only=True)
             h = [str(x) for x in next(it)]
             ix = {k: i for i, k in enumerate(h)}
@@ -85,8 +86,15 @@ def read_files(data_dir):
                 au = col(r, ix, "Author")
                 rows.append((day[:7], BRAND[r[ix["Brand Name"]]], PLAT[ws.title], day, r[ix["Message"]], r[ix["Post URL"]],
                              fnum(r[ix["Engagement"]]), fopt(col(r, ix, "View")), comment, share, str(au).strip() if has_text(au) else None))
+                if ws.title == "YouTube":
+                    yt_lc.append((fopt(col(r, ix, "Like")) or 0.0) + (comment or 0.0))
+            # YouTube Engagement column is 0 on every row of the Social Metric sheets; in the Owned export it equals Like + Comment
+            if ws.title == "YouTube" and rows[start:] and all(x[6] == 0 for x in rows[start:]) and any(v > 0 for v in yt_lc):
+                for i, v in enumerate(yt_lc):
+                    rows[start + i] = rows[start + i][:6] + (v,) + rows[start + i][7:]
+                derived += len(yt_lc)
         wb.close()
-        files.append(dict(name=name, scope=scope, gen=gen, tf0=tf0, tf1=tf1, rows=rows))
+        files.append(dict(name=name, scope=scope, gen=gen, tf0=tf0, tf1=tf1, rows=rows, derived=derived))
     return files
 
 
@@ -180,6 +188,10 @@ def main(data_dir, ledger_path, data_path):
             got = (m[sc]["status"], m[sc]["span"], m[sc]["src"])
             if exp != got:
                 bad.append((m["mo"], sc + " status/span/src", exp, got))
+    der_exp = {f["name"]: f["derived"] for f in files if f["derived"]}
+    der_got = {d["file"]: d["rows"] for d in data["meta"]["derived"]}
+    if der_exp != der_got:
+        bad.append(("derived-engagement files differ", der_exp, der_got, None))
     series = defaultdict(lambda: [0.0, 0])               # (brand, platform, scope) -> engagement, text posts over all months
     for (mo, b, p, s), a in agg.items():
         series[(b, p, s)][0] += a["eng"]

@@ -95,6 +95,31 @@ class LoadTests(unittest.TestCase):
                 L.read_file(p)
             os.remove(p)
 
+    def test_youtube_zero_engagement_column_is_derived_from_like_plus_comment(self):
+        hdr = ["Date", "Brand Name", "Platform", "Author", "Message", "Post URL", "View", "Engagement", "Like", "Comment", "Share"]
+        p = make(self.d, "social_metric", "2026-06-01 to 2026-06-30", "2026-10-16T01:00:00.000Z", {
+            "YouTube": (hdr, [["2026-06-02", MED, "YouTube", "a", "v1", "y1", 1000, 0, 20, 3, 9],
+                              ["2026-06-03", MED, "YouTube", "a", "v2", "y2", 50, 0, 4, 0, 0]]),
+            "Facebook": (HDR_FB_SM, [["2026-06-02", MED, "Facebook", "a", "f", "f1", 0, 0, 0, 0, 0, 0]])})
+        df = L.read_file(p)
+        yt = df[df.platform == "youtube"]
+        self.assertEqual(yt.engagement.tolist(), [23.0, 4.0])      # Like + Comment (Share excluded: the Owned export identity)
+        self.assertTrue(yt.eng_derived.all())
+        self.assertEqual((set(yt.tf_start), set(yt.tf_end), set(yt.family), set(yt.generated_at)),     # no other column is disturbed
+                         ({"2026-06-01"}, {"2026-06-30"}, {"social_metric"}, {"2026-10-16T01:00:00.000Z"}))
+        fb = df[df.platform == "facebook"]
+        self.assertEqual(fb.engagement.tolist(), [0.0])            # only YouTube is repaired
+        self.assertFalse(fb.eng_derived.any())
+
+    def test_youtube_engagement_untouched_when_the_column_is_filled(self):
+        hdr = ["Date", "Brand Name", "Platform", "Author", "Message", "Post URL", "View", "Engagement", "Like", "Comment", "Share"]
+        p = make(self.d, "owned", "2026-07-15 to 2026-10-16", "2026-10-16T00:37:13.548Z", {
+            "YouTube": (hdr, [["2026-07-20", MED, "YouTube", "a", "v1", "y1", 1000, 25, 20, 5, 0],
+                              ["2026-07-21", MED, "YouTube", "a", "v2", "y2", 50, 0, 4, 0, 0]])})
+        yt = L.read_file(p)
+        self.assertEqual(yt.engagement.tolist(), [25.0, 0.0])      # at least one filled value: never overwritten
+        self.assertFalse(yt.eng_derived.any())
+
     def test_unrecognised_filename_fails(self):
         with self.assertRaisesRegex(ValueError, "unrecognised export file name"):
             L.family_of("something_else.xlsx")
@@ -107,10 +132,10 @@ NAN = float("nan")
 
 
 def P(date, brand="MEDCMU", platform="facebook", scope="owned", text="t", url=None, eng=1.0, views=NAN,
-      family="owned", src="o.xlsx", gen=GEN_OLD, tf=("2026-07-15", "2026-10-16"), author="a", comment=NAN, share=NAN):
+      family="owned", src="o.xlsx", gen=GEN_OLD, tf=("2026-07-15", "2026-10-16"), author="a", comment=NAN, share=NAN, derived=False):
     return dict(date=date, month=date[:7], brand=brand, platform=platform, scope=scope, author=author, text=text, url=url,
                 engagement=eng, views=views, comment=comment, share=share, family=family, src_file=src,
-                generated_at=gen, tf_start=tf[0], tf_end=tf[1])
+                generated_at=gen, tf_start=tf[0], tf_end=tf[1], eng_derived=derived)
 
 
 def table(rows):

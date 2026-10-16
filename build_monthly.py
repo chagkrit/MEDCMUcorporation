@@ -38,7 +38,9 @@ def build_data(data_dir):
         meta=dict(
             sources=[dict(file=r.src_file, family=r.family, scope=r.scope, generated_at=r.generated_at,
                           tf=[r.tf_start, r.tf_end], rows=int(rows_by_file[r.src_file])) for r in files.itertuples()],
-            dup_dropped=dropped, rows_used=int(len(sel))),
+            dup_dropped=dropped, rows_used=int(len(sel)),
+            derived=[dict(file=f, platform="youtube", rows=int(n)) for f, n in
+                     posts[posts.eng_derived.fillna(False).astype(bool)].groupby("src_file").size().items()]),
         brands=[dict(key=b[0], short=b[1], label=b[2]) for b in L.BRANDS],
         platforms=L.PLATFORMS,
         months=[info[m] for m in months],
