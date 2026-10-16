@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MEDCMU Social Monthly</title>
+<meta name="theme-color" content="#090d13">
+<script>try{var __t=localStorage.getItem("medcmu-theme");document.documentElement.dataset.theme=__t==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%232a78d6%27/%3E%3Cpath d=%27M7 22V10l9 8 9-8v12%27 stroke=%27white%27 stroke-width=%273%27 fill=%27none%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== MEDCMU Social Dashboard · visual system =====
+   Swiss/minimal, dense, ink-on-paper chrome. The four --b-* brand colours are DATA semantics
+   (one per brand across every chart/table) — never reuse them for UI chrome. */
+:root{
+  color-scheme:light;
+  --page:#f5f6f8; --surface:#ffffff; --surface-2:#f1f3f6; --border:#e1e4ea; --grid:#e8ebf0;
+  --text-1:#0f1720; --text-2:#475264; --text-3:#5f6b7d;
+  --b-MEDCMU:#2a78d6; --b-SI:#eb6834; --b-CU:#1baf7a; --b-SMV:#eda100;
+  --pos:#2a78d6; --neu:#b9b8b2; --neg:#e34948;
+  --side:#ffffff; --accent:#1d4ed8; --accent-solid:#1d4ed8; --accent-2:#6a4ce0;
+  --warn-bg:#fdf3dc; --warn-text:#6b4a00;
+  --shadow:0 1px 2px rgba(15,23,32,.05),0 1px 1px rgba(15,23,32,.03);
+  --bar:rgba(245,246,248,.86);
+  --r:10px; --r-sm:8px;
+  --fz:15px;
+}
+/* dark tokens: set on <html data-theme="dark"> by the inline script in <head> (default) and by the toggle */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --page:#090d13; --side:#0d121a; --surface:#121821; --surface-2:#18202b; --border:#232d3a; --grid:#1f2833;
+  --text-1:#f1f4f9; --text-2:#a9b4c4; --text-3:#8793a5;
+  --b-MEDCMU:#3987e5; --b-SI:#d95926; --b-CU:#199e70; --b-SMV:#c98500;
+  --pos:#3987e5; --neu:#6b6a65; --neg:#e66767;
+  --accent:#7db0ff; --accent-solid:#2563eb; --accent-2:#7a5cff;
+  --warn-bg:#2b2410; --warn-text:#f1d58a;
+  --shadow:none; --bar:rgba(9,13,19,.84);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:84px}
+body{margin:0;background:var(--page);color:var(--text-1);
+  font-family:"Inter","Noto Sans Thai","Sukhumvit Set","Thonburi",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:var(--fz);line-height:1.55;font-feature-settings:"tnum" 1,"cv11" 1;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.seg button:focus-visible{outline-offset:-2px;border-radius:0}
+button,select,input,a{transition:background-color .15s ease,border-color .15s ease,color .15s ease,opacity .15s ease,filter .15s ease}
+button{cursor:pointer}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--accent-solid);color:#fff;padding:8px 14px;border-radius:var(--r-sm);text-decoration:none;font-weight:600}
+.skip:focus{top:12px}
+
+/* ---- controls ---- */
+.sub{color:var(--text-2);font-size:13px;margin:4px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;line-height:1.3;color:var(--text-2);
+  background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px 11px}
+.chip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.chipl{font-size:12px;color:var(--text-3);font-weight:500;margin-right:2px;white-space:nowrap}
+button.chip{font:inherit;font-size:13px;line-height:1.3}
+button.chip.pick{opacity:.7}
+button.chip.pick.on{opacity:1;color:var(--text-1);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface))}
+button.chip.pick:hover{opacity:1;border-color:var(--text-3)}
+.chip.fixed{color:var(--text-1);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface));font-weight:600}
+.btn{font:inherit;font-size:13px;color:var(--text-2);background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-sm);padding:5px 10px}
+.btn:hover{border-color:var(--text-3)}
+section.panel{padding-top:2px}
+.controls{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:0 0 14px}
+.ctl{display:flex;align-items:center;flex-wrap:wrap;max-width:100%;gap:8px;font-size:12.5px;font-weight:500;color:var(--text-2)}
+.seg{max-width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;display:inline-flex;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface)}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:0 0 auto;font:inherit;font-size:13px;color:var(--text-2);background:transparent;border:0;padding:6px 12px;
+  border-right:1px solid var(--border);white-space:nowrap}
+.seg button:last-child{border-right:0}
+.seg button:hover:not(.on){background:var(--surface-2);color:var(--text-1)}
+.seg button.on{background:var(--accent-solid);color:#fff;font-weight:600}
+select{font:inherit;font-size:13px;color:var(--text-1);background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-sm);padding:6px 8px;max-width:100%}
+select:hover{border-color:var(--text-3)}
+label.tog{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);cursor:pointer;
+  background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px 11px}
+label.tog:hover{border-color:var(--text-3)}
+label.tog input{accent-color:var(--accent-solid)}
+label.tog i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+/* ---- layout ---- */
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g1{grid-template-columns:minmax(0,1fr)}
+@media (max-width:1100px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.g2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.g4{grid-template-columns:minmax(0,1fr)}.g4:has(.kpi2){grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---- cards ---- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin:0;box-shadow:var(--shadow)}
+.card h3{margin:0;font-size:14.5px;font-weight:600;letter-spacing:.1px}
+.card .sub{margin:3px 0 10px}
+.card figcaption{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.tbtn{font:inherit;font-size:12px;font-weight:500;color:var(--text-2);background:transparent;border:1px solid var(--border);
+  border-radius:6px;padding:3px 10px;white-space:nowrap}
+.tbtn:hover{border-color:var(--text-3);color:var(--text-1)}
+.tbtn[aria-expanded="true"]{background:var(--surface-2);color:var(--text-1)}
+.cv{position:relative;height:300px}
+.cv.tall{height:360px}
+.kpi{border-top:3px solid var(--kc);padding-top:14px}
+.kpi .name{font-size:13px;color:var(--text-2);font-weight:600;line-height:1.35}
+.kpi .big{font-size:28px;font-weight:700;line-height:1.15;margin:6px 0 10px;font-variant-numeric:tabular-nums;letter-spacing:-.3px}
+.kpi dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:12.5px;color:var(--text-2)}
+.kpi dd{margin:0;text-align:right;color:var(--text-1);font-variant-numeric:tabular-nums}
+.note{font-size:13px;color:var(--text-2);background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--text-3);
+  border-radius:var(--r-sm);padding:9px 13px;margin:0 0 14px}
+.note.warn{background:var(--warn-bg);color:var(--warn-text);border-color:transparent;border-left:3px solid currentColor}
+.note b{color:inherit}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 11px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+td.l,th.l{text-align:left;white-space:normal}
+th{color:var(--text-2);font-weight:600;font-size:12px;background:var(--surface-2);position:sticky;top:0;letter-spacing:.2px}
+tbody tr:hover td{background:color-mix(in srgb,var(--surface-2) 70%,transparent)}
+tbody tr:last-child td{border-bottom:0}
+td.na{color:var(--text-3);font-size:12px}
+td.best{font-weight:700}
+.bdot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:baseline;background:var(--kc)}
+.tv{margin-top:8px}
+.tv[hidden]{display:none}
+a{color:var(--accent)}
+.ptxt{max-width:520px;white-space:normal;text-align:left}
+h2{font-size:15px;font-weight:600;margin:26px 0 10px;letter-spacing:.1px}
+h2::before{content:"";display:inline-block;width:3px;height:.95em;background:var(--accent);border-radius:2px;margin-right:9px;vertical-align:-2px}
+ul.clean{margin:6px 0 0;padding-left:18px;color:var(--text-2);font-size:13.5px}
+ul.clean li{margin:4px 0}
+footer{color:var(--text-3);font-size:12px;margin-top:30px;padding-top:14px;border-top:1px solid var(--border)}
+
+/* ---- shell ---- */
+.app{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh}
+aside.side{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--side);border-right:1px solid var(--border);
+  padding:20px 12px 14px;display:flex;flex-direction:column;gap:4px}
+.logo{display:flex;align-items:center;gap:11px;padding:0 8px 16px;margin-bottom:4px;border-bottom:1px solid var(--border)}
+.logo-mark{flex:0 0 36px;width:36px;height:36px;border-radius:9px;background:var(--accent-solid);display:grid;place-items:center}
+.logo-mark svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.logo-t{font-size:18px;font-weight:700;letter-spacing:.1px;line-height:1.15}
+.logo-s{font-size:11px;letter-spacing:.9px;color:var(--text-3);margin-top:3px;line-height:1.35;font-weight:500}
+.nav-h{font-size:11.5px;font-weight:600;color:var(--text-3);letter-spacing:.5px;padding:16px 10px 5px}
+.nav-item{position:relative;display:flex;align-items:center;gap:11px;width:100%;font:inherit;font-size:13.5px;font-weight:500;color:var(--text-2);
+  background:transparent;border:0;border-radius:var(--r-sm);padding:8px 10px;text-align:left}
+.nav-item:hover{background:var(--surface-2);color:var(--text-1)}
+.nav-item[aria-current="page"]{color:var(--text-1);font-weight:600;background:color-mix(in srgb,var(--accent) 11%,transparent)}
+.nav-item[aria-current="page"]::before{content:"";position:absolute;left:-12px;top:7px;bottom:7px;width:3px;border-radius:0 3px 3px 0;background:var(--accent-solid)}
+.nav-item svg{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nav-item .mono{width:18px;height:18px;flex:0 0 18px;border-radius:5px;background:var(--surface-2);border:1px solid var(--border);
+  font-size:9.5px;font-weight:700;display:grid;place-items:center;color:var(--text-2)}
+.nav-item .lbl{flex:1;min-width:0}
+.nav-item .badge{font-size:11.5px;font-weight:600;color:var(--text-2);background:var(--surface-2);border:1px solid var(--border);
+  border-radius:999px;padding:0 8px;min-width:28px;text-align:center;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-direction:column;gap:6px;padding:0 10px}
+.legend span{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--text-2)}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.side-foot{margin-top:auto;padding:12px 13px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface-2);font-size:12px;color:var(--text-2);line-height:1.55}
+.side-foot b{color:var(--text-1);display:block;font-size:12.5px;margin-bottom:2px}
+.main{min-width:0;padding:0 32px 52px;max-width:1680px}
+header.top{padding:24px 0 14px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-start;justify-content:space-between}
+.crumb{font-size:11.5px;font-weight:600;letter-spacing:1.1px;color:var(--text-3);margin-bottom:5px}
+h1{font-size:23px;margin:0;font-weight:700;letter-spacing:-.1px;line-height:1.25}
+.hright{display:flex;gap:8px;align-items:center;margin-left:auto;flex:0 0 auto}
+.period{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:500;color:var(--text-2);background:var(--surface);
+  border:1px solid var(--border);border-radius:999px;padding:5px 12px;white-space:nowrap}
+.period::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--b-CU)}
+.iconbtn{width:36px;height:36px;display:grid;place-items:center;color:var(--text-2);background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:0}
+.iconbtn:hover{color:var(--text-1);border-color:var(--text-3)}
+.iconbtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.filterbar{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;
+  margin:0 -32px 18px;padding:9px 32px;background:var(--bar);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.btn.primary{color:#fff;border:0;background:var(--accent-solid);padding:8px 14px;border-radius:var(--r-sm);font-weight:600}
+.kpi2{position:relative;display:flex;gap:14px;align-items:center;padding:16px 18px}
+.kpi2 .ico{position:absolute;right:14px;top:14px;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:var(--kc);
+  background:color-mix(in srgb,var(--kc) 14%,transparent)}
+.kpi2 .ico svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.kpi2 .kl{font-size:12.5px;font-weight:500;color:var(--text-2);padding-right:40px}
+.kpi2 .kv{font-size:30px;font-weight:700;line-height:1.15;font-variant-numeric:tabular-nums;letter-spacing:-.4px;margin-top:2px}
+.kpi2 .kcap{font-size:12px;color:var(--text-3);margin-top:3px;line-height:1.4}
+.hnote{font-size:12.5px;color:var(--text-3);margin:10px 2px 18px}
+
+/* ---- presentation mode (wall display) ---- */
+body.present{--fz:17px}
+body.present aside.side,body.present .skip{display:none}
+body.present .app{grid-template-columns:minmax(0,1fr)}
+body.present .main{padding:0 44px 56px;max-width:none}
+body.present h1{font-size:30px}
+body.present .kpi2 .kv{font-size:44px}body.present .kpi .big{font-size:38px}
+body.present .card h3{font-size:18px}body.present table{font-size:15px}
+body.present .cv{height:380px}body.present .cv.tall{height:460px}
+body.present .filterbar{margin:0 -44px 20px;padding:10px 44px}
+
+/* ---- touch targets ---- */
+@media (pointer:coarse){
+  .nav-item,.seg button,.tbtn,.btn,select,button.chip,label.tog,.iconbtn{min-height:44px}
+  .iconbtn{min-width:44px}
+  .seg button{padding-inline:14px}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  aside.side{position:static;height:auto;padding:12px 12px 8px;border-right:0;border-bottom:1px solid var(--border);gap:8px}
+  .logo{padding:0 4px 10px}.logo-mark{flex-basis:30px;width:30px;height:30px;border-radius:8px}.logo-t{font-size:16px}.logo-s{display:none}
+  #nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+  #nav::-webkit-scrollbar{display:none}
+  .nav-group{display:contents}.nav-h{display:none}
+  .nav-item{width:auto;flex:0 0 auto;white-space:nowrap;border:1px solid var(--border);border-radius:999px;padding:7px 13px}
+  .nav-item[aria-current="page"]{border-color:var(--accent)}
+  .nav-item[aria-current="page"]::before{display:none}
+  .side-foot{display:none}
+  .main{padding:0 14px 40px}
+  header.top{padding:16px 0 12px}
+  h1{font-size:20px}
+  .crumb{display:none}
+  .filterbar{margin:0 -14px 14px;padding:8px 14px;flex-wrap:nowrap}
+  .filterbar .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;min-width:0;padding-bottom:1px}
+  .filterbar .chips::-webkit-scrollbar{display:none}
+  .chips>*{flex:0 0 auto}
+  .cv{height:260px}.cv.tall{height:300px}
+  .card{padding:14px}
+  .kpi2{padding:14px}.kpi2 .kv{font-size:24px}.kpi2 .ico{display:none}.kpi2 .kl{padding-right:0}
+  .period{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+
+/* ---- monthly additions ---- */
+.sb{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;line-height:1.5;border-radius:999px;padding:1px 10px;
+  border:1px solid var(--border);background:var(--surface-2);color:var(--text-1);white-space:nowrap}
+.sb::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;flex:0 0 8px}
+.sb.partial::before{background:transparent;border:2px solid currentColor}
+.sb.nodata{border-style:dashed;color:var(--text-3)}
+.sb.nodata::before{display:none}
+.msrc{color:var(--text-3)}
+.dl{font-weight:600;font-variant-numeric:tabular-nums;color:var(--text-1)}
+.dl.na{color:var(--text-3);font-weight:500}
+.kcap .dl{font-size:12px}
+.kpi dd .dl{font-size:12.5px}
+.seg{position:relative}
+
+/* ---- print / save as PDF ---- */
+@media print{
+  aside.side,.filterbar,.iconbtn,.controls,.tbtn,.skip,.hright{display:none!important}
+  .app{display:block}.main{padding:0;max-width:none}
+  body{background:#fff;font-size:12px}
+  .card,.note{box-shadow:none;break-inside:avoid}
+  /* canvases are sized for the screen layout: scale them to the page instead of letting them overflow */
+  .cv,.cv.tall{height:auto!important}
+  .cv canvas{max-width:100%!important;height:auto!important}
+  header.top{padding-top:0}
+  a{color:inherit;text-decoration:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#panels">ข้ามไปยังเนื้อหา</a>
+<div class="app">
+  <aside class="side" id="side">
+    <div class="logo"><div class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 17V8l7 6 7-6v9"/></svg></div>
+      <div><div class="logo-t">MedCMU</div><div class="logo-s">MONTHLY SOCIAL<br>4-BRAND BENCHMARK</div></div></div>
+    <nav id="nav" aria-label="เมนูหลัก"></nav>
+    <div class="side-foot" id="sideFoot"></div>
+  </aside>
+  <main class="main">
+    <header class="top">
+      <div><div class="crumb">MEDCMU · MONTHLY SOCIAL</div><h1 id="pgTitle"></h1><p class="sub" id="pgSub"></p></div>
+    </header>
+    <div class="filterbar" role="region" aria-label="ตัวกรองแบรนด์และการตั้งค่าการแสดงผล">
+      <div class="chips" id="brandChips" aria-label="สีประจำแบรนด์"></div>
+      <div class="hright">
+        <span class="period" id="periodBadge"></span>
+        <button class="iconbtn" id="presentBtn" type="button" aria-pressed="false" aria-label="โหมดนำเสนอเต็มจอ" title="โหมดนำเสนอเต็มจอ (ลูกศรซ้าย/ขวาเปลี่ยนหน้า · Esc ออก)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+        <button class="iconbtn" id="themeBtn" type="button" aria-label="สลับโหมดสว่าง/มืด" title="สลับโหมดสว่าง/มืด"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      </div>
+    </div>
+    <div id="panels"></div>
+    <footer id="foot"></footer>
+  </main>
+</div>
+
+<script>/*__CHARTJS__*/</script>
+<script>
+const D = /*__DATA__*/null;
+"use strict";
+/* ---------- helpers ---------- */
+const $ = (s, el = document) => el.querySelector(s);
+const PL = {facebook:"Facebook", instagram:"Instagram", tiktok:"TikTok", youtube:"YouTube", twitter:"X / Twitter"};
+const SC = {owned:"Owned (บัญชีทางการ)", earned:"Earned (ถูกกล่าวถึง)"};
+const BR = D.brands, ALL = BR.map(b => b.key);
+/* brand filter: MEDCMU is always shown; other brands are opt-in (default = MEDCMU only), remembered in localStorage */
+let EXTRA = new Set();
+try { (JSON.parse(safeGet("medcmu-brands") || "[]") || []).forEach(k => { if (ALL.includes(k) && k !== "MEDCMU") EXTRA.add(k); }); } catch(e){}
+let BK = ALL.filter(k => k === "MEDCMU" || EXTRA.has(k));
+function setExtra(set){ EXTRA = set; BK = ALL.filter(k => k === "MEDCMU" || EXTRA.has(k)); safeSet("medcmu-brands", JSON.stringify([...EXTRA])); }
+const bname = k => BR.find(b => b.key === k).short;
+const cell = (b, p, s) => D.cells[`${b}|${p}|${s}`] || null;
+const NA = "ข้อมูลไม่เพียงพอ";
+const nf = new Intl.NumberFormat("th-TH");
+const fmt = v => v == null ? NA : nf.format(Math.round(v));
+const fmt1 = v => v == null ? NA : new Intl.NumberFormat("th-TH", {maximumFractionDigits:1}).format(v);
+const fpct = (v, d = 1) => v == null ? NA : new Intl.NumberFormat("th-TH", {maximumFractionDigits:d, minimumFractionDigits:d}).format(v) + "%";
+const abbr = v => { const a = Math.abs(v); return a >= 1e6 ? (v/1e6).toFixed(a>=1e7?0:1).replace(/\.0$/,"")+"M" : a >= 1e3 ? (v/1e3).toFixed(a>=1e4?0:1).replace(/\.0$/,"")+"k" : String(Math.round(v)); };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const bcol = k => cv("--b-" + k);
+const sum = a => a.reduce((x, y) => x + (y || 0), 0);
+const dlabel = d => new Date(d + "T00:00:00Z").toLocaleDateString("th-TH", {day:"numeric", month:"short", timeZone:"UTC"});
+function safeGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+function safeSet(k, v){ try { localStorage.setItem(k, v); } catch(e){} }
+
+function seg(id, opts, val){
+  return `<div class="seg" id="${id}" role="group">${opts.map(o => `<button type="button" data-v="${esc(o.v)}" class="${o.v === val ? "on" : ""}" aria-pressed="${o.v === val}">${esc(o.t)}</button>`).join("")}</div>`;
+}
+function bindSeg(id, cb){ const h = $("#" + id); h && h.querySelectorAll("button").forEach(b => b.onclick = () => cb(b.dataset.v)); }
+function sel(id, opts, val){
+  return `<select id="${id}">${opts.map(o => `<option value="${esc(o.v)}" ${o.v === val ? "selected" : ""}>${esc(o.t)}</option>`).join("")}</select>`;
+}
+function bindSel(id, cb){ const h = $("#" + id); h && (h.onchange = () => cb(h.value)); }
+const platOpts = (all) => (all ? [{v:"all", t:"ทุกแพลตฟอร์ม"}] : []).concat(D.platforms.map(p => ({v:p, t:PL[p]})));
+
+/* ---------- charts ---------- */
+const charts = {}, tableOpen = new Set();
+function deepMerge(a, b){ for (const k in b){ if (b[k] && typeof b[k] === "object" && !Array.isArray(b[k])) { a[k] = deepMerge(a[k] && typeof a[k] === "object" ? a[k] : {}, b[k]); } else a[k] = b[k]; } return a; }
+
+const valueLabels = {
+  id:"vl",
+  afterDatasetsDraw(chart){
+    const o = chart.options.plugins.vl; if (!o || !o.on) return;
+    const ctx = chart.ctx, horiz = chart.options.indexAxis === "y";
+    ctx.save(); ctx.font = "600 11.5px " + getComputedStyle(document.body).fontFamily; ctx.fillStyle = cv("--text-1");
+    chart.data.datasets.forEach((ds, di) => {
+      const meta = chart.getDatasetMeta(di); if (meta.hidden) return;
+      meta.data.forEach((el, i) => {
+        const v = ds.data[i];
+        if (v == null){
+          ctx.fillStyle = cv("--text-3"); ctx.font = "11px " + getComputedStyle(document.body).fontFamily;
+          ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+          const x = el.x, y = (chart.scales.y ? chart.scales.y.getPixelForValue(0) : el.y) - 4;
+          if (!horiz) ctx.fillText(NA, x, y);
+          ctx.fillStyle = cv("--text-1"); ctx.font = "600 11.5px " + getComputedStyle(document.body).fontFamily;
+          return;
+        }
+        const t = chart.$vlfmt ? chart.$vlfmt(v) : String(v);
+        if (horiz){ ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillText(t, el.x + 6, el.y); }
+        else { ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillText(t, el.x, el.y - 4); }
+      });
+    });
+    ctx.restore();
+  }
+};
+const crosshair = {
+  id:"cross",
+  afterDatasetsDraw(chart){
+    if (chart.config.type !== "line") return;
+    const a = chart.tooltip && chart.tooltip._active; if (!a || !a.length) return;
+    const x = a[0].element.x, ca = chart.chartArea, ctx = chart.ctx;
+    ctx.save(); ctx.strokeStyle = cv("--text-3"); ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(x, ca.top); ctx.lineTo(x, ca.bottom); ctx.stroke(); ctx.restore();
+  }
+};
+const endLabels = {
+  id:"endl",
+  afterDatasetsDraw(chart){
+    if (!chart.options.plugins.endl || !chart.options.plugins.endl.on) return;
+    const ctx = chart.ctx, pts = [];
+    chart.data.datasets.forEach((ds, di) => {
+      const meta = chart.getDatasetMeta(di); if (meta.hidden) return;
+      let li = -1; for (let i = ds.data.length - 1; i >= 0; i--) if (ds.data[i] != null){ li = i; break; }
+      if (li >= 0) pts.push({y:meta.data[li].y, x:meta.data[li].x, t:ds.label});
+    });
+    pts.sort((a, b) => a.y - b.y);
+    for (let i = 1; i < pts.length; i++) if (pts[i].y - pts[i-1].y < 14) pts[i].y = pts[i-1].y + 14;
+    ctx.save(); ctx.font = "600 12px " + getComputedStyle(document.body).fontFamily; ctx.fillStyle = cv("--text-1");
+    ctx.textAlign = "left"; ctx.textBaseline = "middle";
+    pts.forEach(p => ctx.fillText(p.t, p.x + 9, p.y));
+    ctx.restore();
+  }
+};
+
+function baseOpts(type){
+  const grid = cv("--grid"), t2 = cv("--text-2");
+  const o = {
+    responsive:true, maintainAspectRatio:false, animation:false,
+    layout:{padding:{top:18, right:4}},
+    plugins:{
+      legend:{position:"bottom", labels:{color:t2, usePointStyle:true, pointStyle:"rectRounded", boxWidth:9, boxHeight:9, font:{size:12}}},
+      tooltip:{backgroundColor:cv("--surface-2"), titleColor:cv("--text-1"), bodyColor:cv("--text-1"), borderColor:cv("--border"), borderWidth:1,
+               padding:10, boxPadding:4, usePointStyle:true, cornerRadius:8, titleFont:{weight:"600"},
+               callbacks:{label: c => ` ${c.dataset.label ? c.dataset.label + ": " : ""}${c.parsed.y == null && c.parsed.x != null ? fmt(c.parsed.x) : (c.parsed.y == null ? NA : fmt1(c.parsed.y))}`}},
+      vl:{on:false}, endl:{on:false}
+    },
+    scales:{
+      x:{grid:{display:false}, border:{color:grid}, ticks:{color:t2, font:{size:12}, maxRotation:0, autoSkip:true}},
+      y:{beginAtZero:true, grid:{color:grid}, border:{display:false}, ticks:{color:t2, font:{size:12}, callback:v => abbr(v)}}
+    },
+    interaction:{mode:"nearest", intersect:true}
+  };
+  if (type === "line") o.interaction = {mode:"index", intersect:false};
+  return o;
+}
+function mk(id, type, data, opts = {}, tfmt){
+  if (charts[id]) charts[id].destroy();
+  const el = document.getElementById(id); if (!el) return;
+  // Chart.js treats any function-valued option as scriptable (calls it with a context object),
+  // so keep the value-label formatter out of the options tree.
+  const vlfmt = opts.plugins && opts.plugins.vl ? opts.plugins.vl.fmt : null;
+  if (vlfmt) delete opts.plugins.vl.fmt;
+  const cfg = {type, data, options:deepMerge(baseOpts(type), opts), plugins:[valueLabels, crosshair, endLabels]};
+  const ch = new Chart(el, cfg); ch.$tfmt = tfmt || fmt1; ch.$vlfmt = vlfmt; charts[id] = ch;
+  ch.update("none"); // the constructor's first draw ran before $vlfmt was set (value labels fell back to raw numbers)
+  fillTable(id);
+  return ch;
+}
+function destroyAll(){ Object.keys(charts).forEach(k => { charts[k].destroy(); delete charts[k]; }); }
+function fillTable(id){
+  const host = document.getElementById(id + "-t"); if (!host) return;
+  const ch = charts[id], labels = ch.data.labels, ds = ch.data.datasets;
+  let h = `<div class="tw"><table><thead><tr><th></th>${ds.map(d => `<th>${esc(d.label || "ค่า")}</th>`).join("")}</tr></thead><tbody>`;
+  labels.forEach((l, i) => { h += `<tr><td>${esc([].concat(l).join(" · "))}</td>${ds.map(d => { const v = d.data[i]; return v == null ? `<td class="na">${NA}</td>` : `<td>${ch.$tfmt(v)}</td>`; }).join("")}</tr>`; });
+  host.innerHTML = h + "</tbody></table></div>";
+  host.hidden = !tableOpen.has(id);
+}
+function card(id, title, sub, tall){
+  return `<figure class="card"><figcaption><div><h3>${title}</h3>${sub ? `<p class="sub">${sub}</p>` : ""}</div>
+  <button class="tbtn" type="button" data-t="${id}" aria-expanded="${tableOpen.has(id)}">ตาราง</button></figcaption>
+  <div class="cv ${tall ? "tall" : ""}"><canvas id="${id}" role="img" aria-label="${esc(title)}"></canvas></div><div class="tv" id="${id}-t" hidden></div></figure>`;
+}
+function bindTables(root){
+  root.querySelectorAll(".tbtn").forEach(b => b.onclick = () => {
+    const id = b.dataset.t, h = document.getElementById(id + "-t");
+    if (tableOpen.has(id)) tableOpen.delete(id); else tableOpen.add(id);
+    h.hidden = !tableOpen.has(id); b.setAttribute("aria-expanded", tableOpen.has(id));
+  });
+}
+const barDs = (vals, extra = {}) => Object.assign({data:vals, backgroundColor:BK.map(bcol), borderRadius:4, borderSkipped:false, maxBarThickness:56}, extra);
+const bdot = k => `<span class="bdot" style="--kc:${bcol(k)}"></span>`;
+

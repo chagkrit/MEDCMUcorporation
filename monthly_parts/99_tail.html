@@ -1,0 +1,76 @@
+let active = "overview";
+function render(){
+  destroyAll();
+  const p = document.getElementById("panel-" + active);
+  (RENDER[active] || (q => { q.innerHTML = '<p class="note warn">หน้านี้ยังไม่พร้อมใช้งาน</p>'; }))(p);
+  p.querySelectorAll(".seg").forEach(sg => { const on = sg.querySelector("button.on"); if (on) sg.scrollLeft = Math.max(0, on.offsetLeft - (sg.clientWidth - on.offsetWidth) / 2); });   /* keep the chosen option in view when a selector scrolls (10 months on a phone) */
+}
+function renderChips(){
+  const h = $("#brandChips");
+  h.innerHTML = `<span class="chipl">แบรนด์ที่แสดง</span>` + BR.map(b => b.key === "MEDCMU"
+    ? `<span class="chip on fixed" title="${esc(b.label)} · แสดงเสมอ"><i style="background:var(--b-${b.key})"></i>${esc(b.short)}</span>`
+    : `<button type="button" class="chip pick ${EXTRA.has(b.key) ? "on" : ""}" data-k="${b.key}" aria-pressed="${EXTRA.has(b.key)}" title="${esc(b.label)}"><i style="background:var(--b-${b.key})"></i>${esc(b.short)}</button>`).join("")
+    + `<button type="button" class="chip pick" data-k="__only">เฉพาะ MEDCMU</button><button type="button" class="chip pick" data-k="__all">ทุกแบรนด์</button>`;
+  h.querySelectorAll("button[data-k]").forEach(btn => btn.onclick = () => {
+    const k = btn.dataset.k, n = new Set(EXTRA);
+    if (k === "__only") n.clear(); else if (k === "__all") ALL.forEach(x => x !== "MEDCMU" && n.add(x)); else if (n.has(k)) n.delete(k); else n.add(k);
+    setExtra(n); renderChips(); render();
+  });
+}
+function setTab(id, plat){
+  active = id; safeSet("medcmu-tab", id);
+  if (plat) S.platform.plat = plat;
+  TABS.forEach(t => { const pn = document.getElementById("panel-" + t.id), on = t.id === id; pn.hidden = !on; if (!on) pn.innerHTML = ""; });
+  const T = TABS.find(t => t.id === id); $("#pgTitle").textContent = T.t; $("#pgSub").textContent = T.d;
+  document.querySelectorAll(".nav-item").forEach(b => { const on = b.dataset.id === id; on ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"); });
+  history.replaceState(null, "", "#" + id);
+  render();
+  const cur = document.querySelector('.nav-item[aria-current="page"]');
+  if (cur && matchMedia("(max-width:900px)").matches) cur.scrollIntoView({block:"nearest", inline:"center"});
+}
+function init(){
+  renderChips();
+  const used = D.months.filter(m => m.owned.status !== "nodata" || m.earned.status !== "nodata"), gaps = D.months.filter(m => m.owned.status === "nodata" && m.earned.status === "nodata");
+  const periodTxt = `${THM[+used[0].mo.slice(5) - 1]} – ${THM[+used[used.length - 1].mo.slice(5) - 1]} ${used[0].mo.slice(0, 4)}`;
+  $("#sideFoot").innerHTML = `<b>Brand Scan · Zocial Eye</b>ข้อมูลโพสต์ ${periodTxt}${gaps.length ? `<br>ไม่มีข้อมูล: ${gaps.map(m => mlabel(m.mo)).join(", ")}` : ""}`;
+  $("#foot").textContent = `ที่มา: ไฟล์ Brand Scan ${D.meta.sources.length} ไฟล์ (Social Metric / Owned / Earned) · ตัวเลขทุกค่าคำนวณด้วย build_monthly.py (ledger: monthly_ledger.csv) · ไม่มี reach / impression / click`;
+  const nav = $("#nav"), pan = $("#panels");
+  NAV.forEach(g => {
+    const grp = document.createElement("div"); grp.className = "nav-group"; grp.innerHTML = `<div class="nav-h">${esc(g.h)}</div>`;
+    g.items.forEach(it => {
+      const T = TABS.find(t => t.id === it.id), b = document.createElement("button"); b.type = "button"; b.className = "nav-item"; b.dataset.id = it.id; if (it.plat) b.dataset.plat = it.plat;
+      b.innerHTML = (it.mono ? `<span class="mono">${it.mono}</span>` : ICON[it.i]) + `<span class="lbl">${esc(it.label || T.t)}</span>` + (it.badge != null ? `<span class="badge" title="${esc(it.tip)}">${fmt(it.badge)}</span>` : "");
+      b.onclick = () => setTab(it.id, it.plat); grp.appendChild(b);
+    });
+    nav.appendChild(grp);
+  });
+  TABS.forEach(t => { const s = document.createElement("section"); s.className = "panel"; s.id = "panel-" + t.id; s.hidden = true; pan.appendChild(s); });
+  const th = safeGet("medcmu-theme"); document.documentElement.dataset.theme = th === "light" ? "light" : "dark";
+  $("#themeBtn").onclick = () => { const nx = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; document.documentElement.dataset.theme = nx; safeSet("medcmu-theme", nx); render(); };
+  $("#periodBadge").textContent = periodTxt;
+  Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+  /* presentation mode: hides the sidebar, enlarges type, ←/→ step through the pages, Esc leaves */
+  const pb = $("#presentBtn"), tabIds = TABS.map(t => t.id);
+  const setPresent = on => { document.body.classList.toggle("present", on); pb.setAttribute("aria-pressed", on); setTimeout(render, 60); };
+  pb.onclick = () => {
+    const on = !document.body.classList.contains("present"); setPresent(on);
+    try { if (on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); else if (!on && document.fullscreenElement) document.exitFullscreen(); } catch(e){}
+  };
+  document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement && document.body.classList.contains("present")) setPresent(false); });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && document.body.classList.contains("present") && !document.fullscreenElement) setPresent(false);
+    if (!document.body.classList.contains("present") || !/^Arrow(Left|Right)$/.test(e.key) || /^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+    const i = tabIds.indexOf(active), n = tabIds[(i + (e.key === "ArrowRight" ? 1 : tabIds.length - 1)) % tabIds.length]; setTab(n); e.preventDefault();
+  });
+  /* printing / PDF: charts are drawn with theme colours, so switch to the light theme for the print job and redraw */
+  let printTheme = null;
+  window.addEventListener("beforeprint", () => { if (printTheme === null) printTheme = document.documentElement.dataset.theme; document.documentElement.dataset.theme = "light"; render(); });
+  window.addEventListener("afterprint", () => { if (printTheme) { document.documentElement.dataset.theme = printTheme; printTheme = null; render(); } });
+  const h = location.hash.replace("#", ""), st = safeGet("medcmu-tab");
+  setTab(TABS.some(t => t.id === h) ? h : TABS.some(t => t.id === st) ? st : "overview");
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(render); // canvas text is drawn once: redraw when web fonts arrive
+}
+init();
+</script>
+</body>
+</html>
