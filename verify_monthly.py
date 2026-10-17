@@ -265,6 +265,27 @@ def main(data_dir, ledger_path, data_path):
                 bad.append(("brandscan score " + r["brand"] + " " + r["month"], exp, got, None))
         if sum(len(v) for v in bs["score"]["vals"].values()) != len(tl):
             bad.append(("brandscan score cell count", len(tl), sum(len(v) for v in bs["score"]["vals"].values()), None))
+        with open(os.path.join(d, "brand_score_platform_monthly.csv"), newline="", encoding="utf-8-sig") as f:
+            pm = list(csv.DictReader(f))
+        npm = 0
+        for r in pm:
+            got = bs["score"]["platform"].get(r["brand"], {}).get(r["month"], {}).get(r["platform"])
+            exp = [float(r["own_score"]), float(r["earn_score"])]
+            n_bs += 2
+            npm += 1
+            if got is None or abs(got[0] - exp[0]) > TOL or abs(got[1] - exp[1]) > TOL:
+                bad.append(("brandscan platform score " + r["brand"] + " " + r["month"] + " " + r["platform"], exp, got, None))
+            elif r["month"] != min(x["month"] for x in tl) and (got[2] is None or abs(got[2] - float(r["own_avg_growth_pct"])) > TOL or abs(got[3] - float(r["earn_avg_growth_pct"])) > TOL):
+                bad.append(("brandscan platform growth " + r["brand"] + " " + r["month"] + " " + r["platform"], None, got, None))
+        if sum(len(v) for per in bs["score"]["platform"].values() for v in per.values()) != npm:
+            bad.append(("brandscan platform cell count", npm, None, None))
+        by = defaultdict(dict)
+        for r in pm:
+            by[(r["brand"], r["month"])][r["platform"]] = float(r["earn_score"])
+        for r in tl:      # headline earn score = plain mean of the 5 platform earn scores (holds on every brand-month when pulled)
+            e = by.get((r["brand"], r["month"]), {})
+            if len(e) != 5 or abs(sum(e.values()) / 5 - float(r["earned_score"])) > 1.0:
+                bad.append(("brandscan headline earn vs platform mean", r["brand"], r["month"], None))
         with open(os.path.join(d, "sentiment_earned_by_platform.csv"), newline="", encoding="utf-8-sig") as f:
             sr = list(csv.DictReader(f))
         got = {(r[0], r[1], bs["sent"]["periods"][r[2]]["start"], bs["sent"]["periods"][r[2]]["end"]): r[3:] for r in bs["sent"]["rows"]}
@@ -285,12 +306,16 @@ def main(data_dir, ledger_path, data_path):
             for m, c in (("brand_score", "brand_score"), ("owned_score", "owned_score"), ("earned_score", "earned_score"), ("sentiment_score", "sentiment_score")):
                 if abs(lk.get(("score", r["brand"], "", r["month"], m), -1e18) - float(r[c])) > TOL:
                     bad.append(("brandscan ledger score", r["brand"], r["month"], m))
+        for r in pm:
+            for m in ("own_score", "earn_score"):
+                if abs(lk.get(("score_platform", r["brand"], r["platform"], r["month"], m), -1e18) - float(r[m])) > TOL:
+                    bad.append(("brandscan ledger platform", r["brand"], r["month"], r["platform"]))
         for r in sr:
             per = r["period_start"] + ".." + r["period_end"]
             for m in ("positive", "neutral", "negative", "total"):
                 if abs(lk.get(("sentiment", r["brand"], r["platform"], per, m), -1e18) - float(r[m])) > TOL:
                     bad.append(("brandscan ledger sentiment", r["brand"], r["platform"], per))
-        if len(led_bs) != 4 * len(tl) + len(bs["score"]["platform"]) * 5 * 2 + 4 * len(sr):
+        if len(led_bs) != 4 * len(tl) + 2 * len(pm) + 4 * len(sr):
             bad.append(("brandscan ledger row count", len(led_bs), None, None))
 
     print(f"recounted cells: {len(agg)}; ledger cells: {len(cells)}; ledger values compared: {len(agg) * len(METRICS)} (+ every ledger row's source label); "

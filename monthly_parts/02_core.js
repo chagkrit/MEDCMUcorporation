@@ -46,7 +46,7 @@ const S = {
   earned:{mo:latestFull, plat:"facebook", cb:"MEDCMU"},
   trend:{brands:new Set(ALL), plat:"facebook", scope:"owned", metric:"eng", gran:"week"},
   top:{mo:latestFull, plat:"facebook", scope:"owned", brand:"all"},
-  brandscan:BS ? {metric:"0", pscope:"own", plat:"all", sm:"pos", per:String(Math.max(0, BS.sent.periods.map((q, i) => i).filter(i => { const q = BS.sent.periods[i]; return q.start.slice(8) === "01" && new Date(Date.UTC(+q.start.slice(0, 4), +q.start.slice(5, 7), 0)).getUTCDate() === +q.end.slice(8); }).pop() ?? BS.sent.periods.length - 1))} : null,
+  brandscan:BS ? {pmo:BS.score.latest, metric:"0", pscope:"own", plat:"all", sm:"pos", per:String(Math.max(0, BS.sent.periods.map((q, i) => i).filter(i => { const q = BS.sent.periods[i]; return q.start.slice(8) === "01" && new Date(Date.UTC(+q.start.slice(0, 4), +q.start.slice(5, 7), 0)).getUTCDate() === +q.end.slice(8); }).pop() ?? BS.sent.periods.length - 1))} : null,
 };
 const TABS = [
   {id:"overview", t:"ภาพรวมรายเดือน", d:"สรุปรายเดือนของ MEDCMU และเทียบกับอีก 3 แบรนด์ จากข้อมูลโพสต์ Brand Scan"},

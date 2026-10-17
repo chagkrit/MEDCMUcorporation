@@ -2,7 +2,8 @@
 
 These are API aggregates, not post rows, so they never mix with the xlsx-derived cells in monthly_agg:
   brand_score_timeline.csv           brand, month, brand_score, owned_score, earned_score, sentiment_score
-  brand_score_*.json                 latest-month growth % and per-platform own/earn scores
+  brand_score_platform_monthly.csv   per-platform own/earn score for every month (+ the API's *average* growth rate, not MoM)
+  brand_score_*.json                 latest-month growth % (month-over-month, checked against the timeline)
   sentiment_earned_by_platform.csv   earned posts by sentiment label per brand x platform x period
 Every consistency rule below raises ValueError (never silently passes): a wrong or incomplete save must stop the build.
 """
@@ -12,6 +13,9 @@ from pathlib import Path
 
 BRANDS = ["MEDCMU", "SI", "CU", "SMV"]
 PLATFORMS = ["facebook", "instagram", "tiktok", "youtube", "twitter"]
+OWN_W = (0.261, 0.101, 0.170, 0.231, 0.237)   # facebook, twitter, instagram, youtube, tiktok (order of PLAT_ORDER)
+PLAT_ORDER = ["facebook", "twitter", "instagram", "youtube", "tiktok"]
+HEAD_TOL = 1.0   # headline vs platform-derived: both sides are rounded integers
 GROWTH_TOL = 0.05   # percentage points: API growth is computed from unrounded scores, ours from the rounded integers/1-dp values
 
 
@@ -51,19 +55,36 @@ def load_brandscan(data_dir):
         raise ValueError("brand_score_timeline.csv: need at least 2 months")
     latest, prev = months[-1], months[-2]
 
-    growth, plat = {}, {}
+    growth = {b: [js["brands"][b]["sep_growth_pct"][k] for k in ("score", "own", "earn", "sentiment")] for b in BRANDS}
     for b in BRANDS:
-        g = js["brands"][b]["sep_growth_pct"]
-        growth[b] = [g["score"], g["own"], g["earn"], g["sentiment"]]
         for i, name in enumerate(("score", "own", "earn", "sentiment")):
             a, c = vals[b][prev][i], vals[b][latest][i]
             calc = (c - a) / a * 100
             if abs(calc - growth[b][i]) > GROWTH_TOL:
                 raise ValueError(f"growth identity fails: {b} {name} {prev}->{latest} computed {calc:.3f} vs API {growth[b][i]}")
-        pp = js["brands"][b]["sep_platform"]
-        if sorted(pp) != sorted(PLATFORMS):
-            raise ValueError(f"{b}: platform detail platforms {sorted(pp)}")
-        plat[b] = {p: [v["own_score"], v["earn_score"], v["own_growth_pct"], v["earn_growth_pct"]] for p, v in pp.items()}
+
+    # ---- per-platform scores, every month ----
+    plat = {b: {} for b in BRANDS}
+    for r in _read_csv(d / "brand_score_platform_monthly.csv"):
+        b, mo, p = r["brand"], r["month"], r["platform"]
+        if b not in plat or mo not in vals[b] or p not in PLATFORMS:
+            raise ValueError(f"brand_score_platform_monthly.csv: unknown brand/month/platform {b!r}/{mo!r}/{p!r}")
+        if p in plat[b].setdefault(mo, {}):
+            raise ValueError(f"brand_score_platform_monthly.csv: duplicate {b} {mo} {p}")
+        first = mo == months[0]   # the API reports 0 growth for the first month = no previous month
+        plat[b][mo][p] = [int(r["own_score"]), int(r["earn_score"]),
+                          None if first else float(r["own_avg_growth_pct"]), None if first else float(r["earn_avg_growth_pct"])]
+    for b in BRANDS:
+        if sorted(plat[b]) != months or any(sorted(plat[b][m]) != sorted(PLATFORMS) for m in months):
+            raise ValueError(f"brand_score_platform_monthly.csv: {b} must have all 5 platforms for every month")
+        for i, m in enumerate(months):
+            v = [plat[b][m][p] for p in PLAT_ORDER]
+            # relationships seen on every brand-month when pulled (2026-10-17): headline earn = plain mean of the 5 platform
+            # earn scores; headline own = weighted mean. They catch typing errors in the saved files; if the API changes them, inspect.
+            if abs(sum(x[1] for x in v) / 5 - vals[b][m][2]) > HEAD_TOL:
+                raise ValueError(f"platform earn scores do not average to the headline earn score: {b} {m}")
+            if abs(sum(w * x[0] for w, x in zip(OWN_W, v)) - vals[b][m][1]) > HEAD_TOL:
+                raise ValueError(f"platform own scores do not match the headline own score: {b} {m}")
 
     # ---- sentiment ----
     periods = sorted({(r["period_start"], r["period_end"]) for r in sr})
@@ -99,10 +120,11 @@ def ledger_rows(bs):
         for mo, v in per.items():
             for n, x in zip(names, v):
                 out.append(dict(kind="score", brand=b, platform="", period=mo, metric=n, value=x))
-    for b, pl in bs["score"]["platform"].items():
-        for p, v in pl.items():
-            for n, x in zip(("own_score", "earn_score"), v[:2]):
-                out.append(dict(kind="score_platform", brand=b, platform=p, period=bs["score"]["latest"], metric=n, value=x))
+    for b, per in bs["score"]["platform"].items():
+        for mo, pl in per.items():
+            for p, v in pl.items():
+                for n, x in zip(("own_score", "earn_score"), v[:2]):
+                    out.append(dict(kind="score_platform", brand=b, platform=p, period=mo, metric=n, value=x))
     for b, p, i, pos, neu, neg, tot in bs["sent"]["rows"]:
         per = bs["sent"]["periods"][i]
         label = f"{per['start']}..{per['end']}"

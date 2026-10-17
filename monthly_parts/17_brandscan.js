@@ -19,7 +19,7 @@ const spct = (x, f) => x.n ? x[f] / x.n * 100 : null;      /* n = 0 -> null (not
 const nTag = n => n < SMALL_N ? ` <span class="msrc" title="ตัวอย่างน้อยกว่า ${SMALL_N} โพสต์ สัดส่วนผันผวนมาก ใช้ดูทิศทางเท่านั้น">⚠ n น้อย</span>` : "";
 
 function rBrandScan(p){
-  const st = S.brandscan, sc = BS.score, lt = sc.latest, pv = sc.prev, mi = +st.metric, pi = +st.per, pl = st.plat, scope = st.pscope;
+  const st = S.brandscan, sc = BS.score, lt = sc.latest, pv = sc.prev, mi = +st.metric, pi = +st.per, pl = st.plat, scope = st.pscope, pmo = sc.months.includes(st.pmo) ? st.pmo : lt;
   const plats = D.platforms, per = BS.sent.periods[pi];
   const rise = {up:0, n:0}; ALL.forEach(b => sc.months.slice(1).forEach((m, i) => { rise.n++; if (sc.vals[b][m][0] > sc.vals[b][sc.months[i]][0]) rise.up++; }));
   const moLabels = sc.months.concat([nextMo(lt)]);          /* next month has no score yet: shown as an empty slot, never filled */
@@ -36,10 +36,10 @@ function rBrandScan(p){
    <h2>แนวโน้มคะแนนรายเดือน</h2>
    <div class="controls"><div class="ctl">ตัวชี้วัด ${seg("bMe", SC_METRICS, st.metric)}</div></div>
    <div class="grid g1">${card("cBs1", SC_NAME[mi] + " · รายเดือน", `${mlabel(sc.months[0])} – ${mlabel(lt)} · ${mlabel(nextMo(lt))} ยังไม่เผยแพร่`, true)}</div>
-   <h2>คะแนนแยกแพลตฟอร์ม · ${mlabel(lt)} (เดือนล่าสุดเท่านั้น)</h2>
-   <div class="controls"><div class="ctl">ประเภท ${seg("bPs", [{v:"own", t:"Owned"}, {v:"earn", t:"Earned"}], scope)}</div></div>
-   <p class="note">Brand Scan ให้คะแนนแยกแพลตฟอร์มเฉพาะเดือนล่าสุด จึงไม่มีตัวเลือกเดือน · ในวงเล็บ = % เปลี่ยนจาก ${mlabel(pv)} ตามที่ Brand Scan รายงาน</p>
-   <div class="grid g1">${card("cBs2", "คะแนน " + (scope === "own" ? "Owned" : "Earned") + " ต่อแพลตฟอร์ม", mlabel(lt))}</div>
+   <h2>คะแนนแยกแพลตฟอร์ม · ${mlabel(pmo)}</h2>
+   <div class="controls"><div class="ctl">เดือน ${seg("bPm", sc.months.map(m => ({v:m, t:mlabel(m)})), pmo)}</div><div class="ctl">ประเภท ${seg("bPs", [{v:"own", t:"Owned"}, {v:"earn", t:"Earned"}], scope)}</div></div>
+   <p class="note">ในวงเล็บ = <b>อัตราเติบโตเฉลี่ย</b> ที่ Brand Scan รายงาน (นิยามไม่เปิดเผย <b>ไม่เท่ากับ</b> การเปลี่ยนจากเดือนก่อน; เดือนแรกไม่มี) · คะแนน Earned รวมของแบรนด์ = ค่าเฉลี่ยของ 5 แพลตฟอร์ม · เทียบระหว่างแบรนด์ในเดือนเดียวกัน</p>
+   <div class="grid g1">${card("cBs2", "คะแนน " + (scope === "own" ? "Owned" : "Earned") + " ต่อแพลตฟอร์ม", mlabel(pmo))}</div>
    <div class="card"><div class="tw"><table id="bPt"></table></div></div>
    <h2>Sentiment ของโพสต์ Earned (บวก / กลาง / ลบ)</h2>
    <div class="controls"><div class="ctl">ช่วง ${seg("bPer", perOpts(), st.per)}</div><div class="ctl">แพลตฟอร์ม ${seg("bPl", platOpts(true), pl)}</div></div>
@@ -49,7 +49,7 @@ function rBrandScan(p){
    <div class="controls" style="margin-top:12px"><div class="ctl">แนวโน้ม ${seg("bSm", [{v:"pos", t:"% บวก"}, {v:"neg", t:"% ลบ"}], st.sm)}</div></div>
    <div class="card"><div class="tw"><table id="bSt"></table></div></div>`;
   p.innerHTML = h; bindTables(p);
-  bindSeg("bMe", v => { st.metric = v; render(); }); bindSeg("bPs", v => { st.pscope = v; render(); });
+  bindSeg("bMe", v => { st.metric = v; render(); }); bindSeg("bPm", v => { st.pmo = v; render(); }); bindSeg("bPs", v => { st.pscope = v; render(); });
   bindSeg("bPer", v => { st.per = v; render(); }); bindSeg("bPl", v => { st.plat = v; render(); }); bindSeg("bSm", v => { st.sm = v; render(); });
   /* score timeline: the unpublished next month is an empty slot */
   const mm = mi === 3 ? fmt1 : fmt;
@@ -58,10 +58,10 @@ function rBrandScan(p){
     {layout:{padding:{right:64}}, plugins:{endl:{on:true}}, scales:{y:{beginAtZero:mi !== 3, ticks:{callback:v => mi === 3 ? fmt1(v) : abbr(v)}}}}, mm);
   /* per-platform scores (latest month) */
   const ix = scope === "own" ? 0 : 1, gx = scope === "own" ? 2 : 3;
-  mk("cBs2", "bar", {labels:plats.map(x => window.innerWidth < 600 ? {facebook:"FB", instagram:"IG", tiktok:"TikTok", youtube:"YT", twitter:"X"}[x] : PL[x]), datasets:BK.map(b => ({label:bname(b), data:plats.map(x => sc.platform[b][x][ix]), backgroundColor:bcol(b), borderRadius:4, borderSkipped:false,
+  mk("cBs2", "bar", {labels:plats.map(x => window.innerWidth < 600 ? {facebook:"FB", instagram:"IG", tiktok:"TikTok", youtube:"YT", twitter:"X"}[x] : PL[x]), datasets:BK.map(b => ({label:bname(b), data:plats.map(x => sc.platform[b][pmo][x][ix]), backgroundColor:bcol(b), borderRadius:4, borderSkipped:false,
       borderColor:cv("--surface"), borderWidth:2, maxBarThickness:34}))}, {scales:{x:{ticks:{autoSkip:false}}}, plugins:{vl:{on:true, fmt:fmt}}}, fmt);
   $("#bPt").innerHTML = `<thead><tr><th>แบรนด์</th>${plats.map(x => `<th>${PL[x]}</th>`).join("")}</tr></thead><tbody>${BK.map(b => `<tr><td>${bdot(b)}${bname(b)}</td>${plats.map(x => {
-    const v = sc.platform[b][x], g = v[gx]; return `<td>${fmt(v[ix])} <span class="msrc">(${g >= 0 ? "+" : "−"}${fpct(Math.abs(g))})</span></td>`; }).join("")}</tr>`).join("")}</tbody>`;
+    const v = sc.platform[b][pmo][x], g = v[gx]; return `<td>${fmt(v[ix])} ${g == null ? `<span class="msrc">(–)</span>` : `<span class="msrc">(${g >= 0 ? "+" : "−"}${fpct(Math.abs(g))})</span>`}</td>`; }).join("")}</tr>`).join("")}</tbody>`;
   /* sentiment: stacked 100 % per brand, n in the label */
   const xs = BK.map(b => sentOf(b, pi, pl)), lab = BK.map((b, i) => `${bname(b)} (n=${fmt(xs[i].n)})`);
   const sd = (t, f, c) => ({label:t, data:xs.map(x => spct(x, f)), backgroundColor:c, borderRadius:0, borderSkipped:false, maxBarThickness:56});

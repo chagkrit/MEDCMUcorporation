@@ -69,12 +69,42 @@ class BrandScanLoad(unittest.TestCase):
         with self.assertRaises(ValueError):
             B.load_brandscan(tmp)
 
+    def test_platform_earn_typo_stops(self):
+        tmp, d = clone()
+        def f(rows):
+            r = next(x for x in rows if x["brand"] == "SI" and x["month"] == "2026-05" and x["platform"] == "youtube")
+            r["earn_score"] = str(int(r["earn_score"]) + 20)
+        edit_csv(d / "brand_score_platform_monthly.csv", f)
+        with self.assertRaisesRegex(ValueError, "earn scores"):
+            B.load_brandscan(tmp)
+
+    def test_platform_own_typo_stops(self):
+        tmp, d = clone()
+        def f(rows):
+            r = next(x for x in rows if x["brand"] == "CU" and x["month"] == "2026-03" and x["platform"] == "tiktok")
+            r["own_score"] = str(int(r["own_score"]) + 25)
+        edit_csv(d / "brand_score_platform_monthly.csv", f)
+        with self.assertRaisesRegex(ValueError, "own scores"):
+            B.load_brandscan(tmp)
+
+    def test_platform_missing_row_stops(self):
+        tmp, d = clone()
+        edit_csv(d / "brand_score_platform_monthly.csv", lambda rows: rows.pop(7))
+        with self.assertRaises(ValueError):
+            B.load_brandscan(tmp)
+
+    def test_first_month_growth_is_none(self):
+        bs = B.load_brandscan(REAL)
+        first = bs["score"]["months"][0]
+        self.assertTrue(all(v[2] is None and v[3] is None for v in bs["score"]["platform"]["MEDCMU"][first].values()))
+        self.assertTrue(all(v[2] is not None for v in bs["score"]["platform"]["MEDCMU"][bs["score"]["latest"]].values()))
+
     def test_ledger_counts(self):
         bs = B.load_brandscan(REAL)
         led = B.ledger_rows(bs)
         n_months = len(bs["score"]["months"]); n_per = len(bs["sent"]["periods"])
         self.assertEqual(sum(1 for r in led if r["kind"] == "score"), 4 * n_months * 4)
-        self.assertEqual(sum(1 for r in led if r["kind"] == "score_platform"), 4 * 5 * 2)
+        self.assertEqual(sum(1 for r in led if r["kind"] == "score_platform"), 4 * n_months * 5 * 2)
         self.assertEqual(sum(1 for r in led if r["kind"] == "sentiment"), 4 * 5 * n_per * 4)
 
 
