@@ -247,8 +247,54 @@ def main(data_dir, ledger_path, data_path):
     if set(au_got) != set(au_exp) or any(len(au_got[k]) != len(au_exp[k]) or any(abs(x - y) > TOL for x, y in zip(sorted(au_got[k], reverse=True), au_exp[k])) for k in au_exp if k in au_got):
         bad.append(("author lists differ", len(au_got), len(au_exp), None))
 
+    # ---- Brand Scan tab (MCP score + sentiment): re-read the saved csv/json on its own and compare payload + ledger ----
+    n_bs = 0
+    bs = data.get("brandscan")
+    dirs = sorted(glob.glob(os.path.join(data_dir, "mcp_brand_scan_*")))
+    if bool(bs) != bool(dirs):
+        bad.append(("brandscan payload vs saved folder presence", bool(bs), bool(dirs), None))
+    elif bs:
+        d = dirs[-1]
+        with open(os.path.join(d, "brand_score_timeline.csv"), newline="", encoding="utf-8-sig") as f:
+            tl = list(csv.DictReader(f))
+        for r in tl:
+            got = bs["score"]["vals"].get(r["brand"], {}).get(r["month"])
+            exp = [float(r[k]) for k in ("brand_score", "owned_score", "earned_score", "sentiment_score")]
+            n_bs += 4
+            if got is None or any(abs(x - y) > TOL for x, y in zip(got, exp)):
+                bad.append(("brandscan score " + r["brand"] + " " + r["month"], exp, got, None))
+        if sum(len(v) for v in bs["score"]["vals"].values()) != len(tl):
+            bad.append(("brandscan score cell count", len(tl), sum(len(v) for v in bs["score"]["vals"].values()), None))
+        with open(os.path.join(d, "sentiment_earned_by_platform.csv"), newline="", encoding="utf-8-sig") as f:
+            sr = list(csv.DictReader(f))
+        got = {(r[0], r[1], bs["sent"]["periods"][r[2]]["start"], bs["sent"]["periods"][r[2]]["end"]): r[3:] for r in bs["sent"]["rows"]}
+        if len(got) != len(sr) or len(bs["sent"]["rows"]) != len(sr):
+            bad.append(("brandscan sentiment row count", len(sr), len(bs["sent"]["rows"]), None))
+        for r in sr:
+            pos, neu, neg, tot = int(r["positive"]), int(r["neutral"]), int(r["negative"]), int(r["total"])
+            n_bs += 4
+            if pos + neu + neg != tot:
+                bad.append(("brandscan sentiment does not sum", r["brand"], r["platform"], r["period_start"]))
+            if got.get((r["brand"], r["platform"], r["period_start"], r["period_end"])) != [pos, neu, neg, tot]:
+                bad.append(("brandscan sentiment " + r["brand"] + " " + r["platform"] + " " + r["period_start"], [pos, neu, neg, tot], got.get((r["brand"], r["platform"], r["period_start"], r["period_end"])), None))
+        lp = os.path.join(os.path.dirname(os.path.abspath(ledger_path)), "brandscan_ledger.csv")
+        with open(lp, newline="", encoding="utf-8-sig") as f:
+            led_bs = list(csv.DictReader(f))
+        lk = {(r["kind"], r["brand"], r["platform"], r["period"], r["metric"]): float(r["value"]) for r in led_bs}
+        for r in tl:
+            for m, c in (("brand_score", "brand_score"), ("owned_score", "owned_score"), ("earned_score", "earned_score"), ("sentiment_score", "sentiment_score")):
+                if abs(lk.get(("score", r["brand"], "", r["month"], m), -1e18) - float(r[c])) > TOL:
+                    bad.append(("brandscan ledger score", r["brand"], r["month"], m))
+        for r in sr:
+            per = r["period_start"] + ".." + r["period_end"]
+            for m in ("positive", "neutral", "negative", "total"):
+                if abs(lk.get(("sentiment", r["brand"], r["platform"], per, m), -1e18) - float(r[m])) > TOL:
+                    bad.append(("brandscan ledger sentiment", r["brand"], r["platform"], per))
+        if len(led_bs) != 4 * len(tl) + len(bs["score"]["platform"]) * 5 * 2 + 4 * len(sr):
+            bad.append(("brandscan ledger row count", len(led_bs), None, None))
+
     print(f"recounted cells: {len(agg)}; ledger cells: {len(cells)}; ledger values compared: {len(agg) * len(METRICS)} (+ every ledger row's source label); "
-          f"months: {len(data['months'])}; daily series: {len(data['daily'])}; top-post groups: {len(top_exp)}; author groups: {len(au_exp)}; overlap groups: {len(ov_exp)}; mismatches: {len(bad)}")
+          f"months: {len(data['months'])}; daily series: {len(data['daily'])}; top-post groups: {len(top_exp)}; author groups: {len(au_exp)}; overlap groups: {len(ov_exp)}; brandscan values: {n_bs}; mismatches: {len(bad)}")
     for b in bad[:20]:
         print("  MISMATCH", b)
     return 1 if bad else 0

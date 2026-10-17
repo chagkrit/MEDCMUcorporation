@@ -37,6 +37,7 @@ function momOf(mo, b, sc, f){
 const dHtml = d => d == null ? `<span class="dl na" title="ไม่แสดงเมื่อเดือนใดเดือนหนึ่งไม่ครบ ไม่มีข้อมูล หรือมาจากไฟล์คนละประเภท">–</span>`
   : d === Infinity ? `<span class="dl">▲ จาก 0</span>` : `<span class="dl">${d >= 0 ? "▲ +" : "▼ −"}${fpct(Math.abs(d))}</span>`;
 
+const BS = D.brandscan;   /* Brand Score + earned sentiment from the MCP (null when no saved pull exists -> the Brand Scan tab is hidden) */
 const latestFull = (D.months.filter(m => m.owned.status === "complete").map(m => m.mo).pop()) || D.months[D.months.length - 1].mo;
 const S = {
   overview:{mo:latestFull, scope:"owned"},
@@ -45,6 +46,7 @@ const S = {
   earned:{mo:latestFull, plat:"facebook", cb:"MEDCMU"},
   trend:{brands:new Set(ALL), plat:"facebook", scope:"owned", metric:"eng", gran:"week"},
   top:{mo:latestFull, plat:"facebook", scope:"owned", brand:"all"},
+  brandscan:BS ? {metric:"0", pscope:"own", plat:"all", sm:"pos", per:String(Math.max(0, BS.sent.periods.map((q, i) => i).filter(i => { const q = BS.sent.periods[i]; return q.start.slice(8) === "01" && new Date(Date.UTC(+q.start.slice(0, 4), +q.start.slice(5, 7), 0)).getUTCDate() === +q.end.slice(8); }).pop() ?? BS.sent.periods.length - 1))} : null,
 };
 const TABS = [
   {id:"overview", t:"ภาพรวมรายเดือน", d:"สรุปรายเดือนของ MEDCMU และเทียบกับอีก 3 แบรนด์ จากข้อมูลโพสต์ Brand Scan"},
@@ -53,6 +55,7 @@ const TABS = [
   {id:"earned", t:"Earned / การพูดถึง", d:"โพสต์ของผู้อื่นที่กล่าวถึงแบรนด์ และผู้โพสต์อันดับต้น"},
   {id:"trend", t:"แนวโน้มรายวัน", d:"engagement และจำนวนโพสต์ตามวัน/สัปดาห์"},
   {id:"top", t:"โพสต์เด่น", d:"โพสต์ที่ engagement สูงสุดในเดือนที่เลือก และความกระจุกตัวของยอดรวม"},
+  ...(BS ? [{id:"brandscan", t:"Brand Scan", d:"Brand Score รายเดือนและ sentiment ของโพสต์ Earned จาก Brand Scan (ดึงผ่าน MCP · แหล่งแยกจากไฟล์โพสต์)"}] : []),
   {id:"quality", t:"คุณภาพข้อมูล", d:"สถานะข้อมูลรายเดือน แหล่งที่ใช้ ส่วนต่างระหว่างไฟล์ และข้อจำกัด"},
 ];
 /* one month selection shared by the month-based pages (overview, platform, earned, top posts) */

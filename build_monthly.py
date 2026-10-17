@@ -11,6 +11,7 @@ from pathlib import Path
 
 import pandas as pd
 
+import brandscan_load as BSL
 import monthly_agg as A
 import monthly_load as L
 
@@ -46,7 +47,8 @@ def build_data(data_dir):
         months=[info[m] for m in months],
         cells=cells, dates=dates, daily=A.build_daily(sel, info, dates),
         top=A.build_top(sel), authors=A.build_authors(sel),
-        quality=dict(overlap=ov.to_dict("records")))
+        quality=dict(overlap=ov.to_dict("records")),
+        brandscan=BSL.load_brandscan(data_dir))
     led = []
     for k, c in cells.items():
         mo, b, p, s = k.split("|")
@@ -70,6 +72,9 @@ def main():
     (HERE / "monthly_data.json").write_text(to_payload(data), encoding="utf-8")
     ledger.to_csv(HERE / "monthly_ledger.csv", index=False, encoding="utf-8-sig")
     ov.to_csv(HERE / "monthly_overlap_report.csv", index=False, encoding="utf-8-sig")
+    if data["brandscan"]:
+        pd.DataFrame(BSL.ledger_rows(data["brandscan"])).to_csv(HERE / "brandscan_ledger.csv", index=False, encoding="utf-8-sig")
+        print("brandscan", data["brandscan"]["folder"], "months", len(data["brandscan"]["score"]["months"]), "sentiment rows", len(data["brandscan"]["sent"]["rows"]))
     print("months", [(m["mo"], m["owned"]["status"], m["earned"]["status"]) for m in data["months"]])
     print("cells", len(data["cells"]), "ledger rows", len(ledger), "overlap rows", len(ov), "dup dropped", data["meta"]["dup_dropped"])
     if list((HERE / "monthly_parts").glob("*")):

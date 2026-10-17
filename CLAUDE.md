@@ -1,6 +1,6 @@
 # MEDCMU Monthly Social Dashboard — CLAUDE.md
 
-> **ก่อนทำอะไร: อ่าน `HANDOFF_2026-10-16.md` (หรือไฟล์ HANDOFF_* ใหม่สุด) แล้วเทียบวันที่ไฟล์กับ `docs/progress.md` ก่อนเชื่อสถานะ**
+> **ก่อนทำอะไร: อ่าน `HANDOFF_2026-10-17.md` (ใหม่สุด) แล้วตามด้วย `HANDOFF_2026-10-16.md` แล้วเทียบวันที่ไฟล์กับ `docs/progress.md` ก่อนเชื่อสถานะ**
 > หมายเหตุ: ไฟล์นี้มีสำเนาใน repo `chagkrit/MEDCMUcorporation` ด้วย แต่โฟลเดอร์ `docs/` และ `tools/` (spec, แผน, ledger, ชุดตรวจบราวเซอร์) **อยู่เฉพาะในโฟลเดอร์ Drive ของโปรเจกต์** (`Social MEDCMU/MEDCMU_Dashboard/`) ไม่อยู่ใน repo/clone
 
 ## งานนี้คืออะไร
@@ -13,7 +13,7 @@ Dashboard รายเดือนเทียบ MEDCMU กับ ศิริ�
 ```bash
 python3 build_monthly.py          # xlsx -> monthly_data.json + monthly_ledger.csv + monthly_overlap_report.csv + index.html
 python3 verify_monthly.py         # นับซ้ำจาก xlsx ดิบด้วยโค้ดแยกอิสระ ต้องได้ "mismatches: 0"
-python3 -m unittest discover -s tests   # 25 เคส (ไม่มี pytest ในเครื่อง)
+python3 -m unittest discover -s tests   # 33 เคส (25 เดิม + 8 ของ Brand Scan) (ไม่มี pytest ในเครื่อง)
 # ชุดตรวจบราวเซอร์ (puppeteer-core): ดู tools/browser_checks/ และหัวข้อ "ตรวจก่อนเผยแพร่" ด้านล่าง
 ```
 `python3 -I` ตัด cwd ออกจาก path → import โมดูลโปรเจกต์ไม่ได้ ห้ามใช้ `-I` กับโค้ดของโปรเจกต์ (ใช้ได้กับสคริปต์ที่อ่านข้อมูลอย่างเดียว)
@@ -22,6 +22,7 @@ python3 -m unittest discover -s tests   # 25 เคส (ไม่มี pytest �
 | ที่ | หน้าที่ |
 |---|---|
 | `monthly_load.py` | อ่าน xlsx 3 ประเภท (Social Metric / Owned / Earned) เป็นตารางโพสต์เดียว; ชื่อคอลัมน์จำเป็นหาย/แบรนด์ไม่รู้จัก/ชีตไม่รู้จัก = ValueError (ตั้งใจ ห้ามทำให้เงียบ) |
+| `brandscan_load.py` | อ่านชุด **Brand Score + Sentiment ที่ดึงผ่าน MCP** จาก `../ZocialEye/mcp_brand_scan_*` (โฟลเดอร์ล่าสุด) → `data["brandscan"]` + `brandscan_ledger.csv`; ตรวจกฎความสอดคล้องแล้ว ValueError (ผลรวมไม่ตรง, สูตร growth ไม่ตรง, ขาด/ซ้ำแถว) |
 | `monthly_agg.py` | เลือกไฟล์ต่อเดือน, สถานะ/ช่วงวันที่, รวมยอด, daily/top/authors, ตารางเทียบไฟล์ทับกัน |
 | `build_monthly.py` | ประกอบทั้งหมด + `to_payload` (JSON ปลอดภัยใน `<script>`: ไม่มี NaN, escape `</`) |
 | `monthly_parts/*` | ชิ้นส่วนโครงหน้า ต่อกันตามลำดับชื่อไฟล์ (01 head/CSS, 02 core, 03 icons, 04 nav, 10–16 หน้า, 99 tail) |
@@ -39,7 +40,8 @@ python3 -m unittest discover -s tests   # 25 เคส (ไม่มี pytest �
 - โพสต์ที่นับ = แถวที่มีข้อความ; engagement = คอลัมน์ Engagement ในไฟล์; สัดส่วน top1/top3 นับเฉพาะโพสต์ที่มีข้อความ
 - ยอดดู KPI = IG + TikTok + YouTube เท่านั้น (Facebook ในไฟล์ Social Metric ไม่มี View; X ไม่มี)
 - ตัวกรองแบรนด์เริ่มต้น = MEDCMU อย่างเดียว; การ์ด "เทียบแบรนด์" หน้าภาพรวมแสดงครบ 4 แบรนด์เสมอ
-- ไม่มี reach/impression/click/ผู้ติดตาม/Sentiment/Brand Score ในไฟล์ชุดนี้ → ไม่แสดง ห้ามเดา
+- ไม่มี reach/impression/click/ผู้ติดตาม ในไฟล์ชุดนี้ → ไม่แสดง ห้ามเดา
+- **Brand Score + Sentiment (แท็บ Brand Scan, เพิ่ม 2026-10-17 ตามคำสั่งผู้ใช้)** มาจาก MCP ไม่ใช่ไฟล์โพสต์ → แหล่งแยก ห้ามรวม/เทียบเป็นตัวเลขเดียวกับ engagement จากไฟล์ · ตัวเลขทุกค่าพิมพ์ลงไฟล์ใน `ZocialEye/mcp_brand_scan_<วันที่ดึง>/` (csv+json) แล้ว build อ่านจากไฟล์ ห้ามแก้ตัวเลขใน payload · ต้องแสดง n คู่กับ % เสมอ, n < 30 ติด ⚠, n = 0 = “ไม่มีข้อมูล” (ห้ามเป็น 0%), Sentiment Score (ดัชนีใน Brand Score ~44) ≠ สัดส่วนบวก/กลาง/ลบ, คะแนนรายแพลตฟอร์มมีเฉพาะเดือนล่าสุด, เดือนที่ยังไม่ปิดไม่มี Brand Score (ช่องว่าง) · สูตร Brand Score ไม่เปิดเผยและเพิ่มขึ้นแทบทุกเดือน → เทียบระหว่างแบรนด์ในเดือนเดียวกัน ห้ามอ่าน MoM เป็นผลงาน
 
 ## ข้อระวัง / จุดที่จะผิดพลาดได้ (เจอจริงในงานนี้)
 **ข้อมูล**
@@ -70,6 +72,14 @@ python3 -m unittest discover -s tests   # 25 เคส (ไม่มี pytest �
 21. repo สาธารณะ: ห้ามมี xlsx, `.env*`, `.vercel` (อยู่ใน .gitignore) · `CLAUDE.md`/`HANDOFF_*` ขึ้น repo ได้ (ตรวจ 2026-10-16: ไม่มี path ในเครื่อง/ความลับ — ก่อน commit ครั้งใหม่ต้อง `grep -nE "/Users/|GoogleDrive|@gmail|gho_|password=[^$\"]"` ซ้ำ) แต่ `docs/` และ `tools/` อยู่ในโฟลเดอร์ Drive เท่านั้น ห้ามสมมติว่ามีใน clone · repo มี `monthly_data.json` (ข้อความโพสต์/ชื่อผู้โพสต์สาธารณะ — เหมือนที่ฝังใน index.html อยู่แล้ว)
 22. **ห้าม push/deploy จนกว่าผู้ใช้สั่ง** (เว็บสาธารณะที่ใช้งานอยู่) การอนุมัติรอบหนึ่งไม่ครอบคลุมรอบถัดไป
 
+## ขั้นตอนดึง Brand Score + Sentiment ผ่าน MCP (ทำทุกครั้งที่เดือนปิด/มีเดือนใหม่)
+MCP `zocialeye` (โหลดสคีมาด้วย ToolSearch ก่อน; ตรวจ `zocialeye_status` ว่าไม่ติด cooldown) · พารามิเตอร์ส่งเป็นอ็อบเจ็กต์ใน `params`; แบรนด์ใช้ alias `MEDCMU, SI, CU, Smitivej`
+1. **Brand Score:** `zocialeye_get_brand_score` {brands:[4 แบรนด์], include_timeline:true, response_format:"json"} → timeline ม.ค.–เดือนล่าสุด (score/own/earn/sentiment_score) + growth % + คะแนนรายแพลตฟอร์ม **เฉพาะเดือนล่าสุด** (ย้อนเดือนอื่นต้องส่ง `month` ทีละเดือน) · เดือนที่ยังไม่ปิดจะไม่มีค่า (ห้ามเติม)
+2. **Sentiment:** `zocialeye_get_sentiment` {brands, platform: facebook|instagram|twitter|youtube|tiktok, start_date, end_date, response_format:"json"} **ต้องเรียกแยกทีละแพลตฟอร์ม × ช่วงเวลา** (4 แบรนด์ต่อครั้ง) · ย้อนได้ ~92 วัน (ถ้าเกินจะ error บอกวันที่เริ่มได้เร็วสุด) · ช่วงเดือนปัจจุบันให้ตัดที่ "วันก่อนวันส่งออกไฟล์ Earned" (G−1) เพื่อให้ตรงหน้า Earned · ผลคืนเป็น positive/neutral/negative/total (total=0 มาพร้อม pct=0 = ไม่มีข้อมูล)
+3. **บันทึกลงโฟลเดอร์** `../ZocialEye/mcp_brand_scan_<วันที่ดึง>/` (ชื่อตามวันที่ เพราะ loader เลือกโฟลเดอร์ที่ชื่อมากสุด) 4 ไฟล์: `brand_score_timeline.csv` (brand,month,brand_score,owned_score,earned_score,sentiment_score), `brand_score_*.json` (growth + per-platform + `pulled`), `sentiment_earned_by_platform.csv` (brand,platform,period_start,period_end,positive,neutral,negative,total), `sentiment_earned_*.json` · แม่แบบสคริปต์บันทึก: `tools/save_mcp_brandscan_2026-10-17.py` (ตัวเลขที่พิมพ์จาก output MCP ฝังในสคริปต์ มีตรวจ pos+neu+neg=total ในตัว) · **ห้ามค่าที่ไม่ได้มาจาก MCP ปะปน**
+4. **ตรวจก่อนเชื่อ (ข้อ 24):** ผลรวมนับ, growth identity (build ตรวจให้), เทียบเดือนเก่ากับไฟล์ `MEDCMU DATA 2026/Brand_Score_Jan-Sep2026.xlsx`, เทียบจำนวนโพสต์ Earned กับ Earned export (ส่วนต่างเล็กน้อย/เดือนล่าสุดสูงกว่า = ปกติ ต้องเขียนลงหน้า Quality ลงวันที่)
+5. `python3 -m unittest discover -s tests` → `python3 build_monthly.py` (ต้องเห็นบรรทัด `brandscan <โฟลเดอร์> ...`) → `python3 verify_monthly.py` (`mismatches: 0`, `brandscan values: N`) → `node run4.mjs` → อ่านภาพ → ถามผู้ใช้ก่อน push
+
 ## ตรวจก่อนเผยแพร่ (ทุกครั้งที่ข้อมูล/โค้ดเปลี่ยน)
 1. `python3 -m unittest discover -s tests` → OK
 2. `python3 build_monthly.py` แล้วอ่านบรรทัด `months [...]` ว่าสถานะ/ไฟล์ต่อเดือนถูกต้อง (ดูข้อ 3 ด้านบน)
@@ -87,3 +97,6 @@ python3 -m unittest discover -s tests   # 25 เคส (ไม่มี pytest �
 - ผู้ใช้ตอบสั้นๆ (ไทย/อังกฤษปน) ถามให้น้อยที่สุด แต่ตัดสินใจที่เปลี่ยนตัวเลขหรือเผยแพร่ ต้องบอกผลก่อน/หลังชัดเจน
 - รายงานตามจริง: ตัวเลขที่เปลี่ยนจากที่เคยเผยแพร่ ต้องบอก (เช่น MEDCMU ก.ย. MoM +92.6% → +75.7% หลังคำนวณ YouTube)
 - ทุกงานจบ: อัปเดต `docs/progress.md`, `HANDOFF_*.md` (ฉบับใหม่ลงวันที่) และ memory (`project_medcmu_social_strategy.md`)
+23. **MCP ย้อนหลังได้ราว 92 วันเท่านั้น** (เริ่ม 17 ก.ค. เมื่อดึง 17 ต.ค.) → sentiment ก.ค. = 17–31 · ช่วง ต.ค. ต้องตัดที่ 1–15 ให้ตรงกับ Earned export (กฎ G−1) · Brand Score ย้อนได้ครบตั้งแต่ ม.ค. (timeline) · ตัวเลข API ต.ค. สูงกว่าไฟล์ export เพราะดึงหลังส่งออก (ไม่ใช่ข้อผิดพลาด) · MCP ส่ง `total=0` พร้อม `pct=0` ต้องแสดงเป็นไม่มีข้อมูล
+24. ตัวเลข Brand Scan ในโฟลเดอร์พิมพ์ลงมือจาก output MCP → ทุกครั้งที่ดึงใหม่ต้องผ่าน 3 ด่านก่อนเชื่อ: ผลรวม pos+neu+neg=total, สูตร growth เทียบเดือนก่อน (build ตรวจให้), เทียบ Jan–Aug กับไฟล์ `MEDCMU DATA 2026/Brand_Score_Jan-Sep2026.xlsx` · ถ้า build/ทดสอบล้ม **ห้ามผ่อนกฎ** ให้ตรวจไฟล์ก่อน
+25. ชุดตรวจ `run4.mjs` (แท็บ Brand Scan) ต้องรันด้วย `node run4.mjs index.html brandscan_ledger.csv OUTDIR`; `tamper.py` คัดลอก `brandscan_ledger.csv` ไปไว้ข้าง ledger ปลอม (verifier อ่านจากโฟลเดอร์เดียวกับ ledger)
