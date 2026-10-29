@@ -56,7 +56,7 @@ function heatmap(mo, sc, m){
     ALL.map((b, i) => `<tr><td>${bdot(b)}${esc(bname(b))}</td>${vals[i].map((v, j) => {
       if (v == null) return `<td class="na">${NA}</td>`;
       const t = mx[j] > 0 ? v / mx[j] : 0;
-      return `<td style="background:color-mix(in srgb,#a855f7 ${Math.round(10 + 70 * t)}%,transparent);${t > .55 ? "color:#fff" : ""}">${HMM[m].f(v)}</td>`; }).join("")}</tr>`).join("") + `</tbody></table></div>`;
+      return `<td style="background:color-mix(in srgb,#14989d ${Math.round(10 + 70 * t)}%,transparent);${t > .55 ? "color:#fff" : ""}">${HMM[m].f(v)}</td>`; }).join("")}</tr>`).join("") + `</tbody></table></div>`;
 }
 function ranking(mo, sc){
   const pairs = [];
@@ -68,7 +68,7 @@ function ranking(mo, sc){
         <td class="l"><span class="rbar" style="width:${mx > 0 ? Math.max(3, Math.round(80 * r.c.mean / mx)) : 3}px"></span>${fmt1(r.c.mean)}</td></tr>`).join("") + `</tbody></table></div>`
     : `<p class="sub">${NA} (ต้องมีคู่แบรนด์ × แพลตฟอร์มที่มีอย่างน้อย 5 โพสต์มากกว่า 5 คู่)</p>`;
   const sub = `engagement เฉลี่ยต่อโพสต์ (เฉพาะโพสต์ที่มีข้อความ) · เฉพาะคู่ที่มีอย่างน้อย 5 โพสต์ · ผู้ชมแต่ละแพลตฟอร์มต่างกัน เทียบข้ามแพลตฟอร์มด้วยความระวัง`;
-  return `<div class="grid g2"><figure class="card"><h3 class="rk-h"><span style="color:#a78bfa">${ICON.trend.replace("<svg", '<svg width="18" height="18" style="stroke:currentColor;fill:none;stroke-width:2"')}</span>Top 5 · แบรนด์ × แพลตฟอร์ม</h3><p class="sub">${sub}</p>${tb("oRkT", top)}</figure>
+  return `<div class="grid g2"><figure class="card"><h3 class="rk-h"><span style="color:var(--accent-2)">${ICON.trend.replace("<svg", '<svg width="18" height="18" style="stroke:currentColor;fill:none;stroke-width:2"')}</span>Top 5 · แบรนด์ × แพลตฟอร์ม</h3><p class="sub">${sub}</p>${tb("oRkT", top)}</figure>
     <figure class="card"><h3 class="rk-h"><span style="color:#d97706">${ICON.alert.replace("<svg", '<svg width="18" height="18" style="stroke:currentColor;fill:none;stroke-width:2"')}</span>5 อันดับท้าย · แบรนด์ × แพลตฟอร์ม</h3><p class="sub">${sub} · ไม่ซ้ำกับ Top 5</p>${tb("oRkB", bot)}</figure></div>`;
 }
 function rOverview(p){

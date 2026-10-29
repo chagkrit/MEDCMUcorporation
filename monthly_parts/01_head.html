@@ -4,44 +4,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MEDCMU Social Monthly</title>
-<meta name="theme-color" content="#070b16">
+<meta name="theme-color" content="#04110c">
 <script>try{var __t=localStorage.getItem("medcmu-theme");document.documentElement.dataset.theme=__t==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%271%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%237c3aed%27/%3E%3Cstop offset=%271%27 stop-color=%27%23c026d3%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27url(%23g)%27/%3E%3Cpath d=%27M7 22V10l9 8 9-8v12%27 stroke=%27white%27 stroke-width=%273%27 fill=%27none%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%271%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%23007a33%27/%3E%3Cstop offset=%271%27 stop-color=%27%231fa5aa%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27url(%23g)%27/%3E%3Cpath d=%27M7 22V10l9 8 9-8v12%27 stroke=%27white%27 stroke-width=%273%27 fill=%27none%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ===== MEDCMU Social Dashboard · visual system (executive glass, 2026-10-29) =====
-   Dark glass cards on a soft violet/fuchsia glow. The four --b-* brand colours are DATA semantics
-   (one per brand across every chart/table) — never reuse them for UI chrome; chrome uses violet/fuchsia only. */
+/* ===== MEDCMU Social Dashboard · visual system (executive glass 2026-10-29; Faculty 67th-anniversary palette: green→teal, gold accent) =====
+   Dark glass cards on a soft green/teal glow. The four --b-* brand colours are DATA semantics
+   (one per brand across every chart/table) — never reuse them for UI chrome; chrome uses faculty green/teal + torch gold; CU data colour moved to pink so it cannot be read as chrome green. */
 :root{
   color-scheme:light;
-  --page:#eef1f8; --surface:#ffffff; --surface-2:#f2f3fa; --border:rgba(15,23,42,.10); --grid:rgba(15,23,42,.07);
+  --page:#eef5f1; --surface:#ffffff; --surface-2:#eef6f2; --border:rgba(15,23,42,.10); --grid:rgba(15,23,42,.07);
   --glass:rgba(255,255,255,.74);
   --text-1:#0f172a; --text-2:#475569; --text-3:#5b6678;
-  --b-MEDCMU:#2a78d6; --b-SI:#eb6834; --b-CU:#1baf7a; --b-SMV:#eda100;
+  --b-MEDCMU:#0b8a3e; --b-SI:#eb6834; --b-CU:#d6408a; --b-SMV:#eda100;
   --pos:#2a78d6; --neu:#b9b8b2; --neg:#e34948;
-  --side:#ffffff; --accent:#6d28d9; --accent-solid:#7c3aed; --accent-2:#c026d3;
-  --grad:linear-gradient(100deg,#6d28d9 0%,#a21caf 55%,#db2777 100%);
-  --orb1:#a78bfa; --orb2:#f0abfc; --orb3:#818cf8;
+  --side:#ffffff; --accent:#00692c; --accent-solid:#007a33; --accent-2:#1a9ea3;
+  --grad:linear-gradient(100deg,#00461a 0%,#007a33 45%,#1a9ea3 100%);
+  --orb1:#4cc27f; --orb2:#5cc9cc; --orb3:#f7c76a;
   --warn-bg:#fdf3dc; --warn-text:#6b4a00;
   --shadow:0 10px 40px -18px rgba(15,23,42,.25);
-  --bar:rgba(238,241,248,.80);
+  --bar:rgba(238,245,241,.80);
   --r:18px; --r-sm:10px;
   --fz:15px;
 }
 /* dark tokens: set on <html data-theme="dark"> by the inline script in <head> (default) and by the toggle */
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --page:#070b16; --side:#0b1222; --surface:#0f1627; --surface-2:#161e33; --border:rgba(255,255,255,.09); --grid:rgba(255,255,255,.06);
+  --page:#04110c; --side:#071a12; --surface:#0b1d16; --surface-2:#12291f; --border:rgba(255,255,255,.09); --grid:rgba(255,255,255,.06);
   --glass:rgba(255,255,255,.045);
   --text-1:#e9edf6; --text-2:#a3afc6; --text-3:#8b98b3;
-  --b-MEDCMU:#3987e5; --b-SI:#d95926; --b-CU:#199e70; --b-SMV:#c98500;
+  --b-MEDCMU:#2fb565; --b-SI:#d95926; --b-CU:#e0609d; --b-SMV:#c98500;
   --pos:#3987e5; --neu:#6b6a65; --neg:#e66767;
-  --accent:#c4b5fd; --accent-solid:#7c3aed; --accent-2:#e879f9;
-  --grad:linear-gradient(100deg,#a78bfa 0%,#e879f9 55%,#f9a8d4 100%);
-  --orb1:#7c3aed; --orb2:#c026d3; --orb3:#4338ca;
+  --accent:#7ee0a8; --accent-solid:#0a8f42; --accent-2:#3cc6c0;
+  --grad:linear-gradient(100deg,#3fcf7f 0%,#2bbfb8 60%,#9ee6dc 100%);
+  --orb1:#007a33; --orb2:#1a8f94; --orb3:#8a5a00;
   --warn-bg:#2b2410; --warn-text:#f1d58a;
-  --shadow:0 20px 60px -25px rgba(0,0,0,.8); --bar:rgba(7,11,22,.72);
+  --shadow:0 20px 60px -25px rgba(0,0,0,.8); --bar:rgba(4,17,12,.74);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:130px}
@@ -80,7 +80,7 @@ section.panel{padding-top:2px}
 .seg button:last-child{border-right:0}
 .seg button:hover:not(.on){background:var(--surface-2);color:var(--text-1)}
 .seg button.on{background:var(--grad);color:#fff;font-weight:600}
-:root[data-theme="dark"] .seg button.on{color:#1a0b2e}
+:root[data-theme="dark"] .seg button.on{color:#03241a}
 select{font:inherit;font-size:13px;color:var(--text-1);background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r-sm);padding:6px 8px;max-width:100%}
 select:hover{border-color:var(--text-3)}
@@ -160,8 +160,8 @@ footer{color:var(--text-3);font-size:12px;margin-top:30px;padding-top:14px;borde
   border-bottom:1px solid var(--border)}
 .tb-row{display:flex;align-items:center;gap:12px 18px;padding:12px 32px 8px;max-width:1680px;margin:0 auto}
 .logo{display:flex;align-items:center;gap:12px;min-width:0}
-.logo-mark{flex:0 0 40px;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#c026d3);display:grid;place-items:center;
-  box-shadow:0 8px 24px -8px rgba(192,38,211,.6)}
+.logo-mark{flex:0 0 40px;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#00461a,#007a33 45%,#1fa5aa);display:grid;place-items:center;
+  box-shadow:0 8px 24px -8px rgba(0,122,51,.6)}
 .logo-mark svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .logo-t{font-size:18px;font-weight:700;letter-spacing:.1px;line-height:1.15}
 .logo-s{font-size:11.5px;color:var(--text-3);margin-top:2px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -171,8 +171,8 @@ footer{color:var(--text-3);font-size:12px;margin-top:30px;padding-top:14px;borde
 .nav-item{position:relative;flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;font:inherit;font-size:13.5px;font-weight:500;color:var(--text-2);
   background:var(--glass);border:1px solid var(--border);border-radius:999px;padding:7px 14px}
 .nav-item:hover{color:var(--text-1);border-color:color-mix(in srgb,var(--accent-solid) 45%,transparent)}
-.nav-item[aria-current="page"]{color:#fff;font-weight:600;background:var(--grad);border-color:transparent;box-shadow:0 8px 22px -10px rgba(168,85,247,.8)}
-:root[data-theme="dark"] .nav-item[aria-current="page"]{color:#1a0b2e}
+.nav-item[aria-current="page"]{color:#fff;font-weight:600;background:var(--grad);border-color:transparent;box-shadow:0 8px 22px -10px rgba(31,165,170,.8)}
+:root[data-theme="dark"] .nav-item[aria-current="page"]{color:#03241a}
 .nav-item svg{width:16px;height:16px;flex:0 0 16px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .nav-item .mono{width:16px;height:16px;flex:0 0 16px;border-radius:5px;background:var(--surface-2);border:1px solid var(--border);
   font-size:9px;font-weight:700;display:grid;place-items:center;color:var(--text-2)}
@@ -183,7 +183,7 @@ footer{color:var(--text-3);font-size:12px;margin-top:30px;padding-top:14px;borde
 header.top{padding:26px 0 18px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;justify-content:space-between}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-2);background:var(--glass);border:1px solid var(--border);
   border-radius:999px;padding:4px 12px 4px 8px;margin-bottom:12px}
-.eyebrow .live{width:8px;height:8px;border-radius:50%;background:#a78bfa;box-shadow:0 0 0 4px color-mix(in srgb,#a78bfa 25%,transparent)}
+.eyebrow .live{width:8px;height:8px;border-radius:50%;background:#f59e0b;box-shadow:0 0 0 4px color-mix(in srgb,#f59e0b 25%,transparent)}
 h1{font-size:40px;margin:0;font-weight:800;letter-spacing:-.5px;line-height:1.2;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
   padding-bottom:2px}
 @supports not ((-webkit-background-clip:text) or (background-clip:text)){h1{color:var(--accent)}}
@@ -191,12 +191,12 @@ header.top .sub{font-size:15px;margin-top:8px}
 .hright{display:flex;gap:8px;align-items:center;margin-left:auto;flex:0 0 auto}
 .period{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:500;color:var(--text-2);background:var(--glass);
   border:1px solid var(--border);border-radius:999px;padding:6px 12px;white-space:nowrap}
-.period::before{content:"";width:7px;height:7px;border-radius:50%;background:#a78bfa}
+.period::before{content:"";width:7px;height:7px;border-radius:50%;background:#f59e0b}
 .iconbtn{width:38px;height:38px;display:grid;place-items:center;color:var(--text-2);background:var(--glass);border:1px solid var(--border);border-radius:12px;padding:0}
 .iconbtn:hover{color:var(--text-1);border-color:color-mix(in srgb,var(--accent-solid) 45%,transparent)}
 .iconbtn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .tbtn2{display:inline-flex;align-items:center;gap:7px;height:38px;font:inherit;font-size:13px;font-weight:600;color:#fff;border:0;border-radius:12px;padding:0 14px;
-  background:linear-gradient(135deg,#7c3aed,#c026d3);box-shadow:0 8px 24px -10px rgba(192,38,211,.8)}
+  background:linear-gradient(135deg,#00461a,#007a33 45%,#1fa5aa);box-shadow:0 8px 24px -10px rgba(0,122,51,.8)}
 .tbtn2 svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .tbtn2:hover{filter:brightness(1.08)}
 .filterbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin:0 0 20px;padding:12px 16px;
@@ -218,12 +218,12 @@ header.top .sub{font-size:15px;margin-top:8px}
 .g21{display:grid;gap:14px;grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
 @media (max-width:1100px){.g21{grid-template-columns:minmax(0,1fr)}}
 .ins h3{display:flex;align-items:center;gap:8px}
-.ins h3 svg{width:18px;height:18px;stroke:#c084fc;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ins h3 svg{width:18px;height:18px;stroke:#f59e0b;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .ins ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
 .ins li{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.55;color:var(--text-2);background:color-mix(in srgb,var(--surface-2) 55%,transparent);
   border:1px solid var(--border);border-radius:14px;padding:11px 13px}
 .ins li b{color:var(--text-1);font-weight:600}
-.ins li .ii{flex:0 0 30px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,#a78bfa 18%,transparent);color:#a78bfa}
+.ins li .ii{flex:0 0 30px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,#1fa5aa 18%,transparent);color:#1a9ea3}
 .ins li.warn .ii{background:color-mix(in srgb,#fbbf24 18%,transparent);color:#d97706}
 .ins li .ii svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 table.hm{border-collapse:separate;border-spacing:4px;font-size:13px}
