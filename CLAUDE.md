@@ -1,6 +1,6 @@
 # MEDCMU Monthly Social Dashboard — CLAUDE.md
 
-> **ก่อนทำอะไร: อ่าน `HANDOFF_2026-10-17.md` (ใหม่สุด) แล้วตามด้วย `HANDOFF_2026-10-16.md` แล้วเทียบวันที่ไฟล์กับ `docs/progress.md` ก่อนเชื่อสถานะ**
+> **ก่อนทำอะไร: อ่าน `HANDOFF_2026-10-29.md` (ใหม่สุด: redesign หน้าตา) แล้วตามด้วย `HANDOFF_2026-10-17.md` และ `HANDOFF_2026-10-16.md` แล้วเทียบวันที่ไฟล์กับ `docs/progress.md` ก่อนเชื่อสถานะ**
 > หมายเหตุ: ไฟล์นี้มีสำเนาใน repo `chagkrit/MEDCMUcorporation` ด้วย แต่โฟลเดอร์ `docs/` และ `tools/` (spec, แผน, ledger, ชุดตรวจบราวเซอร์) **อยู่เฉพาะในโฟลเดอร์ Drive ของโปรเจกต์** (`Social MEDCMU/MEDCMU_Dashboard/`) ไม่อยู่ใน repo/clone
 
 ## งานนี้คืออะไร
@@ -28,7 +28,7 @@ python3 -m unittest discover -s tests   # 37 เคส (25 เดิม + 12 ข
 | `monthly_parts/*` | ชิ้นส่วนโครงหน้า ต่อกันตามลำดับชื่อไฟล์ (01 head/CSS, 02 core, 03 icons, 04 nav, 10–16 หน้า, 99 tail) |
 | `verify_monthly.py` | ตัวตรวจอิสระ (ไม่ import จากโมดูลอื่น) |
 | `tests/test_monthly.py` | unit test |
-| `tools/browser_checks/` | `run.mjs` (56 ภาพ + คลิกทุกปุ่ม + เทียบ ledger), `run2.mjs`, `run3.mjs` (เช็กเฉพาะจุด), `live.mjs` (ตรวจเว็บจริง), `tamper.py` (พิสูจน์ว่าตัวตรวจจับข้อมูลผิดได้) |
+| `tools/browser_checks/` | `run.mjs` (56 ภาพ + คลิกทุกปุ่ม + เทียบ ledger), `run2.mjs`, `run3.mjs` (เช็กเฉพาะจุด), `run5.mjs` (heatmap/อันดับ/Key Insights หน้าภาพรวม เทียบ ledger: `node run5.mjs index.html monthly_ledger.csv`), `live.mjs` (ตรวจเว็บจริง), `tamper.py DASH TMPDIR` (พิสูจน์ว่าตัวตรวจจับข้อมูลผิดได้) · ไม่มี node_modules ในโฟลเดอร์ Drive: คัดลอก .mjs ไปโฟลเดอร์ที่ `npm i puppeteer-core@23` แล้วรันด้วย path เต็ม |
 | `archive/q3_2026-10-05/` | dashboard Q3 เดิมทั้งชุด (ย้อนกลับได้) · `build_dashboard.py`/`dashboard_template.html` ที่ราก = ตัวสร้าง Q3 เก็บอ้างอิง **ห้ามใช้สร้างเวอร์ชันนี้** |
 | `docs/` | spec, แผน, `progress.md` (ledger: ทุก `Ruling:` คือการตัดสินใจที่ทำแทนผู้ใช้) |
 
@@ -89,6 +89,12 @@ MCP `zocialeye` (โหลดสคีมาด้วย ToolSearch ก่อน
 5. **อ่านภาพจริง** (อย่าดูแค่ตัวเลข): overview/monthly/quality ที่ 375 และ 1440
 6. ไฟล์ใหม่ที่ทำให้ตัวตรวจเปลี่ยน → เขียนเทสต์ให้ล้มก่อนแล้วค่อยแก้ (TDD) และ `tamper.py` ต้องจับได้ทุกเคส (exit=1) ส่วน untampered = 0
 7. หลังเผยแพร่ `node live.mjs` + `curl | cmp`
+
+## หน้าตา (redesign 2026-10-29 ตามต้นแบบ excel-hazel-chi.vercel.app ที่ผู้ใช้เลือก)
+- แถบบน (โลโก้ + ปุ่ม PDF/ธีม/นำเสนอ) + แท็บแนวนอน `#nav` (เลื่อนในแถบ), หัวข้อไล่สี, การ์ดกระจก, ออร์บพื้นหลัง (`.bg-fx`), ฟอนต์ Prompt (Google Fonts; ออฟไลน์ใช้ฟอนต์ไทยของเครื่อง)
+- **สีตกแต่งใช้ม่วง/บานเย็นเท่านั้น** (`--grad`, `--accent*`, `--orb*`) ห้ามใช้ส้ม/เขียว/เหลือง/น้ำเงิน เพราะชนสีแบรนด์ข้อมูล `--b-*`
+- หน้าภาพรวมเพิ่ม: sparkline ในการ์ด KPI (เดือนไม่มีข้อมูล = ช่องว่าง, เดือนบางส่วน/เปลี่ยนประเภทไฟล์ = จุดกลวง+เส้นประ), Key Insights (คำนวณตอนรัน ลูกศรผ่าน `momOf()` เท่านั้น), Heatmap แบรนด์×แพลตฟอร์ม (สีเทียบภายในคอลัมน์), Top 5 / 5 อันดับท้าย คู่แบรนด์×แพลตฟอร์ม ตามเฉลี่ย/โพสต์ ขั้นต่ำ 5 โพสต์ (ผู้ใช้เลือก — ห้ามทำ Bottom 5 รายโพสต์)
+- สัญญากับชุดตรวจ: แถว KPI ต้องเป็น `.grid.g4` แรกในหน้าภาพรวม และ `.kpi2 .kv` ลำดับที่ 2 = engagement MEDCMU (run.mjs อ่าน) · ห้ามมี ▲/▼ ใน hnote/sparkline · หน้าเดิมสำรองที่ `archive/pre_redesign_2026-10-29/`
 
 ## ยังไม่ได้ตรวจ (อย่าอ้างว่าตรวจแล้ว)
 การพิมพ์/บันทึก PDF จริง · โหมดเต็มจอจริง (Fullscreen API) · อุปกรณ์สัมผัสจริง (ใช้แค่การจำลองหน้าจอ) · ความครบของ Earned ใน Brand Scan (สถานะ "ครบเดือน" มาจาก Timeframe ในไฟล์เท่านั้น)

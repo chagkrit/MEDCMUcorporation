@@ -25,8 +25,8 @@ function setTab(id, plat){
   document.querySelectorAll(".nav-item").forEach(b => { const on = b.dataset.id === id; on ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"); });
   history.replaceState(null, "", "#" + id);
   render();
-  const cur = document.querySelector('.nav-item[aria-current="page"]');
-  if (cur && matchMedia("(max-width:900px)").matches) cur.scrollIntoView({block:"nearest", inline:"center"});
+  const cur = document.querySelector('.nav-item[aria-current="page"]'), nv = $("#nav");   /* keep the active tab visible in the scrolling tab strip */
+  if (cur && nv.scrollWidth > nv.clientWidth) nv.scrollLeft = Math.max(0, cur.offsetLeft - (nv.clientWidth - cur.offsetWidth) / 2);
 }
 function init(){
   renderChips();
@@ -48,8 +48,11 @@ function init(){
   const th = safeGet("medcmu-theme"); document.documentElement.dataset.theme = th === "light" ? "light" : "dark";
   $("#themeBtn").onclick = () => { const nx = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; document.documentElement.dataset.theme = nx; safeSet("medcmu-theme", nx); render(); };
   $("#periodBadge").textContent = periodTxt;
+  const lastD = D.dates[D.dates.length - 1];
+  $("#heroDate").textContent = `Executive Briefing · ข้อมูลโพสต์ถึง ${+lastD.slice(8)} ${THM[+lastD.slice(5, 7) - 1]} ${lastD.slice(0, 4)}`;
+  $("#printBtn").onclick = () => window.print();
   Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
-  /* presentation mode: hides the sidebar, enlarges type, ←/→ step through the pages, Esc leaves */
+  /* presentation mode: hides the tab strip, enlarges type, ←/→ step through the pages, Esc leaves */
   const pb = $("#presentBtn"), tabIds = TABS.map(t => t.id);
   const setPresent = on => { document.body.classList.toggle("present", on); pb.setAttribute("aria-pressed", on); setTimeout(render, 60); };
   pb.onclick = () => {
