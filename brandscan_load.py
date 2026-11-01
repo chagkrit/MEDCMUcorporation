@@ -108,8 +108,38 @@ def load_brandscan(data_dir):
 
     return dict(
         folder=d.name, pulled=js.get("pulled"),
-        score=dict(months=months, vals=vals, latest=latest, prev=prev, growth=growth, platform=plat),
+        score=dict(months=months, vals=vals, latest=latest, prev=prev, growth=growth, platform=plat,
+                   forecast=forecast(vals, months)),
         sent=dict(periods=[dict(start=s, end=e) for s, e in periods], rows=rows))
+
+
+# ---- forecast of the next, not-yet-published month (owner request 2026-11-01: show it labelled "คาดการณ์") ----
+# NOT a Brand Scan number. Method: Owned and Earned each move by the min / mean / max of their last FC_WINDOW
+# month-to-month changes; Brand = W_OWN * Owned + W_EARN * Earned (structure decoded from Jan-Sep 2026: max error 0.8).
+# Sentiment Score is not forecast. Replaced automatically once the official month is saved (it then forecasts the month after).
+FC_WINDOW = 3
+W_OWN, W_EARN = 0.65, 0.35
+
+
+def next_month(mo):
+    y, m = map(int, mo.split("-"))
+    return f"{y + 1}-01" if m == 12 else f"{y}-{m + 1:02d}"
+
+
+def forecast(vals, months):
+    if len(months) < FC_WINDOW + 1:
+        return None
+    win = months[-(FC_WINDOW + 1):]
+    out = {}
+    for b in BRANDS:
+        last = vals[b][months[-1]]
+        res = {}
+        for name, f in (("low", min), ("mid", lambda xs: sum(xs) / len(xs)), ("high", max)):
+            own = last[1] + f([vals[b][win[i + 1]][1] - vals[b][win[i]][1] for i in range(FC_WINDOW)])
+            earn = last[2] + f([vals[b][win[i + 1]][2] - vals[b][win[i]][2] for i in range(FC_WINDOW)])
+            res[name] = [round(W_OWN * own + W_EARN * earn, 1), round(own, 1), round(earn, 1)]
+        out[b] = res
+    return dict(month=next_month(months[-1]), base=months[-1], window=[win[0], win[-1]], w=[W_OWN, W_EARN], vals=out)
 
 
 def ledger_rows(bs):

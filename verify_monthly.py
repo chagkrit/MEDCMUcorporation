@@ -317,6 +317,26 @@ def main(data_dir, ledger_path, data_path):
                     bad.append(("brandscan ledger sentiment", r["brand"], r["platform"], per))
         if len(led_bs) != 4 * len(tl) + 2 * len(pm) + 4 * len(sr):
             bad.append(("brandscan ledger row count", len(led_bs), None, None))
+        # forecast of the next month (shown as คาดการณ์): recompute from the timeline csv with its own code
+        tv = {}
+        for r in tl:
+            tv.setdefault(r["brand"], {})[r["month"]] = (float(r["owned_score"]), float(r["earned_score"]))
+        mos = sorted(next(iter(tv.values())))
+        fc = bs["score"].get("forecast")
+        if len(mos) >= 4:
+            y, m = map(int, mos[-1].split("-")); nm = f"{y + 1}-01" if m == 12 else f"{y}-{m + 1:02d}"
+            if not fc or fc["month"] != nm or nm in bs["score"]["vals"].get("MEDCMU", {}):
+                bad.append(("brandscan forecast month", nm, fc and fc["month"], None))
+            else:
+                for br, per in tv.items():
+                    w = mos[-4:]
+                    do = [per[w[i + 1]][0] - per[w[i]][0] for i in range(3)]; de = [per[w[i + 1]][1] - per[w[i]][1] for i in range(3)]
+                    for k, fo, fe in (("low", min(do), min(de)), ("mid", sum(do) / 3, sum(de) / 3), ("high", max(do), max(de))):
+                        o, e = per[mos[-1]][0] + fo, per[mos[-1]][1] + fe
+                        exp = [0.65 * o + 0.35 * e, o, e]; got = fc["vals"].get(br, {}).get(k)
+                        n_bs += 3
+                        if got is None or any(abs(x - y) > 0.051 for x, y in zip(got, exp)):
+                            bad.append(("brandscan forecast " + br + " " + k, exp, got, None))
 
     print(f"recounted cells: {len(agg)}; ledger cells: {len(cells)}; ledger values compared: {len(agg) * len(METRICS)} (+ every ledger row's source label); "
           f"months: {len(data['months'])}; daily series: {len(data['daily'])}; top-post groups: {len(top_exp)}; author groups: {len(au_exp)}; overlap groups: {len(ov_exp)}; brandscan values: {n_bs}; mismatches: {len(bad)}")

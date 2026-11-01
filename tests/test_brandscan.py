@@ -107,6 +107,24 @@ class BrandScanLoad(unittest.TestCase):
         self.assertEqual(sum(1 for r in led if r["kind"] == "score_platform"), 4 * n_months * 5 * 2)
         self.assertEqual(sum(1 for r in led if r["kind"] == "sentiment"), 4 * 5 * n_per * 4)
 
+    def test_forecast_next_month(self):
+        """Forecast (labelled คาดการณ์ in the UI) = last month + min/mean/max of last 3 Owned/Earned changes, Brand = .65 Own + .35 Earn."""
+        bs = B.load_brandscan(REAL); sc = bs["score"]; fc = sc["forecast"]
+        self.assertEqual(fc["month"], B.next_month(sc["latest"]))
+        self.assertNotIn(fc["month"], sc["months"])          # never mixed into the official months
+        for b in B.BRANDS:
+            lo, mid, hi = (fc["vals"][b][k] for k in ("low", "mid", "high"))
+            self.assertLessEqual(lo[0], mid[0]); self.assertLessEqual(mid[0], hi[0])
+            self.assertLessEqual(abs(mid[0] - (0.65 * mid[1] + 0.35 * mid[2])), 0.06)   # components are stored at 1 dp
+        if sc["latest"] == "2026-09":                          # hand-checked numbers for the Sep-based forecast
+            self.assertEqual(fc["vals"]["MEDCMU"]["mid"], [247.0, 291.7, 164.0])
+            self.assertEqual(fc["vals"]["CU"]["mid"][0], 209.4)
+
+    def test_forecast_not_in_ledger(self):
+        bs = B.load_brandscan(REAL)
+        fm = bs["score"]["forecast"]["month"]
+        self.assertFalse(any(r["period"] == fm for r in B.ledger_rows(bs)))
+
 
 if __name__ == "__main__":
     unittest.main()

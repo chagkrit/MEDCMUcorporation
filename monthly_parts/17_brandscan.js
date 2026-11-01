@@ -22,9 +22,12 @@ function rBrandScan(p){
   const st = S.brandscan, sc = BS.score, lt = sc.latest, pv = sc.prev, mi = +st.metric, pi = +st.per, pl = st.plat, scope = st.pscope, pmo = sc.months.includes(st.pmo) ? st.pmo : lt;
   const plats = D.platforms, per = BS.sent.periods[pi];
   const rise = {up:0, n:0}; ALL.forEach(b => sc.months.slice(1).forEach((m, i) => { rise.n++; if (sc.vals[b][m][0] > sc.vals[b][sc.months[i]][0]) rise.up++; }));
-  const moLabels = sc.months.concat([nextMo(lt)]);          /* next month has no score yet: shown as an empty slot, never filled */
+  /* next month has no official score yet: when a forecast exists it is drawn dashed/hollow and every label says คาดการณ์ (owner request 2026-11-01);
+     sentiment score is never forecast. The forecast is replaced once Brand Scan publishes the month. */
+  const fc = sc.forecast && sc.forecast.month === nextMo(lt) ? sc.forecast : null, FCL = "คาดการณ์";
+  const moLabels = sc.months.map(mlabel).concat([mlabel(nextMo(lt)) + (fc && mi !== 3 ? ` (${FCL})` : "")]);
   let h = `<p class="note"><b>แหล่งข้อมูลของแท็บนี้แยกจากไฟล์โพสต์:</b> ดึงผ่าน Zocial Eye MCP เมื่อ ${esc(BS.pulled || "–")} (โฟลเดอร์ <code>${esc(BS.folder)}</code>) ·
-    <b>Brand Score</b> = คะแนนรายเดือนที่ Brand Scan คำนวณ (${mlabel(sc.months[0])} – ${mlabel(lt)}; ${mlabel(nextMo(lt))} ยังไม่เผยแพร่ จึงเป็นช่องว่าง) ·
+    <b>Brand Score</b> = คะแนนรายเดือนที่ Brand Scan คำนวณ (${mlabel(sc.months[0])} – ${mlabel(lt)}; ${mlabel(nextMo(lt))} ยังไม่เผยแพร่${fc ? ` — แสดง <b>ค่าคาดการณ์</b> (เส้นประ/จุดกลวง) จะแทนด้วยค่าทางการเมื่อ Brand Scan เผยแพร่` : " จึงเป็นช่องว่าง"}) ·
     <b>สูตรคะแนนไม่ได้เปิดเผย</b> และ Brand Score เพิ่มขึ้นในเดือนถัดไป ${rise.up} จาก ${rise.n} ครั้ง (แบรนด์ × เดือน) จึงเทียบ <b>ระหว่างแบรนด์ในเดือนเดียวกัน</b> ไม่ควรอ่านการเพิ่มรายเดือนเป็นผลงาน ·
     <b>Sentiment Score</b> (ดัชนีใน Brand Score) <b>ไม่ใช่</b> สัดส่วนบวก/กลาง/ลบด้านล่าง</p>
    <h2>Brand Score · ${mlabel(lt)}</h2><div class="grid g4">` + ALL.map(b => {
@@ -33,9 +36,10 @@ function rBrandScan(p){
       return `<div class="card kpi" style="--kc:${bcol(b)}"><div class="name">${esc(brLabel(b))}</div><div class="big">${fmt(v[0])}</div>
         <dl><dt>เทียบ ${mlabel(pv)}</dt><dd>${gh(g[0])}</dd><dt>อันดับจาก 4 แบรนด์</dt><dd>#${rk}</dd><dt>Owned Score</dt><dd>${fmt(v[1])} ${gh(g[1])}</dd>
         <dt>Earned Score</dt><dd>${fmt(v[2])} ${gh(g[2])}</dd><dt>Sentiment Score</dt><dd>${fmt1(v[3])} ${gh(g[3])}</dd></dl></div>`; }).join("") + `</div>
+   ${fc ? fcBlock(fc) : ""}
    <h2>แนวโน้มคะแนนรายเดือน</h2>
    <div class="controls"><div class="ctl">ตัวชี้วัด ${seg("bMe", SC_METRICS, st.metric)}</div></div>
-   <div class="grid g1">${card("cBs1", SC_NAME[mi] + " · รายเดือน", `${mlabel(sc.months[0])} – ${mlabel(lt)} · ${mlabel(nextMo(lt))} ยังไม่เผยแพร่`, true)}</div>
+   <div class="grid g1">${card("cBs1", SC_NAME[mi] + " · รายเดือน", `${mlabel(sc.months[0])} – ${mlabel(lt)} · ${mlabel(nextMo(lt))} ยังไม่เผยแพร่${fc && mi !== 3 ? ` (เส้นประ = ${FCL} ไม่ใช่ค่าทางการ)` : ""}`, true)}</div>
    <h2>คะแนนแยกแพลตฟอร์ม · ${mlabel(pmo)}</h2>
    <div class="controls"><div class="ctl">เดือน ${seg("bPm", sc.months.map(m => ({v:m, t:mlabel(m)})), pmo)}</div><div class="ctl">ประเภท ${seg("bPs", [{v:"own", t:"Owned"}, {v:"earn", t:"Earned"}], scope)}</div></div>
    <p class="note">ในวงเล็บ = <b>อัตราเติบโตเฉลี่ย</b> ที่ Brand Scan รายงาน (นิยามไม่เปิดเผย <b>ไม่เท่ากับ</b> การเปลี่ยนจากเดือนก่อน; เดือนแรกไม่มี) · คะแนน Earned รวมของแบรนด์ = ค่าเฉลี่ยของ 5 แพลตฟอร์ม · เทียบระหว่างแบรนด์ในเดือนเดียวกัน</p>
@@ -53,8 +57,11 @@ function rBrandScan(p){
   bindSeg("bPer", v => { st.per = v; render(); }); bindSeg("bPl", v => { st.plat = v; render(); }); bindSeg("bSm", v => { st.sm = v; render(); });
   /* score timeline: the unpublished next month is an empty slot */
   const mm = mi === 3 ? fmt1 : fmt;
-  mk("cBs1", "line", {labels:moLabels.map(mlabel), datasets:BK.map(b => ({label:bname(b), data:sc.months.map(m => sc.vals[b][m][mi]).concat([null]), borderColor:bcol(b), backgroundColor:bcol(b),
-      borderWidth:2, pointRadius:4, pointHoverRadius:6, pointBorderColor:cv("--surface"), pointBorderWidth:2, tension:.25, spanGaps:false}))},
+  const nOff = sc.months.length;                                 /* index of the forecast slot */
+  mk("cBs1", "line", {labels:moLabels, datasets:BK.map(b => ({label:bname(b), data:sc.months.map(m => sc.vals[b][m][mi]).concat([fc && mi !== 3 ? fc.vals[b].mid[mi] : null]), borderColor:bcol(b), backgroundColor:bcol(b),
+      borderWidth:2, pointRadius:4, pointHoverRadius:6, pointBorderColor:sc.months.map(() => cv("--surface")).concat([bcol(b)]),
+      pointBackgroundColor:sc.months.map(() => bcol(b)).concat([cv("--surface")]), pointBorderWidth:2, tension:.25, spanGaps:false,
+      segment:{borderDash:ctx => ctx.p1DataIndex === nOff ? [6, 5] : undefined}}))},
     {layout:{padding:{right:64}}, plugins:{endl:{on:true}}, scales:{y:{beginAtZero:mi !== 3, ticks:{callback:v => mi === 3 ? fmt1(v) : abbr(v)}}}}, mm);
   /* per-platform scores (latest month) */
   const ix = scope === "own" ? 0 : 1, gx = scope === "own" ? 2 : 3;
@@ -77,5 +84,16 @@ function rBrandScan(p){
     const x = xs[i], c = k => x.n ? `<td>${fmt(x[k])} <span class="msrc">(${fpct(spct(x, k))})</span></td>` : `<td class="na">${NA}</td>`;
     return `<tr><td>${bdot(b)}${bname(b)}</td>${cellS(x)}${c("pos")}${c("neu")}${c("neg")}<td class="l" style="white-space:nowrap">${BS.sent.periods.map((q, j) => { const y = sentOf(b, j, pl);
       return y.n ? `${fpct(spct(y, f), 0)} <span class="msrc">(${fmt(y.n)})</span>` : `<span class="msrc">–</span>`; }).join(" · ")}</td></tr>`; }).join("")}</tbody>`;
+}
+/* forecast table (คาดการณ์ — not a Brand Scan number) */
+function fcBlock(fc){
+  const rk = b => 1 + ALL.filter(o => fc.vals[o].mid[0] > fc.vals[b].mid[0]).length;
+  return `<h2>Brand Score · ${mlabel(fc.month)} <span class="msrc">(${"คาดการณ์"})</span></h2>
+   <p class="note warn"><b>คาดการณ์ ไม่ใช่ค่าทางการ</b> — Brand Scan ยังไม่เผยแพร่ ${mlabel(fc.month)} · จะแทนด้วยค่าทางการเมื่อออก ·
+    วิธี: Owned และ Earned ของแต่ละแบรนด์เปลี่ยนเท่าค่าเฉลี่ย (ต่ำสุด–สูงสุด) ของการเปลี่ยนรายเดือนช่วง ${mlabel(fc.window[0])}–${mlabel(fc.window[1])}
+    แล้วรวมเป็น Brand Score = ${fc.w[0]} × Owned + ${fc.w[1]} × Earned (สูตรถอดจากตัวเลข ม.ค.–ก.ย. คลาดไม่เกิน ~1 แต้ม ไม่ใช่สูตรที่ Brand Scan ประกาศ) · ไม่คาดการณ์ Sentiment Score</p>
+   <div class="card"><div class="tw"><table id="bFc"><thead><tr><th>แบรนด์</th><th>Brand Score (${"คาดการณ์"})</th><th>ช่วง ต่ำ–สูง</th><th>Owned (${"คาดการณ์"})</th><th>Earned (${"คาดการณ์"})</th><th>อันดับ (${"คาดการณ์"})</th></tr></thead><tbody>${ALL.map(b => {
+    const v = fc.vals[b]; return `<tr><td>${bdot(b)}${bname(b)}</td><td>~${fmt(Math.round(v.mid[0]))} <span class="msrc">(${"คาดการณ์"})</span></td><td>${fmt(Math.round(v.low[0]))}–${fmt(Math.round(v.high[0]))}</td>
+      <td>~${fmt(Math.round(v.mid[1]))}</td><td>~${fmt(Math.round(v.mid[2]))}</td><td>#${rk(b)}</td></tr>`; }).join("")}</tbody></table></div></div>`;
 }
 RENDER.brandscan = rBrandScan;
