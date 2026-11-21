@@ -2406,17 +2406,16 @@
 2026-10,CU,facebook,earned,median,33.5,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,facebook,earned,top1,27.9,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,facebook,earned,top3,65.3,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,rows,170.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,posts,52.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,blank,118.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,eng,15172.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,views,185916.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,comment,667.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,share,1609.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,mean,226.4,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,median,144.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,top1,8.9,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,facebook,owned,top3,20.6,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,facebook,owned,rows,53.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,facebook,owned,posts,46.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,facebook,owned,blank,7.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,facebook,owned,eng,15268.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,facebook,owned,comment,666.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,facebook,owned,share,1636.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,facebook,owned,mean,262.52,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,facebook,owned,median,164.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,facebook,owned,top1,8.6,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,facebook,owned,top3,20.7,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,instagram,earned,rows,17.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,instagram,earned,posts,17.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,instagram,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2427,16 +2426,16 @@
 2026-10,CU,instagram,earned,median,11.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,instagram,earned,top1,79.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,instagram,earned,top3,91.7,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,instagram,owned,rows,30.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,instagram,owned,posts,23.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,instagram,owned,blank,7.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,instagram,owned,eng,4298.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,instagram,owned,views,29605.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,instagram,owned,comment,26.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,instagram,owned,mean,121.7,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,instagram,owned,median,42.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,instagram,owned,top1,33.9,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,instagram,owned,top3,57.3,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,instagram,owned,rows,30.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,instagram,owned,posts,23.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,instagram,owned,blank,7.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,instagram,owned,eng,4523.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,instagram,owned,views,42118.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,instagram,owned,comment,34.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,instagram,owned,mean,126.52,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,instagram,owned,median,42.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,instagram,owned,top1,35.5,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,instagram,owned,top3,58.7,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,tiktok,earned,rows,1.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,tiktok,earned,posts,1.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,tiktok,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2448,17 +2447,17 @@
 2026-10,CU,tiktok,earned,median,3.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,tiktok,earned,top1,100.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,tiktok,earned,top3,100.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,rows,7.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,posts,7.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,eng,1005.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,views,25147.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,comment,31.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,share,150.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,mean,143.57,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,median,94.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,top1,41.8,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,tiktok,owned,top3,74.1,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,rows,7.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,posts,7.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,eng,1834.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,views,47246.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,comment,38.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,share,227.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,mean,262.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,median,97.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,top1,67.9,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,tiktok,owned,top3,85.6,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,twitter,earned,rows,21.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,twitter,earned,posts,21.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,twitter,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2469,16 +2468,16 @@
 2026-10,CU,twitter,earned,median,11.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,twitter,earned,top1,65.7,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,twitter,earned,top3,84.7,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,twitter,owned,rows,26.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,twitter,owned,posts,26.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,twitter,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,twitter,owned,eng,268.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,twitter,owned,comment,1.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,twitter,owned,share,65.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,twitter,owned,mean,10.31,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,twitter,owned,median,4.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,twitter,owned,top1,29.1,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,CU,twitter,owned,top3,50.4,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,twitter,owned,rows,26.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,twitter,owned,posts,26.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,twitter,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,twitter,owned,eng,275.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,twitter,owned,comment,1.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,twitter,owned,share,65.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,twitter,owned,mean,10.58,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,twitter,owned,median,4.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,twitter,owned,top1,28.4,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,CU,twitter,owned,top3,49.5,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,youtube,earned,rows,3.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,youtube,earned,posts,3.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,CU,youtube,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2500,17 +2499,16 @@
 2026-10,MEDCMU,facebook,earned,median,21.5,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,facebook,earned,top1,15.6,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,facebook,earned,top3,44.8,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,rows,1082.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,posts,161.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,blank,921.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,eng,82927.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,views,1463774.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,comment,3436.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,share,4338.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,mean,498.66,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,median,159.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,top1,8.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,facebook,owned,top3,20.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,facebook,owned,rows,162.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,facebook,owned,posts,161.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,facebook,owned,blank,1.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,facebook,owned,eng,81360.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,facebook,owned,comment,3526.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,facebook,owned,share,4361.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,facebook,owned,mean,505.34,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,facebook,owned,median,159.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,facebook,owned,top1,8.3,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,facebook,owned,top3,20.4,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,instagram,earned,rows,26.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,instagram,earned,posts,26.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,instagram,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2521,16 +2519,16 @@
 2026-10,MEDCMU,instagram,earned,median,12.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,instagram,earned,top1,92.3,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,instagram,earned,top3,95.2,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,instagram,owned,rows,27.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,instagram,owned,posts,27.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,instagram,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,instagram,owned,eng,21006.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,instagram,owned,views,313021.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,instagram,owned,comment,73.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,instagram,owned,mean,778.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,instagram,owned,median,321.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,instagram,owned,top1,16.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,instagram,owned,top3,39.6,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,instagram,owned,rows,27.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,instagram,owned,posts,27.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,instagram,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,instagram,owned,eng,21859.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,instagram,owned,views,332879.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,instagram,owned,comment,77.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,instagram,owned,mean,809.59,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,instagram,owned,median,326.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,instagram,owned,top1,16.5,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,instagram,owned,top3,40.1,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,tiktok,earned,rows,5.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,tiktok,earned,posts,5.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,tiktok,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2542,17 +2540,17 @@
 2026-10,MEDCMU,tiktok,earned,median,208.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,tiktok,earned,top1,98.9,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,tiktok,earned,top3,99.9,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,rows,23.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,posts,23.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,eng,27512.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,views,345806.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,comment,313.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,share,4116.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,mean,1196.17,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,median,311.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,top1,21.8,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,tiktok,owned,top3,48.7,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,rows,23.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,posts,23.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,eng,27849.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,views,362345.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,comment,318.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,share,4262.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,mean,1210.83,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,median,308.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,top1,21.8,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,tiktok,owned,top3,48.7,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,twitter,earned,rows,5.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,twitter,earned,posts,5.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,twitter,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2563,16 +2561,16 @@
 2026-10,MEDCMU,twitter,earned,median,9.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,twitter,earned,top1,54.9,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,twitter,earned,top3,97.6,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,twitter,owned,rows,31.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,twitter,owned,posts,31.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,twitter,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,twitter,owned,eng,13917.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,twitter,owned,comment,26.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,twitter,owned,share,5760.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,twitter,owned,mean,448.94,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,twitter,owned,median,7.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,twitter,owned,top1,96.7,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,twitter,owned,top3,98.4,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,twitter,owned,rows,31.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,twitter,owned,posts,31.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,twitter,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,twitter,owned,eng,13921.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,twitter,owned,comment,27.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,twitter,owned,share,5759.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,twitter,owned,mean,449.06,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,twitter,owned,median,7.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,twitter,owned,top1,96.6,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,twitter,owned,top3,98.4,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,youtube,earned,rows,5.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,youtube,earned,posts,5.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,youtube,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2583,16 +2581,17 @@
 2026-10,MEDCMU,youtube,earned,median,50.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,youtube,earned,top1,91.2,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,MEDCMU,youtube,earned,top3,99.2,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,youtube,owned,rows,22.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,youtube,owned,posts,22.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,youtube,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,youtube,owned,eng,493.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,youtube,owned,views,20248.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,youtube,owned,comment,12.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,youtube,owned,mean,22.41,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,youtube,owned,median,14.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,youtube,owned,top1,24.7,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,MEDCMU,youtube,owned,top3,49.7,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,rows,22.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,posts,22.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,eng,535.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,views,21682.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,comment,12.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,share,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,mean,24.32,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,median,16.5,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,top1,23.6,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,MEDCMU,youtube,owned,top3,48.4,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,facebook,earned,rows,1546.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,facebook,earned,posts,1546.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,facebook,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2604,17 +2603,16 @@
 2026-10,SI,facebook,earned,median,12.5,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,facebook,earned,top1,10.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,facebook,earned,top3,23.6,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,rows,334.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,posts,109.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,blank,225.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,eng,17253.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,views,203475.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,comment,581.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,share,1457.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,mean,150.48,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,median,37.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,top1,17.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,facebook,owned,top3,35.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,facebook,owned,rows,89.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,facebook,owned,posts,76.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,facebook,owned,blank,13.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,facebook,owned,eng,17256.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,facebook,owned,comment,571.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,facebook,owned,share,1493.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,facebook,owned,mean,221.7,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,facebook,owned,median,92.5,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,facebook,owned,top1,17.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,facebook,owned,top3,34.7,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,instagram,earned,rows,302.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,instagram,earned,posts,302.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,instagram,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2625,16 +2623,16 @@
 2026-10,SI,instagram,earned,median,31.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,instagram,earned,top1,23.5,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,instagram,earned,top3,50.8,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,instagram,owned,rows,26.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,instagram,owned,posts,26.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,instagram,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,instagram,owned,eng,14559.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,instagram,owned,views,29213.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,instagram,owned,comment,26.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,instagram,owned,mean,559.96,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,instagram,owned,median,62.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,instagram,owned,top1,68.6,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,instagram,owned,top3,84.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,instagram,owned,rows,26.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,instagram,owned,posts,26.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,instagram,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,instagram,owned,eng,14640.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,instagram,owned,views,32510.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,instagram,owned,comment,26.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,instagram,owned,mean,563.08,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,instagram,owned,median,62.5,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,instagram,owned,top1,68.3,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,instagram,owned,top3,84.1,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,tiktok,earned,rows,76.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,tiktok,earned,posts,76.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,tiktok,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2646,17 +2644,17 @@
 2026-10,SI,tiktok,earned,median,99.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,tiktok,earned,top1,31.1,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,tiktok,earned,top3,64.6,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,rows,8.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,posts,8.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,eng,773.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,views,43580.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,comment,11.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,share,26.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,mean,96.62,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,median,67.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,top1,38.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,tiktok,owned,top3,62.6,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,rows,8.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,posts,8.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,eng,743.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,views,44026.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,comment,11.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,share,26.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,mean,92.88,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,median,64.5,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,top1,38.2,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,tiktok,owned,top3,63.1,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,twitter,earned,rows,112.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,twitter,earned,posts,112.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,twitter,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2667,16 +2665,16 @@
 2026-10,SI,twitter,earned,median,2.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,twitter,earned,top1,30.3,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,twitter,earned,top3,65.8,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,twitter,owned,rows,16.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,twitter,owned,posts,16.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,twitter,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,twitter,owned,eng,173.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,twitter,owned,comment,1.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,twitter,owned,share,49.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,twitter,owned,mean,10.81,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,twitter,owned,median,2.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,twitter,owned,top1,36.4,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,twitter,owned,top3,73.4,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,twitter,owned,rows,16.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,twitter,owned,posts,16.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,twitter,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,twitter,owned,eng,174.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,twitter,owned,comment,1.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,twitter,owned,share,49.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,twitter,owned,mean,10.88,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,twitter,owned,median,2.5,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,twitter,owned,top1,36.8,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,twitter,owned,top3,73.6,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,youtube,earned,rows,88.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,youtube,earned,posts,88.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,youtube,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2687,16 +2685,17 @@
 2026-10,SI,youtube,earned,median,18.5,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,youtube,earned,top1,18.9,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SI,youtube,earned,top3,43.7,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,youtube,owned,rows,5.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,youtube,owned,posts,5.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,youtube,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,youtube,owned,eng,36.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,youtube,owned,views,1788.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,youtube,owned,comment,1.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,youtube,owned,mean,7.2,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,youtube,owned,median,7.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,youtube,owned,top1,27.8,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SI,youtube,owned,top3,69.4,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,rows,5.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,posts,5.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,eng,63.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,views,2529.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,comment,3.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,share,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,mean,12.6,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,median,12.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,top1,31.7,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SI,youtube,owned,top3,69.8,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,facebook,earned,rows,568.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,facebook,earned,posts,568.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,facebook,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2708,17 +2707,16 @@
 2026-10,SMV,facebook,earned,median,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,facebook,earned,top1,29.3,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,facebook,earned,top3,44.6,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,rows,147.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,posts,40.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,blank,107.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,eng,31183.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,views,313864.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,comment,271.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,share,982.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,mean,767.17,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,median,569.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,top1,8.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,facebook,owned,top3,23.1,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,facebook,owned,rows,40.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,facebook,owned,posts,40.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,facebook,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,facebook,owned,eng,32011.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,facebook,owned,comment,274.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,facebook,owned,share,1071.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,facebook,owned,mean,800.27,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,facebook,owned,median,593.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,facebook,owned,top1,8.1,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,facebook,owned,top3,22.1,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,instagram,earned,rows,78.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,instagram,earned,posts,78.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,instagram,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2729,16 +2727,16 @@
 2026-10,SMV,instagram,earned,median,2.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,instagram,earned,top1,53.7,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,instagram,earned,top3,83.8,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,instagram,owned,rows,9.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,instagram,owned,posts,9.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,instagram,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,instagram,owned,eng,10406.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,instagram,owned,views,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,instagram,owned,comment,54.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,instagram,owned,mean,1156.22,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,instagram,owned,median,55.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,instagram,owned,top1,95.6,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,instagram,owned,top3,97.7,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,instagram,owned,rows,9.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,instagram,owned,posts,9.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,instagram,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,instagram,owned,eng,10566.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,instagram,owned,views,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,instagram,owned,comment,54.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,instagram,owned,mean,1174.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,instagram,owned,median,55.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,instagram,owned,top1,95.6,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,instagram,owned,top3,97.7,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,tiktok,earned,rows,17.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,tiktok,earned,posts,17.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,tiktok,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2750,17 +2748,17 @@
 2026-10,SMV,tiktok,earned,median,14.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,tiktok,earned,top1,89.5,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,tiktok,earned,top3,99.2,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,rows,12.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,posts,12.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,eng,2423.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,views,54739.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,comment,9.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,share,480.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,mean,201.92,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,median,87.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,top1,50.9,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,tiktok,owned,top3,76.4,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,rows,12.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,posts,12.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,eng,2625.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,views,63701.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,comment,13.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,share,684.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,mean,218.75,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,median,86.5,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,top1,56.7,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,tiktok,owned,top3,79.1,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,twitter,earned,rows,27.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,twitter,earned,posts,27.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,twitter,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2771,16 +2769,16 @@
 2026-10,SMV,twitter,earned,median,21.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,twitter,earned,top1,16.1,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,twitter,earned,top3,40.6,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,twitter,owned,rows,21.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,twitter,owned,posts,21.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,twitter,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,twitter,owned,eng,7048.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,twitter,owned,comment,3.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,twitter,owned,share,3645.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,twitter,owned,mean,335.62,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,twitter,owned,median,270.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,twitter,owned,top1,19.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,twitter,owned,top3,40.4,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,twitter,owned,rows,21.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,twitter,owned,posts,21.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,twitter,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,twitter,owned,eng,7059.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,twitter,owned,comment,3.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,twitter,owned,share,3653.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,twitter,owned,mean,336.14,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,twitter,owned,median,269.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,twitter,owned,top1,19.5,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,twitter,owned,top3,40.3,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,youtube,earned,rows,4.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,youtube,earned,posts,4.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,youtube,earned,blank,0.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
@@ -2791,13 +2789,14 @@
 2026-10,SMV,youtube,earned,median,39.5,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,youtube,earned,top1,52.7,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
 2026-10,SMV,youtube,earned,top3,100.0,Brand Scan export data Earned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,youtube,owned,rows,22.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,youtube,owned,posts,22.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,youtube,owned,blank,0.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,youtube,owned,eng,615.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,youtube,owned,views,67991.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,youtube,owned,comment,10.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,youtube,owned,mean,27.95,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,youtube,owned,median,14.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,youtube,owned,top1,38.0,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
-2026-10,SMV,youtube,owned,top3,60.5,Brand Scan export data Owned from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,rows,22.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,posts,22.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,blank,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,eng,632.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,views,196176.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,comment,11.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,share,0.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,mean,28.73,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,median,14.0,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,top1,38.3,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
+2026-10,SMV,youtube,owned,top3,60.6,Brand Scan export data Social Metric from 2026-10-01 to 2026-10-31.xlsx
