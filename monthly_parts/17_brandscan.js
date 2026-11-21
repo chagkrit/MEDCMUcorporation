@@ -1,7 +1,7 @@
-/* ===== 8 Brand Scan (Brand Score + earned sentiment, pulled through the Zocial Eye MCP; separate source from the post files) ===== */
+/* ===== 8 Brand Scan (Social Metric Score + earned sentiment, pulled through the Zocial Eye MCP; separate source from the post files) ===== */
 const SMALL_N = 30;                                   /* below this many earned posts a % is shown but flagged as unstable */
-const SC_METRICS = [{v:"0", t:"Brand Score"}, {v:"1", t:"Owned Score"}, {v:"2", t:"Earned Score"}, {v:"3", t:"Sentiment Score"}];
-const SC_NAME = ["Brand Score", "Owned Score", "Earned Score", "Sentiment Score"];
+const SC_METRICS = [{v:"0", t:"Social Metric Score"}, {v:"1", t:"Owned Score"}, {v:"2", t:"Earned Score"}, {v:"3", t:"Sentiment Score"}];
+const SC_NAME = ["Social Metric Score", "Owned Score", "Earned Score", "Sentiment Score"];
 const perLabel = pr => spanTxt([pr.start, pr.end]);
 const perOpts = () => BS.sent.periods.map((pr, i) => ({v:String(i), t:perLabel(pr) + (partialPer(pr) ? "*" : "")}));
 /* a period is partial when it is not a whole calendar month (Jul starts at the 92-day retention floor, Oct ends at the export date) */
@@ -27,10 +27,10 @@ function rBrandScan(p){
   const fc = sc.forecast && sc.forecast.month === nextMo(lt) ? sc.forecast : null, FCL = "คาดการณ์";
   const moLabels = sc.months.map(mlabel).concat([mlabel(nextMo(lt)) + (fc && mi !== 3 ? ` (${FCL})` : "")]);
   let h = `<p class="note"><b>แหล่งข้อมูลของแท็บนี้แยกจากไฟล์โพสต์:</b> ดึงผ่าน Zocial Eye MCP เมื่อ ${esc(BS.pulled || "–")} (โฟลเดอร์ <code>${esc(BS.folder)}</code>) ·
-    <b>Brand Score</b> = คะแนนรายเดือนที่ Brand Scan คำนวณ (${mlabel(sc.months[0])} – ${mlabel(lt)}; ${mlabel(nextMo(lt))} ยังไม่เผยแพร่${fc ? ` — แสดง <b>ค่าคาดการณ์</b> (เส้นประ/จุดกลวง) จะแทนด้วยค่าทางการเมื่อ Brand Scan เผยแพร่` : " จึงเป็นช่องว่าง"}) ·
-    <b>สูตรคะแนนไม่ได้เปิดเผย</b> และ Brand Score เพิ่มขึ้นในเดือนถัดไป ${rise.up} จาก ${rise.n} ครั้ง (แบรนด์ × เดือน) จึงเทียบ <b>ระหว่างแบรนด์ในเดือนเดียวกัน</b> ไม่ควรอ่านการเพิ่มรายเดือนเป็นผลงาน ·
-    <b>Sentiment Score</b> (ดัชนีใน Brand Score) <b>ไม่ใช่</b> สัดส่วนบวก/กลาง/ลบด้านล่าง</p>
-   <h2>Brand Score · ${mlabel(lt)}</h2><div class="grid g4">` + ALL.map(b => {
+    <b>Social Metric Score</b> (เดิมเรียก Brand Score) = คะแนนรายเดือนที่ Brand Scan คำนวณ (${mlabel(sc.months[0])} – ${mlabel(lt)}; ${mlabel(nextMo(lt))} ยังไม่เผยแพร่${fc ? ` — แสดง <b>ค่าคาดการณ์</b> (เส้นประ/จุดกลวง) จะแทนด้วยค่าทางการเมื่อ Brand Scan เผยแพร่` : " จึงเป็นช่องว่าง"}) ·
+    <b>สูตรคะแนนไม่ได้เปิดเผย</b> และ Social Metric Score เพิ่มขึ้นในเดือนถัดไป ${rise.up} จาก ${rise.n} ครั้ง (แบรนด์ × เดือน) จึงเทียบ <b>ระหว่างแบรนด์ในเดือนเดียวกัน</b> ไม่ควรอ่านการเพิ่มรายเดือนเป็นผลงาน ·
+    <b>Sentiment Score</b> (ดัชนีใน Social Metric Score) <b>ไม่ใช่</b> สัดส่วนบวก/กลาง/ลบด้านล่าง</p>
+   <h2>Social Metric Score · ${mlabel(lt)}</h2><div class="grid g4">` + ALL.map(b => {
       const v = sc.vals[b][lt], g = sc.growth[b], rk = 1 + ALL.filter(o => sc.vals[o][lt][0] > v[0]).length;
       const gh = x => x == null ? NA : `<span class="dl">${x >= 0 ? "▲ +" : "▼ −"}${fpct(Math.abs(x))}</span>`;
       return `<div class="card kpi" style="--kc:${bcol(b)}"><div class="name">${esc(brLabel(b))}</div><div class="big">${fmt(v[0])}</div>
@@ -88,11 +88,11 @@ function rBrandScan(p){
 /* forecast table (คาดการณ์ — not a Brand Scan number) */
 function fcBlock(fc){
   const rk = b => 1 + ALL.filter(o => fc.vals[o].mid[0] > fc.vals[b].mid[0]).length;
-  return `<h2>Brand Score · ${mlabel(fc.month)} <span class="msrc">(${"คาดการณ์"})</span></h2>
+  return `<h2>Social Metric Score · ${mlabel(fc.month)} <span class="msrc">(${"คาดการณ์"})</span></h2>
    <p class="note warn"><b>คาดการณ์ ไม่ใช่ค่าทางการ</b> — Brand Scan ยังไม่เผยแพร่ ${mlabel(fc.month)} · จะแทนด้วยค่าทางการเมื่อออก ·
     วิธี: Owned และ Earned ของแต่ละแบรนด์เปลี่ยนเท่าค่าเฉลี่ย (ต่ำสุด–สูงสุด) ของการเปลี่ยนรายเดือนช่วง ${mlabel(fc.window[0])}–${mlabel(fc.window[1])}
-    แล้วรวมเป็น Brand Score = ${fc.w[0]} × Owned + ${fc.w[1]} × Earned (สูตรถอดจากตัวเลข ม.ค.–ก.ย. คลาดไม่เกิน ~1 แต้ม ไม่ใช่สูตรที่ Brand Scan ประกาศ) · ไม่คาดการณ์ Sentiment Score</p>
-   <div class="card"><div class="tw"><table id="bFc"><thead><tr><th>แบรนด์</th><th>Brand Score (${"คาดการณ์"})</th><th>ช่วง ต่ำ–สูง</th><th>Owned (${"คาดการณ์"})</th><th>Earned (${"คาดการณ์"})</th><th>อันดับ (${"คาดการณ์"})</th></tr></thead><tbody>${ALL.map(b => {
+    แล้วรวมเป็น Social Metric Score = ${fc.w[0]} × Owned + ${fc.w[1]} × Earned (สูตรถอดจากตัวเลข ม.ค.–ก.ย. คลาดไม่เกิน ~1 แต้ม ไม่ใช่สูตรที่ Brand Scan ประกาศ) · ไม่คาดการณ์ Sentiment Score</p>
+   <div class="card"><div class="tw"><table id="bFc"><thead><tr><th>แบรนด์</th><th>Social Metric Score (${"คาดการณ์"})</th><th>ช่วง ต่ำ–สูง</th><th>Owned (${"คาดการณ์"})</th><th>Earned (${"คาดการณ์"})</th><th>อันดับ (${"คาดการณ์"})</th></tr></thead><tbody>${ALL.map(b => {
     const v = fc.vals[b]; return `<tr><td>${bdot(b)}${bname(b)}</td><td>~${fmt(Math.round(v.mid[0]))} <span class="msrc">(${"คาดการณ์"})</span></td><td>${fmt(Math.round(v.low[0]))}–${fmt(Math.round(v.high[0]))}</td>
       <td>~${fmt(Math.round(v.mid[1]))}</td><td>~${fmt(Math.round(v.mid[2]))}</td><td>#${rk(b)}</td></tr>`; }).join("")}</tbody></table></div></div>`;
 }
